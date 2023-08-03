@@ -28,6 +28,7 @@ if(global.is_gmml_version){
 global.invincible_mode = false
 global.ball_invincible_mode = false
 global.td_invincible_mode = false
+global.restart_invincible_mode = false
 global.infinite_jumps = false
 obj_persistent.show_hotkeys_tip = 0
 global.hotkeys_shown = false

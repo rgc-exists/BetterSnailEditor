@@ -152,6 +152,10 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_place_multiple_oneAtATime_objs = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            case "Restart Invincibility":
+                global.restart_invincible_mode = file_text_read_real(file)
+                file_text_readln(file)
+                break
             
         }
     }

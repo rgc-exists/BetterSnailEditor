@@ -1,4 +1,6 @@
-if(global.invincible_mode){
+if(global.invincible_mode && !((global.last_death_by == -7) && !global.restart_invincible_mode)){
+    return false;
+} else if((global.last_death_by == -7) && global.restart_invincible_mode){
     return false;
 } else {
     if(global.setting_blood_mode){
