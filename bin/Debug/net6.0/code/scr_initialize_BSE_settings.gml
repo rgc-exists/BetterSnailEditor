@@ -32,3 +32,4 @@ global.setting_unicorn_horn_ball_override = true
 global.setting_custom_thumbnails = false
 global.setting_campaign_exploration_mode = false
 global.setting_place_multiple_oneAtATime_objs = false
+global.restart_invincible_mode = false
