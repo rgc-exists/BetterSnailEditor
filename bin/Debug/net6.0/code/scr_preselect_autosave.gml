@@ -1,0 +1,1 @@
+selectedItem = global.setting_autosave_level

@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GmmlInteropGenerator">
+      <HintPath>GmmlInteropGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="GmmlPatcher">
+      <HintPath>GmmlPatcher.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp">
+      <HintPath>Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Semver">
+      <HintPath>Semver.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="UndertaleModLib">
+      <HintPath>UndertaleModLib.dll</HintPath>
+    </Reference>
+    <Reference Include="WysApi">
+      <HintPath>WysApi.dll</HintPath>
+    </Reference>
+    <Reference Include="WysModMenu">
+      <HintPath>WysModMenu.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OneDrive\Documents\gmml-main\gmml-main\GmmlHooker\GmmlHooker.csproj" />
+  </ItemGroup>
+	
+
+</Project>

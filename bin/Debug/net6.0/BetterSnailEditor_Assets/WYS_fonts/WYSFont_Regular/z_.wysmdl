@@ -1,0 +1,5 @@
+2.0.0a
+OBJECTS
+[ { "x": 150.0, "y": 390.0, "scaleX": 1.0, "properties": { "visible": 1.0 }, "scaleY": 1.0, "angle": 0.0, "custom_tool_or_object_id": "anchor" }, { "x": 30.0, "y": 390.0, "scaleX": 1.0, "properties": { "visible": 1.0 }, "scaleY": 1.0, "angle": 0.0, "custom_tool_or_object_id": "anchor" }, { "x": 30.0, "y": 210.0, "scaleX": 1.0, "properties": { "visible": 1.0 }, "scaleY": 1.0, "angle": 0.0, "custom_tool_or_object_id": "anchor" }, { "x": 150.0, "y": 210.0, "scaleX": 1.0, "properties": { "visible": 1.0 }, "scaleY": 1.0, "angle": 0.0, "custom_tool_or_object_id": "anchor" } ]
+WIRES
+[ [ 0.0, 1.0 ], [ 1.0, 3.0 ], [ 3.0, 2.0 ] ]

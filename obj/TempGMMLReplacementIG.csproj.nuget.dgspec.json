@@ -1,0 +1,389 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\rando\\source\\repos\\BetterSnailEditor_GS2ML\\TempGMMLReplacementIG.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\GmmlHooker.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\GmmlHooker.csproj",
+        "projectName": "GmmlHooker",
+        "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\GmmlHooker.csproj",
+        "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\GmmlPatcher.csproj": {
+                "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\GmmlPatcher.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\GmmlInteropGenerator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\GmmlInteropGenerator.csproj",
+        "projectName": "GmmlInteropGenerator",
+        "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\GmmlInteropGenerator.csproj",
+        "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2022.1.0, )"
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.3, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\GmmlPatcher.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\GmmlPatcher.csproj",
+        "projectName": "GmmlPatcher",
+        "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\GmmlPatcher.csproj",
+        "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlPatcher\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\GmmlInteropGenerator.csproj": {
+                "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlInteropGenerator\\GmmlInteropGenerator.csproj"
+              },
+              "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\UndertaleModLib.csproj": {
+                "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\UndertaleModLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2022.1.0, )"
+            },
+            "Semver": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\UndertaleModLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\UndertaleModLib.csproj",
+        "projectName": "UndertaleModLib",
+        "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\UndertaleModLib.csproj",
+        "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\UndertaleModTool\\UndertaleModLib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.5.1, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "PropertyChanged.Fody": {
+              "target": "Package",
+              "version": "[3.3.3, )"
+            },
+            "SharpZipLib": {
+              "target": "Package",
+              "version": "[1.3.3, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[6.0.18, 6.0.18]"
+            },
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+              "version": "[6.0.18, 6.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[6.0.18, 6.0.18]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
+              "version": "[6.0.18, 6.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[6.0.18, 6.0.18]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+              "version": "[6.0.18, 6.0.18]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\rando\\source\\repos\\BetterSnailEditor_GS2ML\\TempGMMLReplacementIG.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rando\\source\\repos\\BetterSnailEditor_GS2ML\\TempGMMLReplacementIG.csproj",
+        "projectName": "TempGMMLReplacementIG",
+        "projectPath": "C:\\Users\\rando\\source\\repos\\BetterSnailEditor_GS2ML\\TempGMMLReplacementIG.csproj",
+        "packagesPath": "C:\\Users\\rando\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rando\\source\\repos\\BetterSnailEditor_GS2ML\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rando\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\GmmlHooker.csproj": {
+                "projectPath": "C:\\Users\\rando\\OneDrive\\Documents\\gmml-main\\gmml-main\\GmmlHooker\\GmmlHooker.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
