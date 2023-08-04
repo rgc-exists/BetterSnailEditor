@@ -1,7 +1,23 @@
 //This script is unused because I couldn't get it to work.
 
+
 audio_stop_all()
+for(var list = 400000; list < 500000; list++){
+    if(audio_is_playing(list)){
+        audio_stop_sound(list)
+    }
+}
+
 game_load(working_directory + "BSE_SaveState.wyssavestate2")
+audio_stop_all()
+
+for(var list = 400000; list < 500000; list++){
+    if(audio_is_playing(list)){
+        audio_stop_sound(list)
+    }
+}
+audio_stop_all()
+
 var f = file_text_open_read(working_directory + "BSE_SaveState.wyssavestate1")
 var json = file_text_read_string(f)
 file_text_close(f)
@@ -18,9 +34,12 @@ for(var list = 0; list < 100000; list++){
     }
 }
 
+music_index_ids = [85, 101, 103, 102, 100, 86, 97, 91, 90, 91, 92, 86, 93, 95, 88, 89, 4, 95, 94, 320, 87]
+
 var dsMaps = variable_struct_get(saveState, "DsMaps")
 var dsLists = variable_struct_get(saveState, "DsLists")
 var dsGrids = variable_struct_get(saveState, "DsGrids")
+var sounds = variable_struct_get(saveState, "Sounds")
 
 var last_map = 0
 var last_list = 0
@@ -81,67 +100,31 @@ for(var list = 0; list < 100000; list++){
         ds_grid_create(0, 0)
     }
 
-}
-
-
-
-var objSounds = variable_struct_get(saveState, "ObjSounds")
-var globalSounds = variable_struct_get(saveState, "GlobalSounds")
-var objsKeys = variable_struct_get_names(objSounds)
-
-music_index_ids = [85, 101, 103, 102, 100, 86, 97, 91, 90, 91, 92, 86, 93, 95, 88, 89, 4, 95, 94, 320, 87]
-
-for(var o = 0; o < array_length(objsKeys); o++){
-    obj = variable_struct_get(objSounds, objsKeys[o])
-    oKeys = variable_struct_get_names(obj)
-    for(var v = 0; v < array_length(oKeys); v++){
-        var soundInfo = variable_struct_get(obj, oKeys[v])
+    curSoundIndex = list + 400000
+    if(variable_struct_exists(sounds, string(curSoundIndex))){
+        var soundInfo = variable_struct_get(sounds, string(curSoundIndex))
         var is_music = false
         for(var m = 0; m < array_length(music_index_ids); m++){
             if(soundInfo[1] == music_index_ids[m]){
                 is_music = true
             }
         }
-        if is_music
-            variable_instance_set(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v],  audio_play_sound(soundInfo[1], 0, true))
-        else
-            variable_instance_set(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v],  audio_play_sound(soundInfo[1], 0, false))
-        audio_sound_set_track_position(variable_instance_get(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v]), soundInfo[2])
-        audio_sound_gain(variable_instance_get(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v]), soundInfo[3], 0)
-        audio_sound_pitch(variable_instance_get(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v]), soundInfo[4])
-        audio_sound_set_listener_mask(variable_instance_get(real(string_replace(objsKeys[o], "ref ", "")), oKeys[v]), soundInfo[5])
-    }
-}
-
-
-var globalKeys = variable_struct_get_names(globalSounds)
-for(var v = 0; v < array_length(globalKeys); v++){
-    var soundInfo = variable_struct_get(obj, globalKeys[v])
-    var is_music = false
-    for(var m = 0; m < array_length(music_index_ids); m++){
-        if(soundInfo[1] == music_index_ids[m]){
-            is_music = true
+        var curSound = -1;
+        if is_music {
+            curSound = audio_play_sound(soundInfo[1], 0, true)
         }
+        else
+            curSound = audio_play_sound(soundInfo[1], 0, false)
+        audio_sound_set_track_position(curSound, soundInfo[2])
+        audio_sound_gain(curSound, soundInfo[3], 0)
+        audio_sound_pitch(curSound, soundInfo[4])
+        audio_sound_set_listener_mask(curSound, soundInfo[5])
     }
-    if is_music
-        variable_global_set(globalKeys[v],  audio_play_sound(soundInfo[1], 0, true))
-    else
-        variable_global_set(globalKeys[v],  audio_play_sound(soundInfo[1], 0, false))
-    audio_sound_set_track_position(variable_global_get(globalKeys[v]), soundInfo[2])
-    audio_sound_gain(variable_global_get(globalKeys[v]), soundInfo[3], 0)
-    audio_sound_pitch(variable_global_get(globalKeys[v]), soundInfo[4])
-    audio_sound_set_listener_mask(variable_global_get(globalKeys[v]), soundInfo[5])
+
 }
 
-gml_Script_keybinding_ini_defaults()
-gml_Script_keybinding_load()
-gml_Script_loca_text_load()
-gml_Script_loca_load_all_audio_into_memory()
-if(variable_global_exists("li_level_editor_database")){
-    if(ds_exists(global.li_level_editor_database, ds_type_list)){
-        gml_Script_leveleditor_database_ini()
-    }
-}
+
+
 /*
 gml_Script_keybinding_ini_defaults()
 gml_Script_keybinding_load()
