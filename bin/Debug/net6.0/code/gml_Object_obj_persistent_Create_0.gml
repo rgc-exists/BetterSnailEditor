@@ -159,4 +159,7 @@ global.preset_character_data = [
 
 prevMouseInInspector = false
 
+global.just_loaded_savestate = false
+
+
 #orig#()

@@ -6,7 +6,7 @@ var f = file_text_open_read(working_directory + "BSE_SaveState.wyssavestate1")
 var json = file_text_read_string(f)
 file_text_close(f)
 var saveState = json_parse(json)
-for(var list = 0; list < 10000; list++){
+for(var list = 0; list < 100000; list++){
     if(ds_exists(list, ds_type_list)){
         ds_list_destroy(list)
     }
@@ -17,11 +17,29 @@ for(var list = 0; list < 10000; list++){
         ds_grid_destroy(list)
     }
 }
+
 var dsMaps = variable_struct_get(saveState, "DsMaps")
 var dsLists = variable_struct_get(saveState, "DsLists")
 var dsGrids = variable_struct_get(saveState, "DsGrids")
 
-for(var list = 0; list < 10000; list++){
+var last_map = 0
+var last_list = 0
+var last_grid = 0
+
+for(var list = 0; list < 100000; list++){
+    if(variable_struct_exists(dsMaps, string(list))){
+        last_map = list 
+    }
+    
+    if(variable_struct_exists(dsLists, string(list))){
+        last_list = list
+    }
+
+    if(variable_struct_exists(dsGrids, string(list))){
+        last_grid = list
+    }
+}
+for(var list = 0; list < 100000; list++){
     if(variable_struct_exists(dsMaps, string(list))){
         var curMap = ds_map_create()
         var ds_struct = variable_struct_get(dsMaps, string(list))
@@ -29,50 +47,42 @@ for(var list = 0; list < 10000; list++){
         for(var i = 0; i < array_length(ds_array); i++){
             ds_map_add(curMap, ds_array[i], variable_struct_get(ds_struct, ds_array[i]))
         }
+    } else if(list <= last_map){
+        ds_list_create()
     }
-    if(variable_instance_exists(id, "prevDsMap")){
-        if(ds_exists(prevDsMap, ds_type_map)){
-            ds_map_destroy(prevDsMap)
-        }
-    }
-    if(!variable_struct_exists(dsMaps, string(list))){
-        prevDsMap = ds_map_create()
-    }
+
+    
     if(variable_struct_exists(dsLists, string(list))){
         var curList = ds_list_create()
-        var ds_array = variable_struct_get(dsMaps, string(list))
+        var ds_array = variable_struct_get(dsLists, string(list))
         for(var i = 0; i < array_length(ds_array); i++){
             ds_list_add(curList, ds_array[i])
         }
-        ds_list_destroy(curList)
+    } else if(list <= last_list){
+        ds_list_create()
     }
-    if(variable_instance_exists(id, "prevDsList")){
-        if(ds_exists(prevDsList, ds_type_list)){
-            ds_list_destroy(prevDsList)
-        }
-    }
-    if(!variable_struct_exists(dsLists, string(list))){
-        prevDsList = ds_list_create()
-    }
+
+
+
     if(variable_struct_exists(dsGrids, string(list))){
-        var row = variable_struct_get(dsMaps, string(list))
-        var curGrid = ds_grid_create(array_length(row), array_length(row[0]))
-        for(var xx = 0; xx < array_length(row); xx++){
-            var column = row[xx]
-            for(var yy = 0; yy < array_length(column); yy++){
-                ds_grid_add(curGrid, xx, yy, row[yy])
+        var row = variable_struct_get(dsGrids, string(list))
+        if(array_length(row) > 0){
+            var curGrid = ds_grid_create(array_length(row), array_length(row[0]))
+            for(var xx = 0; xx < array_length(row); xx++){
+                var column = row[xx]
+                for(var yy = 0; yy < array_length(column); yy++){
+                    ds_grid_add(curGrid, xx, yy, row[yy])
+                }
             }
+        } else {
+            var curGrid = ds_grid_create(0, 0)
         }
+    } else if(list <= last_grid){
+        ds_grid_create(0, 0)
     }
-    if(variable_instance_exists(id, "prevDsGrid")){
-        if(ds_exists(prevDsGrid, ds_type_grid)){
-            ds_grid_destroy(prevDsGrid)
-        }
-    }
-    if(!variable_struct_exists(dsLists, string(list))){
-        prevDsGrid = ds_grid_create(1, 1)
-    }
+
 }
+
 
 
 var objSounds = variable_struct_get(saveState, "ObjSounds")
@@ -123,4 +133,17 @@ for(var v = 0; v < array_length(globalKeys); v++){
     audio_sound_set_listener_mask(variable_global_get(globalKeys[v]), soundInfo[5])
 }
 
-
+gml_Script_keybinding_ini_defaults()
+gml_Script_keybinding_load()
+gml_Script_loca_text_load()
+gml_Script_loca_load_all_audio_into_memory()
+if(variable_global_exists("li_level_editor_database")){
+    if(ds_exists(global.li_level_editor_database, ds_type_list)){
+        gml_Script_leveleditor_database_ini()
+    }
+}
+/*
+gml_Script_keybinding_ini_defaults()
+gml_Script_keybinding_load()
+gml_Script_scr_level_dat_ini()
+*/

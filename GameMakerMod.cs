@@ -62,6 +62,8 @@ public partial class GameMakerMod
 
     public void AddCode()
     {
+        CreateFunctionFromFile("scr_load_savestate_unused.gml", "scr_load_savestate");
+        CreateFunctionFromFile("scr_save_savestate_unused.gml", "scr_save_savestate");
         CreateFunctionFromFile("scr_initialize_BSE_settings.gml", "scr_initialize_BSE_settings");
         CreateFunctionFromFile("scr_draw_global_inspector_UI.gml", "scr_draw_global_inspector_UI", 5);
         CreateFunctionFromFile("scr_draw_wires_copy_preview.gml", "scr_draw_wires_copy_preview", 5);
@@ -116,8 +118,10 @@ public partial class GameMakerMod
         HookFunctionFromFile("try_commenting_on_player_hats.gml", "try_commenting_on_player_hats");
         HookFunctionFromFile("loca_sound.gml", "loca_sound");
         HookFunctionFromFile("clear_existing_level.gml", "clear_existing_level");
+        HookFunctionFromFile("loca_load_all_audio_into_memory.gml", "loca_load_all_audio_into_memory");
         //HookFunctionFromFile("hlp_collision_point_search.gml", "hlp_collision_point_search");
         //HookFunctionFromFile("scr_load_empty_game.gml", "scr_load_empty_game");
+        //HookCodeFromFile("gml_Object_obj_player_Alarm_1.gml", "gml_Object_obj_player_Alarm_1");
         HookCodeFromFile("gml_Object_obj_level_select_blockage_Create_0.gml", "gml_Object_obj_level_select_blockage_Create_0");
         HookCodeFromFile("gml_Object_obj_level_editor_Step_0.gml", "gml_Object_obj_level_editor_Step_0");
         HookCodeFromFile("gml_Object_obj_music_parent_Step_0.gml", "gml_Object_obj_music_parent_Step_0");

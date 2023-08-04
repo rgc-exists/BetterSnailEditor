@@ -8,7 +8,7 @@ var dsStacks = modhelper_create_struct()
 var dsGrids = modhelper_create_struct()
 var dsQueues = modhelper_create_struct()
 var dsPriorities = modhelper_create_struct()
-while(list < 10000){
+while(list < 100000){
     if(ds_exists(list, ds_type_map)){
         var keys = ds_map_keys_to_array(list)
         var map = modhelper_create_struct()
@@ -68,7 +68,7 @@ var globalLocals = modhelper_create_struct()
 for(var i = 0; i < array_length(objLocalNames); i++){
     if(is_real(variable_global_get(globalLocalNames[i]))){
         if(audio_is_playing(variable_global_get(globalLocalNames[i]))){
-            var soundInfo = [variable_global_get(globalLocalNames[i]), asset_get_index(audio_get_name(variable_instance_get(objects[o], globalLocalNames[i]))), audio_sound_get_track_position(variable_instance_get(objects[o], globalLocalNames[i])), audio_sound_get_gain(variable_instance_get(objects[o], globalLocalNames[i])), audio_sound_get_pitch(variable_instance_get(objects[o], globalLocalNames[i])), audio_sound_get_listener_mask(variable_instance_get(objects[o], globalLocalNames[i]))]
+            var soundInfo = [variable_global_get(globalLocalNames[i]), asset_get_index(audio_get_name(variable_global_get(globalLocalNames[i]))), audio_sound_get_track_position(variable_global_get(globalLocalNames[i])), audio_sound_get_gain(variable_global_get(globalLocalNames[i])), audio_sound_get_pitch(variable_global_get(globalLocalNames[i])), audio_sound_get_listener_mask(variable_global_get(globalLocalNames[i]))]
             variable_struct_set(globalLocals, globalLocalNames[i], soundInfo)
         }
     }

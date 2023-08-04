@@ -1,4 +1,7 @@
-#orig#()
+
+if(!global.just_loaded_savestate){
+    #orig#()
+}
 if(global.global_inspector_active){
     if(!point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), 2, 2, 1920 - 2, 1080 - 2)){
         global.input_confirm_pressed = 0
