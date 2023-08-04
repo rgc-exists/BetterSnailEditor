@@ -1,5 +1,3 @@
-//This script is unused because I couldn't get it to work.
-
 
 audio_stop_all()
 for(var list = 400000; list < 500000; list++){
@@ -7,17 +5,7 @@ for(var list = 400000; list < 500000; list++){
         audio_stop_sound(list)
     }
 }
-
 game_load(working_directory + "BSE_SaveState.wyssavestate2")
-audio_stop_all()
-
-for(var list = 400000; list < 500000; list++){
-    if(audio_is_playing(list)){
-        audio_stop_sound(list)
-    }
-}
-audio_stop_all()
-
 var f = file_text_open_read(working_directory + "BSE_SaveState.wyssavestate1")
 var json = file_text_read_string(f)
 file_text_close(f)
@@ -32,18 +20,30 @@ for(var list = 0; list < 100000; list++){
     if(ds_exists(list, ds_type_grid)){
         ds_grid_destroy(list)
     }
+    if(ds_exists(list, ds_type_stack)){
+        ds_stack_destroy(list)
+    }
+    if(ds_exists(list, ds_type_queue)){
+        ds_queue_destroy(list)
+    }
+    if(ds_exists(list, ds_type_priority)){
+        ds_priority_destroy(list)
+    }
 }
-
-music_index_ids = [85, 101, 103, 102, 100, 86, 97, 91, 90, 91, 92, 86, 93, 95, 88, 89, 4, 95, 94, 320, 87]
 
 var dsMaps = variable_struct_get(saveState, "DsMaps")
 var dsLists = variable_struct_get(saveState, "DsLists")
 var dsGrids = variable_struct_get(saveState, "DsGrids")
-var sounds = variable_struct_get(saveState, "Sounds")
+var dsStacks = variable_struct_get(saveState, "DsStacks")
+var dsQueues = variable_struct_get(saveState, "DsQueues")
+var dsPriorities = variable_struct_get(saveState, "DsPriorities")
 
 var last_map = 0
 var last_list = 0
 var last_grid = 0
+var last_stack = 0
+var last_queue = 0
+var last_priority = 0
 
 for(var list = 0; list < 100000; list++){
     if(variable_struct_exists(dsMaps, string(list))){
@@ -57,6 +57,18 @@ for(var list = 0; list < 100000; list++){
     if(variable_struct_exists(dsGrids, string(list))){
         last_grid = list
     }
+
+    if(variable_struct_exists(dsStacks, string(list))){
+        last_stack = list
+    }
+
+    if(variable_struct_exists(dsQueues, string(list))){
+        last_queue = list
+    }
+
+    if(variable_struct_exists(dsPriorities, string(list))){
+        last_priority = list
+    }
 }
 for(var list = 0; list < 100000; list++){
     if(variable_struct_exists(dsMaps, string(list))){
@@ -66,7 +78,7 @@ for(var list = 0; list < 100000; list++){
         for(var i = 0; i < array_length(ds_array); i++){
             ds_map_add(curMap, ds_array[i], variable_struct_get(ds_struct, ds_array[i]))
         }
-    } else if(list <= last_map){
+    } else if(list < last_map){
         ds_list_create()
     }
 
@@ -77,7 +89,7 @@ for(var list = 0; list < 100000; list++){
         for(var i = 0; i < array_length(ds_array); i++){
             ds_list_add(curList, ds_array[i])
         }
-    } else if(list <= last_list){
+    } else if(list < last_list){
         ds_list_create()
     }
 
@@ -96,35 +108,82 @@ for(var list = 0; list < 100000; list++){
         } else {
             var curGrid = ds_grid_create(0, 0)
         }
-    } else if(list <= last_grid){
+    } else if(list < last_grid){
         ds_grid_create(0, 0)
     }
 
-    curSoundIndex = list + 400000
-    if(variable_struct_exists(sounds, string(curSoundIndex))){
-        var soundInfo = variable_struct_get(sounds, string(curSoundIndex))
-        var is_music = false
-        for(var m = 0; m < array_length(music_index_ids); m++){
-            if(soundInfo[1] == music_index_ids[m]){
-                is_music = true
-            }
+    
+    if(variable_struct_exists(dsStacks, string(list))){
+        var curList = ds_stack_create()
+        var ds_array = variable_struct_get(dsStacks, string(list))
+        for(var i = 0; i < array_length(ds_array); i++){
+            ds_stack_push(curList, ds_array[i])
         }
-        var curSound = -1;
-        if is_music {
-            curSound = audio_play_sound(soundInfo[1], 0, true)
+    } else if(list < last_stack){
+        ds_stack_create()
+    }
+
+    
+    if(variable_struct_exists(dsQueues, string(list))){
+        var curList = ds_queue_create()
+        var ds_array = variable_struct_get(dsQueues, string(list))
+        for(var i = 0; i < array_length(ds_array); i++){
+            ds_queue_enqueue(curList, ds_array[i])
         }
-        else
-            curSound = audio_play_sound(soundInfo[1], 0, false)
-        audio_sound_set_track_position(curSound, soundInfo[2])
-        audio_sound_gain(curSound, soundInfo[3], 0)
-        audio_sound_pitch(curSound, soundInfo[4])
-        audio_sound_set_listener_mask(curSound, soundInfo[5])
+    } else if(list < last_queue){
+        ds_queue_create()
+    }
+    
+    if(variable_struct_exists(dsPriorities, string(list))){
+        var curList = ds_priority_create()
+        var ds_array = variable_struct_get(dsPriorities, string(list))
+        var priorities = ds_array[0]
+        var values = ds_array[1]
+        for(var i = 0; i < array_length(values); i++){
+            ds_priority_add(curList, values[i], priorities[i])
+        }
+    } else if(list < last_priority){
+        ds_priority_create()
     }
 
 }
+/*
 
+var objSounds = variable_struct_get(saveState, "ObjSounds")
+var globalSounds = variable_struct_get(saveState, "GlobalSounds")
 
+var objects = []
 
+with all {
+    array_push(objects, id)
+}
+
+for(var o = 0; o < array_length(objects); o++){
+    var objLocalNames = variable_instance_get_names(objects[o]);
+    for(var i = 0; i < array_length(objLocalNames); i++){
+        if(is_real(variable_instance_get(objects[o], objLocalNames[i]))){
+            if(audio_is_playing(variable_instance_get(objects[o], objLocalNames[i]))){
+                if(variable_struct_exists(objSounds, string(objects[o]))){
+                    var objStruct = variable_struct_get(objSounds, string(objects[o]))
+                    if(variable_struct_exists(objStruct, objLocalNames[i])){
+                        soundInfo = variable_struct_get(objStruct, objLocalNames[i])
+                        audio_sound_set_track_position(variable_instance_get(objects[o], objLocalNames[i]), soundInfo[2])
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+gml_Script_keybinding_ini_defaults()
+gml_Script_keybinding_load()
+gml_Script_loca_text_load()
+gml_Script_loca_load_all_audio_into_memory()
+if(variable_global_exists("li_level_editor_database")){
+    if(ds_exists(global.li_level_editor_database, ds_type_list)){
+        gml_Script_leveleditor_database_ini()
+    }
+}
 /*
 gml_Script_keybinding_ini_defaults()
 gml_Script_keybinding_load()

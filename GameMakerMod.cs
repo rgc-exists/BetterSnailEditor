@@ -196,6 +196,7 @@ public partial class GameMakerMod
         SetObjectCodeFromFile("gml_Object_obj_persistent_Draw_73.gml", "obj_persistent", EventType.Draw, EventSubtypeDraw.DrawEnd);
         SetObjectCodeFromFile("gml_Object_obj_td_enemy_Step_0.gml", "obj_td_enemy", EventType.Step, EventSubtypeStep.Step);
         SetObjectCodeFromFile("gml_Object_obj_level_editor_Alarm_1.gml", "obj_level_editor", EventType.Alarm, 1);
+        SetObjectCodeFromFile("gml_Object_obj_persistent_Draw_75.gml", "obj_persistent", EventType.Draw, EventSubtypeDraw.DrawGUIEnd);
         HookCodeFromFile("gml_Object_obj_menu_Hacks_Other_10.gml", "gml_Object_obj_menu_Hacks_Other_10");
         HookCodeFromFile("gml_Object_obj_start_screen_save_slot_Step_0.gml", "gml_Object_obj_start_screen_save_slot_Step_0");
         HookCodeFromFile("gml_Object_obj_level_selection_Create_0.gml", "gml_Object_obj_level_selection_Create_0");
