@@ -81,6 +81,7 @@ public partial class GameMakerMod
         CreateFunctionFromFile("scr_set_global_var_to_color_raw.gml", "scr_set_global_var_to_color_raw", 1);
         CreateFunctionFromFile("scr_save_character.gml", "scr_save_character", 1);
         CreateFunctionFromFile("scr_load_character.gml", "scr_load_character", 1);
+        CreateFunctionFromFile("scr_lvled_powertrigg_activate_helper_NOTINLINE.gml", "scr_lvled_powertrigg_activate_helper_NOTINLINE", 1);
         HookFunctionFromFile("workshop_save_level_screenshot.gml", "workshop_save_level_screenshot");
         HookFunctionFromFile("scr_update_power_grid.gml", "scr_update_power_grid");
         HookFunctionFromFile("scr_reset_all_settings.gml", "scr_reset_all_settings");
@@ -131,6 +132,7 @@ public partial class GameMakerMod
         HookCodeFromFile("gml_Object_obj_aivl_parent_Step_0.gml", "gml_Object_obj_aivl_parent_Step_0");
         HookCodeFromFile("gml_Object_obj_td_core_Collision_obj_td_enemy.gml", "gml_Object_obj_td_core_Collision_obj_td_enemy");
         HookCodeFromFile("gml_Object_obj_ai_eye_Draw_0.gml", "gml_Object_obj_ai_eye_Draw_0");
+        HookCodeFromFile("gml_Object_obj_lvledtior_trigger_powerable_Step_0.gml", "gml_Object_obj_lvledtior_trigger_powerable_Step_0");
         //HookCodeFromFile("gml_Object_obj_fx_constant_Create_0.gml", "gml_Object_obj_fx_constant_Create_0");
         //HookCodeFromFile("gml_Object_obj_fx_jump_air_Create_0.gml", "gml_Object_obj_fx_jump_air_Create_0");
         //HookCodeFromFile("gml_Object_obj_fx_jump_Create_0.gml", "gml_Object_obj_fx_jump_Create_0");
@@ -197,6 +199,7 @@ public partial class GameMakerMod
         SetObjectCodeFromFile("gml_Object_obj_td_enemy_Step_0.gml", "obj_td_enemy", EventType.Step, EventSubtypeStep.Step);
         SetObjectCodeFromFile("gml_Object_obj_level_editor_Alarm_1.gml", "obj_level_editor", EventType.Alarm, 1);
         SetObjectCodeFromFile("gml_Object_obj_persistent_Draw_75.gml", "obj_persistent", EventType.Draw, EventSubtypeDraw.DrawGUIEnd);
+        HookCodeFromFile("gml_Object_obj_level_select_portal_Step_0.gml", "gml_Object_obj_level_select_portal_Step_0");
         HookCodeFromFile("gml_Object_obj_menu_Hacks_Other_10.gml", "gml_Object_obj_menu_Hacks_Other_10");
         HookCodeFromFile("gml_Object_obj_start_screen_save_slot_Step_0.gml", "gml_Object_obj_start_screen_save_slot_Step_0");
         HookCodeFromFile("gml_Object_obj_level_selection_Create_0.gml", "gml_Object_obj_level_selection_Create_0");

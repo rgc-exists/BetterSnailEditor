@@ -78,38 +78,16 @@ variable_struct_set(saveState, "DsStacks", dsStacks)
 variable_struct_set(saveState, "DsQueues", dsQueues)
 variable_struct_set(saveState, "DsPriorities", dsPriorities)
 
-var objects = []
+var globalVars = modhelper_create_struct()
 
-with all {
-    array_push(objects, id)
+var globalVarNames = variable_instance_get_names(global)
+for(var i = 0; i < array_length(globalVarNames); i++){
+    var globalName = globalVarNames[i]
+    var globalValue = variable_global_get(globalName)
+    variable_struct_set(globalVars, globalName, globalValue)
 }
 
-var objs_sounds = modhelper_create_struct()
-for(var o = 0; o < array_length(objects); o++){
-    var objLocalNames = variable_instance_get_names(objects[o]);
-    var objLocals = modhelper_create_struct()
-    for(var i = 0; i < array_length(objLocalNames); i++){
-        if(is_real(variable_instance_get(objects[o], objLocalNames[i]))){
-            if(audio_is_playing(variable_instance_get(objects[o], objLocalNames[i]))){
-                var soundInfo = [variable_instance_get(objects[o], objLocalNames[i]), asset_get_index(audio_get_name(variable_instance_get(objects[o], objLocalNames[i]))), audio_sound_get_track_position(variable_instance_get(objects[o], objLocalNames[i])), audio_sound_get_gain(variable_instance_get(objects[o], objLocalNames[i])), audio_sound_get_pitch(variable_instance_get(objects[o], objLocalNames[i])), audio_sound_get_listener_mask(variable_instance_get(objects[o], objLocalNames[i]))]
-                variable_struct_set(objLocals, objLocalNames[i], soundInfo)
-            }
-        }
-    }
-    variable_struct_set(objs_sounds, string(objects[i]), objLocals)
-}
-var globalLocalNames = variable_instance_get_names(global);
-var globalLocals = modhelper_create_struct()
-for(var i = 0; i < array_length(objLocalNames); i++){
-    if(is_real(variable_global_get(globalLocalNames[i]))){
-        if(audio_is_playing(variable_global_get(globalLocalNames[i]))){
-            var soundInfo = [variable_global_get(globalLocalNames[i]), asset_get_index(audio_get_name(variable_global_get(globalLocalNames[i]))), audio_sound_get_track_position(variable_global_get(globalLocalNames[i])), audio_sound_get_gain(variable_global_get(globalLocalNames[i])), audio_sound_get_pitch(variable_global_get(globalLocalNames[i])), audio_sound_get_listener_mask(variable_global_get(globalLocalNames[i]))]
-            variable_struct_set(globalLocals, globalLocalNames[i], soundInfo)
-        }
-    }
-}
-variable_struct_set(saveState, "ObjSounds", objs_sounds)
-variable_struct_set(saveState, "GlobalSounds", globalLocals)
+variable_struct_set(saveState, "GlobalVars", globalVars)
 
 var json = json_stringify(saveState)
 var f = file_text_open_write(working_directory + "BSE_SaveState.wyssavestate1")

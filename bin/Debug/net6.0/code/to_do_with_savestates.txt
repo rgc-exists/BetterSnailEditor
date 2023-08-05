@@ -1,0 +1,2 @@
+TO DO WITH SAVESTATES:
+-Hope they function somewhat properly :)

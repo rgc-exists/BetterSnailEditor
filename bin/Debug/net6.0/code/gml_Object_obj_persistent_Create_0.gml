@@ -38,10 +38,6 @@ go_to_BSE_credits_next = false
 
 gml_Script_scr_show_hitboxes_ini()
 global.show_hitboxes = false
-//Show hitboxes is unused because obj_spike_permanent wasn't cooperating.
-//I have literally no clue why but the hitbox doesn't appear, and then when I die to it it appears as if it was a solid non-deadly wall. I'm done for now. :/
-//Feel free to fix it for me and I'll include it and credit you!
-
 global.really_big_circle = sprite_add(global.betterSE_assets + "sprites/" + "ReallyBigCircleToDrawBecauseFuckingUMTDoesntSupportTheDrawElipseFunction_FuckYouUMT.png", 0, false, false, 0, 0)
 
 global.snailax_just_finished = false
@@ -49,8 +45,8 @@ global.snailax_playing = false
 
 global.cur_musroom_song = 1
 global.cur_musroom_sound = -1
-global.musroom_names = ["1 - Another Simulation", "2 - Jump And Die", "3 - Simulated Life", "4 - Quietly Searching", "5 - Let's Make It Pain", "6 - Admitting Defeat", "7 - Shelly Fire", "8 - Demolition Warning", "10 - Disco of Doom", "11 - Chill Zone", "12 - Mr Dance", "13 - Underwater", "14 - Mama Squid", "15 - Death by Nanobots", "16 - Helpy Loves You", "17 - Winter Mode", "18 - Artificial Joy", "19 - Tension", "20 - Final Encounter", "22 - Reality Diving", "23 - Hello AI Ft. Jason Hanes", "24 - Unicorn Victory", "25 - Supremacy", "26 - Brain Ambience", "27 - Artificial Winter", "28 - Another Simulation (Winter)", "29 - Level Editor Theme", "[UNUSED]  Hello AI Ancestry", "[UNUSED]  Hello AI Ancestry Ft. Jason Hanes.ogg", "[UNUSED] Hello AI v1", "[UNOFFICIAL] Snailax Theme (By MissingTextureMan)", "[UNUSED PROTOTYPE] AnnoyingRageGameMusic.mp3 (By Yän)"]
-global.musroom_songs = [304, 86, 91, 87, 92, 93, 96, 101, 89, 90, 104, 94, 103, 4, 102, 88, 363, 133, 95, 321, 98, 97, 100, 7, 352, 181, 323, audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI Ancestry.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI Ancestry Ft. Jason Hanes.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI v1.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Snailax Editor Theme.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "AnnoyingRageGameMusic.ogg")]
+global.musroom_names = ["1 - Another Simulation", "2 - Jump And Die", "3 - Simulated Life", "4 - Quietly Searching", "5 - Let's Make It Pain", "6 - Admitting Defeat", "7 - Shelly Fire", "8 - Demolition Warning", "10 - Disco of Doom", "11 - Chill Zone", "12 - Mr Dance", "13 - Underwater", "14 - Mama Squid", "15 - Death by Nanobots", "16 - Helpy Loves You", "17 - Winter Mode", "18 - Artificial Joy", "19 - Tension", "20 - Final Encounter", "22 - Reality Diving", "23 - Hello AI Ft. Jason Hanes", "24 - Unicorn Victory", "25 - Supremacy", "26 - Brain Ambience", "27 - Artificial Winter", "28 - Another Simulation (Winter)", "29 - Level Editor Theme", "30 - Elevator Music", "[UNUSED]  Hello AI Ancestry", "[UNUSED]  Hello AI Ancestry Ft. Jason Hanes.ogg", "[UNUSED] Hello AI v1", "[UNOFFICIAL] Snailax Theme (By MissingTextureMan)", "[UNUSED PROTOTYPE] AnnoyingRageGameMusic.mp3 (By Yän)"]
+global.musroom_songs = [sou_music_logo_theme, sou_music_main, sou_music_LightOcean, sou_music_silent, sou_music_LightPain, sou_music_NoHope, SnailCombat_02, sou_music_BlockyBoss, sou_music_disco, sou_music_disco_silent, sou_music_mrDance, sou_music_underwater, sou_music_MamaSquid, DeathByNanobots, sou_music_helpy, sou_music_winter, ArtificialFun, sou_music_tension, BossFightWIP_04, AwaitingTheHorizon, music_credits, BossVictoryJingle, sou_music_squid_kill, sou_InBrainAmbientLooped, ArtificialWinter, AnotherSimulation_Winter, sou_music_LevelEditor, sou_music_Elevator, audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI Ancestry.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI Ancestry Ft. Jason Hanes.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Hello AI v1.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "Snailax Editor Theme.ogg"), audio_create_stream(global.betterSE_assets + "audio/" + "AnnoyingRageGameMusic.ogg")]
 global.cheat_player_speed = 1
 global.cheat_jump_height = 1
 

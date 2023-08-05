@@ -1,6 +1,6 @@
 function toolrotate_90degrees(argument0, argument1) //gml_Script_toolrotate_90degrees
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     argument0.image_angle -= (round(argument1) * 90)
@@ -15,7 +15,7 @@ function toolrotate_90degrees(argument0, argument1) //gml_Script_toolrotate_90de
 
 function toolrotate_90exclusive(argument0, argument1) //gml_Script_toolrotate_90exclusive
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     argument0.image_angle = (argument0.image_angle == 0 ? 90 : 0)
@@ -26,7 +26,7 @@ function toolrotate_90exclusive(argument0, argument1) //gml_Script_toolrotate_90
 
 function toolrotate_30degrees(argument0, argument1) //gml_Script_toolrotate_30degrees
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     argument0.image_angle -= (round(argument1) * 30)
@@ -41,7 +41,7 @@ function toolrotate_30degrees(argument0, argument1) //gml_Script_toolrotate_30de
 
 function toolrotate_flip_horizontal(argument0, argument1) //gml_Script_toolrotate_flip_horizontal
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     argument0.image_xscale = (-argument0.image_xscale)
@@ -52,7 +52,7 @@ function toolrotate_flip_horizontal(argument0, argument1) //gml_Script_toolrotat
 
 function toolrotate_flip_vertical(argument0, argument1) //gml_Script_toolrotate_flip_vertical
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     argument0.image_yscale = (-argument0.image_yscale)
@@ -63,7 +63,7 @@ function toolrotate_flip_vertical(argument0, argument1) //gml_Script_toolrotate_
 
 function toolrotate_property(argument0, argument1, argument2) //gml_Script_toolrotate_property
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     var ts = ds_map_find_value(argument0.ds_map_tool_properties, argument2)
@@ -82,7 +82,7 @@ function toolrotate_property(argument0, argument1, argument2) //gml_Script_toolr
 
 function toolrotate_sprite(argument0, argument1) //gml_Script_toolrotate_sprite
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
     {
     }
     ts = ds_map_find_value(argument0.ds_map_tool_properties, "tex")
@@ -103,7 +103,7 @@ function toolrotate_sprite(argument0, argument1) //gml_Script_toolrotate_sprite
 
 function toolrotate_impossible(argument0, argument1) //gml_Script_toolrotate_impossible
 {
-    if (argument1 == 0)
+    if (argument1 == obj_lt_music_trigger)
         return;
     sound = audio_play_sound(sou_order_beep, 0.7, false)
     audio_sound_gain(sound, 0.6, 0)
@@ -119,7 +119,7 @@ function toolplace_fill_with_blocks(argument0, argument1) //gml_Script_toolplace
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -139,12 +139,12 @@ function toolplace_fill_with_blocks(argument0, argument1) //gml_Script_toolplace
             level_bound_y2 = max(level_bound_y2, (mouse_drag_box_ymax * 60))
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             li_objects_in_box = ds_list_create()
@@ -282,7 +282,7 @@ function toolplace_fill_with_wall_blocks_hlp(argument0, argument1, argument2) //
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -398,7 +398,7 @@ function toolplace_singleton_placement(argument0, argument1) //gml_Script_toolpl
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -427,12 +427,12 @@ function toolplace_singleton_placement(argument0, argument1) //gml_Script_toolpl
             tool_id = argument0.custom_tool_or_object_id
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             mouse_drag_box_xmin = mouse_drag_box_current_x
@@ -469,7 +469,7 @@ function toolplace_one_at_a_time_placement(argument0, argument1) //gml_Script_to
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -496,12 +496,12 @@ function toolplace_one_at_a_time_placement(argument0, argument1) //gml_Script_to
             tool_id = argument0.custom_tool_or_object_id
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             mouse_drag_box_xmin = mouse_drag_box_current_x
@@ -570,7 +570,7 @@ function toolplace_fill_with_stripes(argument0, argument1) //gml_Script_toolplac
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -590,12 +590,12 @@ function toolplace_fill_with_stripes(argument0, argument1) //gml_Script_toolplac
             level_bound_y2 = max(level_bound_y2, (mouse_drag_box_ymax * 60))
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             x1 = ((mouse_drag_box_xmin * 60) + xoffseet)
@@ -784,7 +784,7 @@ function toolplace_delete_blocks_of_same_type(argument0, argument1) //gml_Script
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -797,12 +797,12 @@ function toolplace_delete_blocks_of_same_type(argument0, argument1) //gml_Script
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             li_objects_in_box = ds_list_create()
@@ -851,7 +851,7 @@ function toolplace_delete_paths_of_same_path_id(argument0, argument1) //gml_Scri
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -864,12 +864,12 @@ function toolplace_delete_paths_of_same_path_id(argument0, argument1) //gml_Scri
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
-                xoffseet = 0
+                xoffseet = obj_lt_music_trigger
             else
                 xoffseet = xoffseet.value
             yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
             if is_undefined(yoffseet)
-                yoffseet = 0
+                yoffseet = obj_lt_music_trigger
             else
                 yoffseet = yoffseet.value
             li_objects_in_box = ds_list_create()
@@ -921,7 +921,7 @@ function toolplace_delete_wall_blocks(argument0, argument1) //gml_Script_toolpla
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -934,8 +934,8 @@ function toolplace_delete_wall_blocks(argument0, argument1) //gml_Script_toolpla
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             on_area_delete_fx(mouse_drag_box_xmin, mouse_drag_box_ymin, mouse_drag_box_xmax, mouse_drag_box_ymax)
             li_objects_in_box = ds_list_create()
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 54, 1, 1, li_objects_in_box, 0)
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 397, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 53, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 399, 1, 1, li_objects_in_box, 0)
             collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 125, 1, 1, li_objects_in_box, 0)
             tool_id = argument0.custom_tool_or_object_id
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
@@ -969,7 +969,7 @@ function toolplace_delete_trigger_blocks_of_same_type(argument0, argument1) //gm
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -1015,7 +1015,7 @@ function toolplace_delete_blocks_all_in_rect(argument0, argument1) //gml_Script_
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -1028,7 +1028,7 @@ function toolplace_delete_blocks_all_in_rect(argument0, argument1) //gml_Script_
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             on_area_delete_fx(mouse_drag_box_xmin, mouse_drag_box_ymin, mouse_drag_box_xmax, mouse_drag_box_ymax)
             li_objects_in_box = ds_list_create()
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 159, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 160, 1, 1, li_objects_in_box, 0)
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
             {
                 inst_check = ds_list_find_value(li_objects_in_box, indx)
@@ -1055,7 +1055,7 @@ function toolplace_delete_blocks_all_in_rect(argument0, argument1) //gml_Script_
             lvlwire_delete_non_valids()
             break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, obj_levelstyler.col_traps)
             break
@@ -1068,8 +1068,8 @@ function toolplace_move_thing(argument0, argument1) //gml_Script_toolplace_move_
 {
     switch argument1
     {
-        case 0:
-            drag_collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+        case obj_lt_music_trigger:
+            drag_collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (drag_collision != noone)
             {
                 hlp_draw_bounding_box_around_obj(drag_collision, 4, obj_levelstyler.col_td_turret_3)
@@ -1150,7 +1150,7 @@ function toolplace_move_thing(argument0, argument1) //gml_Script_toolplace_move_
             }
             break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
             {
                 drag_current_toolstruct = collision.toolStruct
@@ -1184,7 +1184,7 @@ function toolplace_copy_blocks_all_in_rect(argument0, argument1) //gml_Script_to
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -1196,17 +1196,17 @@ function toolplace_copy_blocks_all_in_rect(argument0, argument1) //gml_Script_to
             mouse_drag_box_ymin = (min(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60)
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             li_objects_in_box = ds_list_create()
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 159, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 160, 1, 1, li_objects_in_box, 0)
             clipboard = []
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
             {
                 inst_check = ds_list_find_value(li_objects_in_box, indx)
-                if variable_struct_exists(inst_check.toolStruct, "can_be_copied")
+                if (inst_check.toolStruct.placement_script == gml_Script_toolplace_singleton_placement)
                 {
-                    if (inst_check.toolStruct.placement_script == gml_Script_toolplace_singleton_placement)
-                    {
-                    }
-                    else if (!inst_check.toolStruct.can_be_copied)
+                }
+                else if variable_struct_exists(inst_check.toolStruct, "can_be_copied")
+                {
+                    if (inst_check.toolStruct.can_be_copied == 0 || (inst_check.toolStruct.can_be_copied == 3 && (inst_check.image_xscale != 1 || inst_check.image_yscale != 1)))
                     {
                     }
                     else
@@ -1293,34 +1293,6 @@ function hlp_rotate_object_data(argument0, argument1, argument2, argument3, argu
         return_angle = (round((return_angle / rot_property.f_scroll_steps)) * rot_property.f_scroll_steps)
         return_angle = (return_angle % 360)
     }
-    else if (cur_tool_id == "wall")
-    {
-        return_angle = (round((return_angle / 90)) * 90)
-        return_angle = (return_angle % 360)
-        switch return_angle
-        {
-            case 180:
-                return_x -= (return_scale_x * 60)
-                return_y -= (return_scale_y * 60)
-                break
-            case 90:
-                return_y -= (return_scale_x * 60)
-                var temp = return_scale_x
-                return_scale_x = return_scale_y
-                return_scale_y = temp
-                break
-            case 270:
-                return_x -= (return_scale_y * 60)
-                temp = return_scale_x
-                return_scale_x = return_scale_y
-                return_scale_y = temp
-                break
-            default:
-                break
-        }
-
-        return_angle = 0
-    }
     return 
     {
         x: return_x,
@@ -1360,7 +1332,7 @@ function toolplace_copy_paste(argument0, argument1) //gml_Script_toolplace_copy_
     var y_off = ds_map_find_value(argument0.ds_map_tool_properties, "copyyoff").value
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             hlp_toolplace_start_dragging_box(argument0)
             break
         case 1:
@@ -1374,7 +1346,22 @@ function toolplace_copy_paste(argument0, argument1) //gml_Script_toolplace_copy_
             mx = floor((global.cursor_in_level_x / 60))
             my = floor((global.cursor_in_level_y / 60))
             for (i = 0; i < array_length(clipboard); i++)
-                hlp_show_copy_preview((mx * 60), (my * 60), clipboard[i], argument0.image_angle, x_off, y_off)
+            {
+                var _Ts = clipboard[i].toolStruct
+                if variable_struct_exists(_Ts, "can_be_copied")
+                {
+                    if (_Ts.can_be_copied == 4 && (clipboard[i].scaleX != 1 || clipboard[i].scaleY != 1) && argument0.image_angle != 0)
+                    {
+                    }
+                    else if (_Ts.can_be_copied == 2 && argument0.image_angle != 0)
+                    {
+                    }
+                    else
+                        hlp_show_copy_preview((mx * 60), (my * 60), clipboard[i], argument0.image_angle, x_off, y_off)
+                }
+                else
+                    hlp_show_copy_preview((mx * 60), (my * 60), clipboard[i], argument0.image_angle, x_off, y_off)
+            }
             break
         case 2:
             created_inst_x = (mouse_drag_box_current_x * 60)
@@ -1382,20 +1369,45 @@ function toolplace_copy_paste(argument0, argument1) //gml_Script_toolplace_copy_
             for (i = 0; i < array_length(clipboard); i++)
             {
                 var clip_entry = clipboard[i]
-                var _Ts = clipboard[i].toolStruct
-                rot_data = hlp_rotate_object_data(created_inst_x, created_inst_y, (created_inst_x + clip_entry.x), (created_inst_y + clip_entry.y), argument0.image_angle, clip_entry.toolStruct, clip_entry, x_off, y_off)
-                created_inst = instance_create_layer(rot_data.x, rot_data.y, _Ts.preview_layer, _Ts.object_index_in_editor)
-                created_inst.sprite_index = _Ts.preview_sprite_index_once_placed
-                created_inst.image_index = _Ts.preview_image_index
-                created_inst.image_blend = _Ts.preview_color
-                created_inst.image_angle = rot_data.image_angle
-                created_inst.image_xscale = rot_data.image_xscale
-                created_inst.image_yscale = rot_data.image_yscale
-                ds_list_add(_Ts.li_placed_instances, created_inst)
-                created_inst.map_properties = clip_entry.properties
-                created_inst.toolStruct = _Ts
-                call_after_initializing_new_level_editor_object(created_inst)
-                toolplace_delete_similar(created_inst)
+                _Ts = clipboard[i].toolStruct
+                if variable_struct_exists(_Ts, "can_be_copied")
+                {
+                    if (_Ts.can_be_copied == 2 && argument0.image_angle != 0)
+                    {
+                    }
+                    else
+                    {
+                        rot_data = hlp_rotate_object_data(created_inst_x, created_inst_y, (created_inst_x + clip_entry.x), (created_inst_y + clip_entry.y), argument0.image_angle, clip_entry.toolStruct, clip_entry, x_off, y_off)
+                        created_inst = instance_create_layer(rot_data.x, rot_data.y, _Ts.preview_layer, _Ts.object_index_in_editor)
+                        created_inst.sprite_index = _Ts.preview_sprite_index_once_placed
+                        created_inst.image_index = _Ts.preview_image_index
+                        created_inst.image_blend = _Ts.preview_color
+                        created_inst.image_angle = rot_data.image_angle
+                        created_inst.image_xscale = rot_data.image_xscale
+                        created_inst.image_yscale = rot_data.image_yscale
+                        ds_list_add(_Ts.li_placed_instances, created_inst)
+                        created_inst.map_properties = clip_entry.properties
+                        created_inst.toolStruct = _Ts
+                        call_after_initializing_new_level_editor_object(created_inst)
+                        toolplace_delete_similar(created_inst)
+                    }
+                }
+                else
+                {
+                    rot_data = hlp_rotate_object_data(created_inst_x, created_inst_y, (created_inst_x + clip_entry.x), (created_inst_y + clip_entry.y), argument0.image_angle, clip_entry.toolStruct, clip_entry, x_off, y_off)
+                    created_inst = instance_create_layer(rot_data.x, rot_data.y, _Ts.preview_layer, _Ts.object_index_in_editor)
+                    created_inst.sprite_index = _Ts.preview_sprite_index_once_placed
+                    created_inst.image_index = _Ts.preview_image_index
+                    created_inst.image_blend = _Ts.preview_color
+                    created_inst.image_angle = rot_data.image_angle
+                    created_inst.image_xscale = rot_data.image_xscale
+                    created_inst.image_yscale = rot_data.image_yscale
+                    ds_list_add(_Ts.li_placed_instances, created_inst)
+                    created_inst.map_properties = clip_entry.properties
+                    created_inst.toolStruct = _Ts
+                    call_after_initializing_new_level_editor_object(created_inst)
+                    toolplace_delete_similar(created_inst)
+                }
             }
             break
     }
@@ -1407,8 +1419,8 @@ function toolspecial_pick_properties(argument0, argument1) //gml_Script_toolspec
 {
     switch argument1
     {
-        case 0:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+        case obj_lt_music_trigger:
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
             {
                 if (argument0.custom_tool_or_object_id == "property_picker_tool")
@@ -1457,7 +1469,7 @@ function toolspecial_pick_properties(argument0, argument1) //gml_Script_toolspec
             else
                 break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
@@ -1470,13 +1482,13 @@ function toolspecial_place_properties(argument0, argument1) //gml_Script_toolspe
 {
     switch argument1
     {
-        case 0:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+        case obj_lt_music_trigger:
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
             {
                 if (argument0.custom_tool_or_object_id == "property_picker_tool")
                     argument0.last_tool_this_interacted_with = collision.toolStruct
-                sound = audio_play_sound(choose(358, 339), 0.9, false)
+                sound = audio_play_sound(choose(359, 339), 0.9, false)
                 audio_sound_gain_fx(sound, 0.6, 1)
                 audio_sound_pitch(sound, (0.8 + random(0.4)))
                 tool_to_copy_from = collision.toolStruct
@@ -1533,7 +1545,7 @@ function toolspecial_place_properties(argument0, argument1) //gml_Script_toolspe
             else
                 break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 159)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
@@ -1546,11 +1558,11 @@ function toolspecial_wire_maker(argument0, argument1) //gml_Script_toolspecial_w
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             wire_start_x = -100
             wire_start_y = -100
             wire_start_collision = -1
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
             if (collision != noone)
             {
                 sound = audio_play_sound(choose(278, 337), 0.9, false)
@@ -1566,7 +1578,7 @@ function toolspecial_wire_maker(argument0, argument1) //gml_Script_toolspecial_w
                 break
             else
             {
-                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
                 if (collision != noone && wire_start_collision != collision)
                 {
                     hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
@@ -1583,10 +1595,10 @@ function toolspecial_wire_maker(argument0, argument1) //gml_Script_toolspecial_w
                 break
             else
             {
-                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
                 if (collision != noone && wire_start_collision != collision)
                 {
-                    sound = audio_play_sound(choose(358, 339), 0.9, false)
+                    sound = audio_play_sound(choose(359, 339), 0.9, false)
                     audio_sound_gain_fx(sound, 0.6, 1)
                     audio_sound_pitch(sound, (1.8 + random(0.4)))
                     lvlwire_create(wire_start_collision, collision)
@@ -1594,7 +1606,7 @@ function toolspecial_wire_maker(argument0, argument1) //gml_Script_toolspecial_w
                 break
             }
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
@@ -1607,11 +1619,11 @@ function toolspecial_wire_destroyer(argument0, argument1) //gml_Script_toolspeci
 {
     switch argument1
     {
-        case 0:
+        case obj_lt_music_trigger:
             wire_start_x = -100
             wire_start_y = -100
             wire_start_collision = -1
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
             if (collision != noone)
             {
                 sound = audio_play_sound(choose(278, 337), 0.9, false)
@@ -1627,7 +1639,7 @@ function toolspecial_wire_destroyer(argument0, argument1) //gml_Script_toolspeci
                 break
             else
             {
-                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
                 if (collision != noone)
                 {
                     hlp_draw_bounding_box_around_obj(collision, 4, obj_levelstyler.col_traps)
@@ -1644,7 +1656,7 @@ function toolspecial_wire_destroyer(argument0, argument1) //gml_Script_toolspeci
                 break
             else
             {
-                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+                collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
                 if (collision != -4)
                 {
                     sound = audio_play_sound(sou_shooter_explosion_03, 0.95, false)
@@ -1658,7 +1670,7 @@ function toolspecial_wire_destroyer(argument0, argument1) //gml_Script_toolspeci
                 break
             }
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 80)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 79)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
@@ -1671,12 +1683,12 @@ function hlp_toolplace_start_dragging_box(argument0) //gml_Script_hlp_toolplace_
 {
     xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
     if is_undefined(xoffseet)
-        xoffseet = 0
+        xoffseet = obj_lt_music_trigger
     else
         xoffseet = xoffseet.value
     yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
     if is_undefined(yoffseet)
-        yoffseet = 0
+        yoffseet = obj_lt_music_trigger
     else
         yoffseet = yoffseet.value
     mouse_drag_box_start_x = floor(((global.cursor_in_level_x - xoffseet) / 60))
@@ -1694,12 +1706,12 @@ function hlp_toolplace_drag_box_step(argument0, argument1, argument2, argument3,
 {
     xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
     if is_undefined(xoffseet)
-        xoffseet = 0
+        xoffseet = obj_lt_music_trigger
     else
         xoffseet = xoffseet.value
     yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
     if is_undefined(yoffseet)
-        yoffseet = 0
+        yoffseet = obj_lt_music_trigger
     else
         yoffseet = yoffseet.value
     mouse_drag_box_current_x = floor(((global.cursor_in_level_x - xoffseet) / 60))
@@ -1743,12 +1755,12 @@ function hlp_toolplace_drag_box_step_one_by_one(argument0, argument1, argument2,
     mouse_crag_box_draw_y2 = lerp(mouse_crag_box_draw_y2, mouse_drag_box_ymax, 0.6)
     xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
     if is_undefined(xoffseet)
-        xoffseet = 0
+        xoffseet = obj_lt_music_trigger
     else
         xoffseet = xoffseet.value
     yoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "yoff")
     if is_undefined(yoffseet)
-        yoffseet = 0
+        yoffseet = obj_lt_music_trigger
     else
         yoffseet = yoffseet.value
     scr_draw_rectangle_border_fromto((mouse_crag_box_draw_x1 + xoffseet), (mouse_crag_box_draw_y1 + yoffseet), (mouse_crag_box_draw_x2 + xoffseet), (mouse_crag_box_draw_y2 + yoffseet), argument1, argument2)

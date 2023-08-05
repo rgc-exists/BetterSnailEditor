@@ -1,4 +1,3 @@
-
 audio_stop_all()
 for(var list = 400000; list < 500000; list++){
     if(audio_is_playing(list)){
@@ -147,34 +146,18 @@ for(var list = 0; list < 100000; list++){
     }
 
 }
-/*
 
-var objSounds = variable_struct_get(saveState, "ObjSounds")
-var globalSounds = variable_struct_get(saveState, "GlobalSounds")
 
-var objects = []
 
-with all {
-    array_push(objects, id)
+var globalVars = variable_struct_get(saveState, "GlobalVars")
+
+var globalNames = variable_struct_get_names(globalVars)
+for(var g = 0; g < array_length(globalNames); g++){
+    var globalName = globalNames[g]
+    var globalValue = variable_struct_get(globalVars, globalName)
+    variable_global_set(globalName, globalValue)
 }
 
-for(var o = 0; o < array_length(objects); o++){
-    var objLocalNames = variable_instance_get_names(objects[o]);
-    for(var i = 0; i < array_length(objLocalNames); i++){
-        if(is_real(variable_instance_get(objects[o], objLocalNames[i]))){
-            if(audio_is_playing(variable_instance_get(objects[o], objLocalNames[i]))){
-                if(variable_struct_exists(objSounds, string(objects[o]))){
-                    var objStruct = variable_struct_get(objSounds, string(objects[o]))
-                    if(variable_struct_exists(objStruct, objLocalNames[i])){
-                        soundInfo = variable_struct_get(objStruct, objLocalNames[i])
-                        audio_sound_set_track_position(variable_instance_get(objects[o], objLocalNames[i]), soundInfo[2])
-                    }
-                }
-            }
-        }
-    }
-}
-*/
 gml_Script_keybinding_ini_defaults()
 gml_Script_keybinding_load()
 gml_Script_loca_text_load()
@@ -184,6 +167,11 @@ if(variable_global_exists("li_level_editor_database")){
         gml_Script_leveleditor_database_ini()
     }
 }
+global.model_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "spr_models_tool_v3.png", 0, 0, 0, 0, 0)
+global.inspector_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "inspector_tool_v2.png", 0, 0, 0, 0, 0)
+
+
+
 /*
 gml_Script_keybinding_ini_defaults()
 gml_Script_keybinding_load()
