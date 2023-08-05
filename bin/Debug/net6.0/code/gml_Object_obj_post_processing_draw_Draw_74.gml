@@ -13,14 +13,12 @@ if(global.inspector_active){
     time++
     if currently_reading_dialog_file
         time -= 0.9
-    if (global.setting_post_processing <= 0 || (room == EndGameCredits && global.credits_mode == 100))
-    {
-        if application_surface_is_enabled()
-            application_surface_enable(false)
-        return false;
-    }
+
     if (!application_surface_is_enabled())
         application_surface_enable(true)
+
+
+        
     if (!surface_exists(application_surface))
         return false;
     
