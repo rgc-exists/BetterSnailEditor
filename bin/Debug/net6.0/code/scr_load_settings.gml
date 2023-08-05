@@ -156,6 +156,14 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.restart_invincible_mode = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            case "Global Inspector":
+                global.setting_global_inspector_available = file_text_read_real(file)
+                file_text_readln(file)
+                break
+            case "SaveStates":
+                global.setting_save_states = file_text_read_real(file)
+                file_text_readln(file)
+                break
             
         }
     }

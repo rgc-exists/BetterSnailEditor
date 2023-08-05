@@ -4,8 +4,8 @@ for(var list = 400000; list < 500000; list++){
         audio_stop_sound(list)
     }
 }
-game_load(working_directory + "BSE_SaveState.wyssavestate2")
-var f = file_text_open_read(working_directory + "BSE_SaveState.wyssavestate1")
+game_load(working_directory + "BSE_SaveState_" + string(argument0) + ".wyssavestate2")
+var f = file_text_open_read(working_directory + "BSE_SaveState_" + string(argument0) + ".wyssavestate1")
 var json = file_text_read_string(f)
 file_text_close(f)
 var saveState = json_parse(json)

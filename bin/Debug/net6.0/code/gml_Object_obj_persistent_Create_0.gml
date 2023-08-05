@@ -35,6 +35,14 @@ global.rendering_enabled = true
 global.exits_in_this_level_are_available = true
 go_to_BSE_credits_next = false
 
+for(var i = 0; i <= 9; i++){
+    if(file_exists(working_directory + "BSE_SaveState_" + string(i) + ".wyssavestate1")){
+        file_delete(working_directory + "BSE_SaveState_" + string(i) + ".wyssavestate1")
+    }
+    if(file_exists(working_directory + "BSE_SaveState_" + string(i) + ".wyssavestate2")){
+        file_delete(working_directory + "BSE_SaveState_" + string(i) + ".wyssavestate2")
+    }
+}
 
 gml_Script_scr_show_hitboxes_ini()
 global.show_hitboxes = false

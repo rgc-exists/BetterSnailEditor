@@ -62,8 +62,8 @@ public partial class GameMakerMod
 
     public void AddCode()
     {
-        CreateFunctionFromFile("scr_load_savestate_unused.gml", "scr_load_savestate");
-        CreateFunctionFromFile("scr_save_savestate_unused.gml", "scr_save_savestate");
+        CreateFunctionFromFile("scr_load_savestate.gml", "scr_load_savestate", 1);
+        CreateFunctionFromFile("scr_save_savestate.gml", "scr_save_savestate", 1);
         CreateFunctionFromFile("scr_initialize_BSE_settings.gml", "scr_initialize_BSE_settings");
         CreateFunctionFromFile("scr_draw_global_inspector_UI.gml", "scr_draw_global_inspector_UI", 5);
         CreateFunctionFromFile("scr_draw_wires_copy_preview.gml", "scr_draw_wires_copy_preview", 5);
@@ -283,7 +283,6 @@ public partial class GameMakerMod
             instance = editorCameraMenu.Name.Content
         });
         data.InsertMenuOption(Menus.Vanilla.More, 3, data.CreateToggleOption("\"Epilepsy Warning\"", "epilepsy_warning", "gml_Script_scr_set_epilepsy_warning(argument0)", "gml_Script_scr_preselect_epilepsy_warning()", "global.setting_epilepsy_warning", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Having this off will skip the epilepsy warning you get at the beginning of the game.\""));
-        data.InsertMenuOption(Menus.Vanilla.Extras, 2, data.CreateToggleOption("\"Show Hitboxes\"", "epilepsy_warning", "gml_Script_scr_set_show_hitboxes(argument0)", "gml_Script_scr_preselect_show_hitboxes()", "global.show_hitboxes", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Show the hitboxes of most solid objects, triggers,and interactive objects.\""));
         data.InsertMenuOption(Menus.Vanilla.More, 3, data.CreateToggleOption("\"Skip Title Animation\"", "skip_title_anim", "global.setting_skip_title_animation = argument0", "selectedITem = global.setting_skip_title_animation", "global.setting_skip_title_animation", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Skip the title screen animation from when you load a save file.\""));
         data.InsertMenuOption(Menus.Vanilla.SquidVisuals, 3, data.CreateToggleOption("\"Constant Opacity\"", "squid_constant_opacity", "gml_Script_scr_set_squid_constant_opacity(argument0)", "scr_preselect_squid_constant_opacity()", "global.setting_squid_constant_opacity", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Change whether or not squid becomes less visible when being silent.\""));
         data.AddMenuOption(Menus.Vanilla.Graphics, data.CreateChangeOption("\"Intense Background Intensity\"", "intenseBackgrounda", "global.setting_intense_backgrounds = clamp(global.setting_intense_backgrounds + argument0, 0, 1)", "return string_replace(string(global.setting_intense_backgrounds * 100), \".00\", \"\") + \"%\" ", 0.1));
@@ -504,6 +503,16 @@ bExitSumbenuAfterConfirm = 0
 bExecuteScriptsOnConfirm = 0
 bExecuteScriptsOnExit = 1");
 
+
+        UndertaleGameObject advancedSpecialMenu = data.CreateMenu("advanced_special", 
+        data.CreateToggleOption("\"Show Hitboxes\"", "show_hitboxes", "gml_Script_scr_set_show_hitboxes(argument0)", "gml_Script_scr_preselect_show_hitboxes()", "global.show_hitboxes", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Show the hitboxes of most solid objects, triggers,and interactive objects.\""),
+        data.CreateToggleOption("\"Global Inspector (Press F5)\"", "global_inspector", "global.setting_global_inspector_available = argument0", "selectedItem = global.setting_global_inspector_available", "global.setting_global_inspector_available", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can press F5 to open the global object inspector.\""),
+        data.CreateToggleOption("\"Savestates (EXPERIMENTAL)\nInfo----------->\"", "menu_savestates", "global.setting_save_states = argument0", "selectedItem = global.setting_save_states", "global.setting_save_states", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, F6 at the same time as any of the number keys (F6+[0-9]) to save a savestate.\nThen you can press F7 at the same time as the same number key you pressed to save it with (F7+[0-9]) to load that savestate.\n\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\"")
+        );
+        data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")
+        {
+            instance = advancedSpecialMenu.Name.Content
+        });
     }
 
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0){

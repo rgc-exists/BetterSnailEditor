@@ -115,7 +115,7 @@ if inbubble
         inbubble = 0
         if (snailtype == 0)
         {
-            sound = audio_play_sound(choose(5, 262), 0.8, false)
+            sound = audio_play_sound(choose(sou_BubbleLeave_A, sou_BubbleLeave_B), 0.8, false)
             audio_sound_gain_fx(sound, 0.75, 0)
             audio_sound_pitch(sound, (0.85 + random(0.3)))
             scr_exit_bubble()
@@ -133,7 +133,7 @@ if (groundedremember >= 0 || airjumps > 0)
                 global.input_analysis_performing_jump_timer = 1
             if global.underwater
             {
-                sound = audio_play_sound(choose(129, 130, 131, 132, 134, 135), 0.9, false)
+                sound = audio_play_sound(choose(sou_UnderwJump_01, sou_UnderwJump_02, sou_UnderwJump_03, sou_UnderwJump_04, sou_UnderwJump_05, sou_UnderwJump_06), 0.9, false)
                 audio_sound_gain_fx(sound, 1.2, 0)
             }
             else if (winter && groundedremember >= 0)
@@ -152,13 +152,13 @@ if (groundedremember >= 0 || airjumps > 0)
                         }
                     }
                 }
-                sound = audio_play_sound(choose(324, 57, 136), 0.9, false)
+                sound = audio_play_sound(choose(sou_snowJump1, sou_snowJump2, sou_snowJump3), 0.9, false)
                 audio_sound_gain(sound, 0.2, 0)
                 audio_sound_pitch(sound, (0.9 + random(0.2)))
             }
             else
             {
-                sound = audio_play_sound(choose(27, 28, 29, 30, 31, 32), 0.9, false)
+                sound = audio_play_sound(choose(sou_jump_01, sou_jump_02, sou_jump_03, sou_jump_04, sou_jump_05, sou_jump_06), 0.9, false)
                 audio_sound_gain_fx(sound, 0.2, 0)
             }
             if (random(1) < 0.5)
@@ -167,13 +167,13 @@ if (groundedremember >= 0 || airjumps > 0)
                     audio_stop_sound(snail_voice_sound)
                 if (!global.underwater)
                 {
-                    snail_voice_sound = audio_play_sound(choose(70, 71, 72, 73, 74, 75, 76), 0.9, false)
+                    snail_voice_sound = audio_play_sound(choose(sou_cuteJump_01, sou_cuteJump_02, sou_cuteJump_03, sou_cuteJump_04, sou_cuteJump_05, sou_cuteJump_06, sou_cuteJump_07), 0.9, false)
                     audio_sound_gain_fx(snail_voice_sound, 0.05, 0)
                     audio_sound_pitch(snail_voice_sound, (0.45 + random(0.1)))
                 }
                 else
                 {
-                    snail_voice_sound = audio_play_sound(choose(187, 188, 189, 190, 191, 193, 194), 0.9, false)
+                    snail_voice_sound = audio_play_sound(choose(sou_UnderwCuteJump_01, sou_UnderwCuteJump_02, sou_UnderwCuteJump_03, sou_UnderwCuteJump_04, sou_UnderwCuteJump_05, sou_UnderwCuteJump_06, sou_UnderwCuteJump_07), 0.9, false)
                     audio_sound_gain_fx(snail_voice_sound, 0.35, 0)
                     audio_sound_pitch(snail_voice_sound, (0.45 + random(0.1)))
                 }
@@ -356,10 +356,10 @@ if (place_free(x, (y + vspeed)) == 0)
             if (vspeed > 7)
             {
                 if global.underwater
-                    sound = audio_play_sound(choose(142, 143, 144), 0.7, false)
+                    sound = audio_play_sound(choose(sou_UnderwLanding_01, sou_UnderwLanding_02, sou_UnderwLanding_03), 0.7, false)
                 else if winter
                 {
-                    sound = audio_play_sound(choose(322, 344, 136, 341), 0.7, false)
+                    sound = audio_play_sound(choose(sou_snowLand1, sou_snowLand2, sou_snowJump3 /* Yes, I know this is the wrong sound, but apparently this is how it is in the vanilla game. */, sou_snowLand4), 0.7, false)
                     if (global.setting_visual_details > 0)
                     {
                         part_type_speed(global.part_type_snow, 0, (speed * 0.25), 0, 0)
@@ -373,7 +373,7 @@ if (place_free(x, (y + vspeed)) == 0)
                     }
                 }
                 else
-                    sound = audio_play_sound(choose(41, 42, 43), 0.7, false)
+                    sound = audio_play_sound(choose(sou_landing_1, sou_landing_2, sou_landing_3), 0.7, false)
                 vol = (clamp(((vspeed - 7) * 0.03), 0, 0.5) * 0.75)
                 audio_sound_gain_fx(sound, (vol * vol), 0)
                 audio_sound_pitch(sound, (0.8 + (vol * 0.4)))
@@ -387,7 +387,7 @@ if (place_free(x, (y + vspeed)) == 0)
     {
         if (snailtype == 0)
         {
-            sound = audio_play_sound(choose(5, 262), 0.8, false)
+            sound = audio_play_sound(choose(sou_BubbleLeave_A, sou_BubbleLeave_B), 0.8, false)
             audio_sound_gain_fx(sound, 0.75, 0)
             audio_sound_pitch(sound, (2 + random(0.2)))
             scr_exit_bubble()
@@ -402,13 +402,13 @@ if (place_free(x, (y + vspeed)) == 0)
         {
             if global.underwater
             {
-                sound = audio_play_sound(choose(3, 0, 21), 0.2, false)
+                sound = audio_play_sound(choose(sou_CeilingTouch_A_underw, sou_CeilingTouch_B_underw, sou_CeilingTouch_C_underw), 0.2, false)
                 audio_sound_gain_fx(sound, (abs(vspeed) / 18), 0)
                 audio_sound_pitch(sound, (0.85 + random(0.3)))
             }
             else
             {
-                sound = audio_play_sound(choose(356, 14, 6), 0.2, false)
+                sound = audio_play_sound(choose(sou_CeilingTouch_A, sou_CeilingTouch_B, sou_CeilingTouch_C), 0.2, false)
                 audio_sound_gain_fx(sound, (abs(vspeed) / 120), 0)
                 audio_sound_pitch(sound, (1.7 + random(0.3)))
             }

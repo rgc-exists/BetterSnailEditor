@@ -36,8 +36,10 @@ if(global.setting_optimized_wires){
 }
 
 if(room != menu && room != level_editor && room != main_menu_dark && room != disclaimer_photoepilepsy){
-    if(keyboard_check_pressed(vk_f5)){
-        global.global_inspector_active = !global.global_inspector_active
+    if(global.setting_global_inspector_available){
+        if(keyboard_check_pressed(vk_f5)){
+            global.global_inspector_active = !global.global_inspector_active
+        }
     }
 } else if(room == level_editor){
     global.global_inspector_active = false

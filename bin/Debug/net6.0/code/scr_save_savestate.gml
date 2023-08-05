@@ -90,7 +90,7 @@ for(var i = 0; i < array_length(globalVarNames); i++){
 variable_struct_set(saveState, "GlobalVars", globalVars)
 
 var json = json_stringify(saveState)
-var f = file_text_open_write(working_directory + "BSE_SaveState.wyssavestate1")
+var f = file_text_open_write(working_directory + "BSE_SaveState_" + string(argument0) + ".wyssavestate1")
 file_text_write_string(f, json)
 file_text_close(f)
-game_save(working_directory + "BSE_SaveState.wyssavestate2")
+game_save(working_directory + "BSE_SaveState_" + string(argument0) + ".wyssavestate2")
