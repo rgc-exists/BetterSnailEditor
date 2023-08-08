@@ -25,8 +25,8 @@ if(global.setting_squid_color == -1 || is_undefined(global.setting_squid_color))
     col_ai_inback = obj_levelstyler.col_ai_inback
 } else {
     col_ai = global.setting_squid_color
-    col_ai2 = merge_color(c_white, global.setting_squid_color, 0.825)
-    col_ai_inback = global.setting_squid_color
+    col_ai2 = merge_color(c_white, global.setting_squid_color, 0.5)
+    col_ai_inback = merge_color(c_white, global.setting_squid_color, 0.9)
 }
 image_blend = merge_color(col_ai, col_ai2, ((sin((time * 0.2)) * 0.5) + 0.5))
 image_blend = merge_color(col_ai_inback, image_blend, talkyblend)

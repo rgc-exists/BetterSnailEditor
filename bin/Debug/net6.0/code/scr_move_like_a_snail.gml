@@ -359,7 +359,7 @@ if (place_free(x, (y + vspeed)) == 0)
                     sound = audio_play_sound(choose(sou_UnderwLanding_01, sou_UnderwLanding_02, sou_UnderwLanding_03), 0.7, false)
                 else if winter
                 {
-                    sound = audio_play_sound(choose(sou_snowLand1, sou_snowLand2, sou_snowJump3 /* Yes, I know this is the wrong sound, but apparently this is how it is in the vanilla game. */, sou_snowLand4), 0.7, false)
+                    sound = audio_play_sound(choose(sou_snowLand1, sou_snowLand2, sou_snowLand3, sou_snowLand4), 0.7, false)
                     if (global.setting_visual_details > 0)
                     {
                         part_type_speed(global.part_type_snow, 0, (speed * 0.25), 0, 0)

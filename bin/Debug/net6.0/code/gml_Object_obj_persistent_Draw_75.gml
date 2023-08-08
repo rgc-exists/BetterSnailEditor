@@ -5,7 +5,7 @@ if(global.just_loaded_savestate){
         visible = true
     }
 }
-if(global.setting_save_states){
+if(global.setting_save_states == 1){
     if(room != level_editor && room != menu && room != main_menu_dark && room != the_elevator){
         if(keyboard_check(vk_f6)){
             draw_set_halign(0)
@@ -17,9 +17,9 @@ if(global.setting_save_states){
             for(var i = 0; i <= 9; i++){
                 number = string_digits(keyboard_lastchar)
                 if (number == string(i)){
-                    show_message("Savestate saved!")
                     keyboard_lastchar = ""
                     gml_Script_scr_save_savestate(i)
+                    show_message("Savestate saved!")
                 }
             }
         } else if(keyboard_check(vk_f7)){
@@ -39,6 +39,18 @@ if(global.setting_save_states){
                 }
             }
             global.just_loaded_savestate = true
+        }
+    }
+} else if(global.setting_save_states == 2){
+    if(room != level_editor && room != menu && room != main_menu_dark && room != the_elevator){
+        if(keyboard_check_pressed(vk_f6)){
+            gml_Script_scr_save_savestate(1)
+            show_message("Savestate saved!")
+        } else if(keyboard_check_pressed(vk_f7)){
+            if(file_exists(working_directory + "BSE_SaveState_" + "1" + ".wyssavestate2") && file_exists(working_directory + "BSE_SaveState_" + "1" + ".wyssavestate1")){
+                gml_Script_scr_load_savestate(1)
+                global.just_loaded_savestate = true
+            }
         }
     }
 }

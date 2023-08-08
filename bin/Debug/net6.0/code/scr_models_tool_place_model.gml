@@ -90,8 +90,8 @@ switch argument1
                 else
                 {
                     rot_data = hlp_rotate_object_data(created_inst_x, created_inst_y, (created_inst_x + clip_entry.x), (created_inst_y + clip_entry.y), argument0.image_angle, clip_entry.toolStruct, clip_entry, x_off, y_off)
-                    ds_list_add(created_instances, created_inst)
                     created_inst = instance_create_layer(rot_data.x, rot_data.y, _Ts.preview_layer, _Ts.object_index_in_editor)
+                    ds_list_add(created_instances, created_inst)
                     created_inst.sprite_index = _Ts.preview_sprite_index_once_placed
                     created_inst.image_index = _Ts.preview_image_index
                     created_inst.image_blend = _Ts.preview_color
@@ -108,8 +108,8 @@ switch argument1
             else
             {
                 rot_data = hlp_rotate_object_data(created_inst_x, created_inst_y, (created_inst_x + clip_entry.x), (created_inst_y + clip_entry.y), argument0.image_angle, clip_entry.toolStruct, clip_entry, x_off, y_off)
-                ds_list_add(created_instances, created_inst)
                 created_inst = instance_create_layer(rot_data.x, rot_data.y, _Ts.preview_layer, _Ts.object_index_in_editor)
+                ds_list_add(created_instances, created_inst)
                 created_inst.sprite_index = _Ts.preview_sprite_index_once_placed
                 created_inst.image_index = _Ts.preview_image_index
                 created_inst.image_blend = _Ts.preview_color
@@ -129,7 +129,6 @@ switch argument1
                 lvlwire_create(ds_list_find_value(created_instances, ww[0]), ds_list_find_value(created_instances, ww[1]))
             }
         }
-        //show_message("k")
         ds_list_destroy(created_instances)
         break
 }

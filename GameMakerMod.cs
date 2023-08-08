@@ -73,6 +73,8 @@ public partial class GameMakerMod
         CreateFunctionFromFile("scr_reset_vanilla_settings.gml", "scr_reset_vanilla_settings", 2);
         CreateFunctionFromFile("scr_show_hitboxes.gml", "scr_show_hitboxes", 2);
         CreateFunctionFromFile("scr_show_hitboxes_ini.gml", "scr_show_hitboxes_ini", 2);
+        CreateFunctionFromFile("scr_set_savestates.gml", "scr_set_savestates", 1);
+        CreateFunctionFromFile("scr_preselect_savestates.gml", "scr_preselect_savestates");
         CreateFunctionFromFile("scr_set_autosave.gml", "scr_set_autosave", 1);
         CreateFunctionFromFile("scr_preselect_autosave.gml", "scr_preselect_autosave");
         CreateFunctionFromFile("scr_go_to_music_player.gml", "scr_go_to_music_player");
@@ -268,7 +270,7 @@ public partial class GameMakerMod
             return string(global.setting_multiframe_loading_wires)
         else
             return ""OFF (All objects load in one frame.)""
-        ", 50), data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\""));
+        ", 50) /*, data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\"") */);
         data.InsertMenuOptionFromEnd(levelEditorMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")
         {
             instance = advancedEditorMenu.Name.Content
@@ -284,7 +286,7 @@ public partial class GameMakerMod
         });
         data.InsertMenuOption(Menus.Vanilla.More, 3, data.CreateToggleOption("\"Epilepsy Warning\"", "epilepsy_warning", "gml_Script_scr_set_epilepsy_warning(argument0)", "gml_Script_scr_preselect_epilepsy_warning()", "global.setting_epilepsy_warning", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Having this off will skip the epilepsy warning you get at the beginning of the game.\""));
         data.InsertMenuOption(Menus.Vanilla.More, 3, data.CreateToggleOption("\"Skip Title Animation\"", "skip_title_anim", "global.setting_skip_title_animation = argument0", "selectedITem = global.setting_skip_title_animation", "global.setting_skip_title_animation", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Skip the title screen animation from when you load a save file.\""));
-        data.InsertMenuOption(Menus.Vanilla.SquidVisuals, 3, data.CreateToggleOption("\"Constant Opacity\"", "squid_constant_opacity", "gml_Script_scr_set_squid_constant_opacity(argument0)", "scr_preselect_squid_constant_opacity()", "global.setting_squid_constant_opacity", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Change whether or not squid becomes less visible when being silent.\""));
+        data.InsertMenuOption(Menus.Vanilla.SquidVisuals, 3, data.CreateToggleOption("\"Constant Opacity\"", "squid_constant_opacity", "gml_Script_scr_set_squid_constant_opacity(argument0)", "scr_preselect_squid_constant_opacity()", "global.setting_squid_constant_opacity", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Change whether or not squid becomes less visible when being silent.\n(ALSO MAKES HIM ALWAYS STAY IN THE FRONT, DUE TO HOW THE CODE OF THE GAME WAS STRUCTURED I CANNOT CHANGE THIS.)\""));
         data.AddMenuOption(Menus.Vanilla.Graphics, data.CreateChangeOption("\"Intense Background Intensity\"", "intenseBackgrounda", "global.setting_intense_backgrounds = clamp(global.setting_intense_backgrounds + argument0, 0, 1)", "return string_replace(string(global.setting_intense_backgrounds * 100), \".00\", \"\") + \"%\" ", 0.1));
 
 
@@ -503,16 +505,22 @@ bExitSumbenuAfterConfirm = 0
 bExecuteScriptsOnConfirm = 0
 bExecuteScriptsOnExit = 1");
 
-
         UndertaleGameObject advancedSpecialMenu = data.CreateMenu("advanced_special", 
         data.CreateToggleOption("\"Show Hitboxes\"", "show_hitboxes", "gml_Script_scr_set_show_hitboxes(argument0)", "gml_Script_scr_preselect_show_hitboxes()", "global.show_hitboxes", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Show the hitboxes of most solid objects, triggers,and interactive objects.\""),
-        data.CreateToggleOption("\"Global Inspector (Press F5)\"", "global_inspector", "global.setting_global_inspector_available = argument0", "selectedItem = global.setting_global_inspector_available", "global.setting_global_inspector_available", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can press F5 to open the global object inspector.\""),
-        data.CreateToggleOption("\"Savestates (EXPERIMENTAL)\nInfo----------->\"", "menu_savestates", "global.setting_save_states = argument0", "selectedItem = global.setting_save_states", "global.setting_save_states", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, F6 at the same time as any of the number keys (F6+[0-9]) to save a savestate.\nThen you can press F7 at the same time as the same number key you pressed to save it with (F7+[0-9]) to load that savestate.\n\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\"")
+        data.CreateToggleOption("\"Global Inspector (Press F5)\"", "global_inspector", "global.setting_global_inspector_available = argument0", "selectedItem = global.setting_global_inspector_available", "global.setting_global_inspector_available", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can press F5 to open the global object inspector.\"")
         );
         data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")
         {
             instance = advancedSpecialMenu.Name.Content
         });
+
+        UndertaleGameObject savestatesMenu = data.CreateMenu("savestates_menu",
+            new WysMenuSettings(executeScriptsOnSwitch:true, executeScriptsOnExit:true),
+            new WysMenuOption("\"Off\"", null, "gml_Script_scr_set_savestates", "0"), 
+            new WysMenuOption("\"Multiple Slots (F6/F7+number keys 1-9)\"", null, "gml_Script_scr_set_savestates", "1"),
+            new WysMenuOption("\"Single Slot (Just F6+F7)\"", null, "gml_Script_scr_set_savestates", "2")
+        );
+        data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (EXPERIMENTAL)\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can save and load the state of your game.\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\""));
     }
 
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0){

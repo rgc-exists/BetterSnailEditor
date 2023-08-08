@@ -116,20 +116,18 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_squid_color = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            /*
             case "Optimized Wires":
                 global.setting_optimized_wires = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            */
             case "Funny Squid":
                 global.setting_funny_squid = file_text_read_real(file)
                 file_text_readln(file)
                 break
             case "Blood Mode":
                 global.setting_blood_mode = file_text_read_real(file)
-                file_text_readln(file)
-                break
-            case "Reset New Levels":
-                global.setting_fully_reset_new_levels = file_text_read_real(file)
                 file_text_readln(file)
                 break
             case "Multiframe Loading Wires":

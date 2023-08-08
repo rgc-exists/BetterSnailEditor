@@ -1,12 +1,6 @@
 #orig#()
 
 
-for(var o = 0; o < ds_list_size(global.li_level_editor_database); o += 1){
-    obj_struct = ds_list_find_value(global.li_level_editor_database, o)
-    variable_struct_set(obj_struct, "can_be_copied", 1)
-    ds_list_set(global.li_level_editor_database, o, obj_struct)
-}
-
 copy_tool = -1
 for(var o = 0; o < ds_list_size(global.li_level_editor_database); o += 1){
     copy_tool = ds_list_find_value(global.li_level_editor_database, o)

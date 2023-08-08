@@ -137,6 +137,11 @@ function toolplace_fill_with_blocks(argument0, argument1) //gml_Script_toolplace
             level_bound_x2 = max(level_bound_x2, (mouse_drag_box_xmax * 60))
             level_bound_y1 = min(level_bound_y1, (mouse_drag_box_ymin * 60))
             level_bound_y2 = max(level_bound_y2, (mouse_drag_box_ymax * 60))
+            do_randomization = ds_map_find_value(argument0.ds_map_tool_properties, "pl_dorng")
+            if is_undefined(do_randomization)
+                do_randomization = 0
+            else
+                do_randomization = do_randomization.value
             xoffseet = ds_map_find_value(argument0.ds_map_tool_properties, "xoff")
             if is_undefined(xoffseet)
                 xoffseet = obj_lt_music_trigger
@@ -154,12 +159,31 @@ function toolplace_fill_with_blocks(argument0, argument1) //gml_Script_toolplace
             var x2 = ((mouse_drag_box_xmax * 60) + xoffseet)
             var y2 = ((mouse_drag_box_ymax * 60) + yoffseet)
             on_area_spawn_fx(x1, y1, x2, y2)
+            last_offset = 0
+            next_duplicate = 0
             for (xxplace = mouse_drag_box_xmin; xxplace < mouse_drag_box_xmax; xxplace++)
             {
                 for (yyplace = mouse_drag_box_ymin; yyplace < mouse_drag_box_ymax; yyplace++)
                 {
                     created_inst_x = ((xxplace * 60) + 30)
                     created_inst_y = ((yyplace * 60) + 30)
+                    if do_randomization
+                    {
+                        rand_rotoff = 0
+                        if (!next_duplicate)
+                            last_offset = irandom_range(-16, 16)
+                        else
+                            last_offset = round((last_offset * -1.1))
+                        created_inst_x += lengthdir_x(last_offset, (argument0.image_angle + rand_rotoff))
+                        created_inst_y += lengthdir_y(last_offset, (argument0.image_angle + rand_rotoff))
+                        if (irandom_range(1, 3) == 2 && (!next_duplicate) && abs(last_offset >= 13))
+                        {
+                            yyplace--
+                            next_duplicate = 1
+                        }
+                        else
+                            next_duplicate = 0
+                    }
                     quicktool_sprite = argument0.preview_sprite_index_once_placed
                     img_angle = argument0.image_angle
                     img_xscale = argument0.image_xscale
@@ -935,8 +959,8 @@ function toolplace_delete_wall_blocks(argument0, argument1) //gml_Script_toolpla
             on_area_delete_fx(mouse_drag_box_xmin, mouse_drag_box_ymin, mouse_drag_box_xmax, mouse_drag_box_ymax)
             li_objects_in_box = ds_list_create()
             collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 53, 1, 1, li_objects_in_box, 0)
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 399, 1, 1, li_objects_in_box, 0)
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 125, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 401, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 126, 1, 1, li_objects_in_box, 0)
             tool_id = argument0.custom_tool_or_object_id
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
             {
@@ -1028,7 +1052,7 @@ function toolplace_delete_blocks_all_in_rect(argument0, argument1) //gml_Script_
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             on_area_delete_fx(mouse_drag_box_xmin, mouse_drag_box_ymin, mouse_drag_box_xmax, mouse_drag_box_ymax)
             li_objects_in_box = ds_list_create()
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 160, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 162, 1, 1, li_objects_in_box, 0)
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
             {
                 inst_check = ds_list_find_value(li_objects_in_box, indx)
@@ -1055,7 +1079,7 @@ function toolplace_delete_blocks_all_in_rect(argument0, argument1) //gml_Script_
             lvlwire_delete_non_valids()
             break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, obj_levelstyler.col_traps)
             break
@@ -1069,7 +1093,7 @@ function toolplace_move_thing(argument0, argument1) //gml_Script_toolplace_move_
     switch argument1
     {
         case obj_lt_music_trigger:
-            drag_collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            drag_collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (drag_collision != noone)
             {
                 hlp_draw_bounding_box_around_obj(drag_collision, 4, obj_levelstyler.col_td_turret_3)
@@ -1150,7 +1174,7 @@ function toolplace_move_thing(argument0, argument1) //gml_Script_toolplace_move_
             }
             break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
             {
                 drag_current_toolstruct = collision.toolStruct
@@ -1196,7 +1220,7 @@ function toolplace_copy_blocks_all_in_rect(argument0, argument1) //gml_Script_to
             mouse_drag_box_ymin = (min(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60)
             mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
             li_objects_in_box = ds_list_create()
-            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 160, 1, 1, li_objects_in_box, 0)
+            collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 162, 1, 1, li_objects_in_box, 0)
             clipboard = []
             for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)
             {
@@ -1420,7 +1444,7 @@ function toolspecial_pick_properties(argument0, argument1) //gml_Script_toolspec
     switch argument1
     {
         case obj_lt_music_trigger:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
             {
                 if (argument0.custom_tool_or_object_id == "property_picker_tool")
@@ -1469,7 +1493,7 @@ function toolspecial_pick_properties(argument0, argument1) //gml_Script_toolspec
             else
                 break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
@@ -1483,7 +1507,7 @@ function toolspecial_place_properties(argument0, argument1) //gml_Script_toolspe
     switch argument1
     {
         case obj_lt_music_trigger:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
             {
                 if (argument0.custom_tool_or_object_id == "property_picker_tool")
@@ -1545,7 +1569,7 @@ function toolspecial_place_properties(argument0, argument1) //gml_Script_toolspe
             else
                 break
         case 4:
-            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 160)
+            collision = hlp_collision_point_search(global.cursor_in_level_x, global.cursor_in_level_y, 162)
             if (collision != noone)
                 hlp_draw_bounding_box_around_obj(collision, 4, 16777215)
             break
