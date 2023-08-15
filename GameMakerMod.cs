@@ -377,7 +377,7 @@ public partial class GameMakerMod
         new WysMenuOption("\"KYS Please\"", null, "gml_Script_scr_set_voiceline_mode", "2"),
         new WysMenuOption("\"HAHAHAHAHAHA!!!!\"", null, "gml_Script_scr_set_voiceline_mode", "3")
         );
-        data.InsertMenuOptionFromEnd(Vanilla.Extras, 0, new Menus.WysMenuOption("\"Voiceline Mode\"")
+        data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Voiceline Mode\"")
         {
             instance = voicelineMode.Name.Content,
         });
