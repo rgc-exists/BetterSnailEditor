@@ -162,6 +162,7 @@ gml_Script_keybinding_ini_defaults()
 gml_Script_keybinding_load()
 gml_Script_loca_text_load()
 gml_Script_loca_load_all_audio_into_memory()
+gml_Script_scr_show_hitboxes_ini()
 if(variable_global_exists("li_level_editor_database")){
     if(ds_exists(global.li_level_editor_database, ds_type_list)){
         gml_Script_leveleditor_database_ini()
