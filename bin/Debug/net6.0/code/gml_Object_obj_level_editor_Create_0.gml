@@ -21,3 +21,6 @@ if(global.setting_squid_in_editor){
     my_ai_rep.is_in_editor = true
     block_all_vls = instance_create_layer(-100, -100, "FadeOutIn", obj_aivl_block_vls_all)
 }
+
+just_pressed_upload_icon = true
+global.currentlyUploadingOrUpdatingALevel = false

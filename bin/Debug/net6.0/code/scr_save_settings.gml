@@ -1,4 +1,14 @@
+if(variable_global_exists("is_resetting_settings")){
+    if(global.is_resetting_settings == 1){
+        return false;
+    }
+}
 #orig#()
+if(variable_global_exists("is_resetting_settings")){
+    if(global.is_resetting_settings == 2){
+        return false;
+    }
+}
 
 file = file_text_open_write("BetterSE_SettoIngs23-2.set")
 file_text_write_string(file, "Hello, human. Welcome to the advanced version of the Better Snail Editor exclusive settings.")
@@ -196,4 +206,6 @@ file_text_writeln(file)
 file_text_write_real(file, global.setting_save_states)
 repeat (2)
     file_text_writeln(file)
+file_text_write_string(file, "Attempt Timer")
+file_text_writeln(file)
 file_text_close(file)

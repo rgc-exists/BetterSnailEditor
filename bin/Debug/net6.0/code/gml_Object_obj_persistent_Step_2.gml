@@ -1,4 +1,6 @@
 #orig#()
+
+
 if(global.setting_optimized_wires){
     if (!variable_global_exists("powered_count"))
         global.powered_count = 0
@@ -92,4 +94,17 @@ if(global.global_inspector_active){
             ds_list_destroy(li_selected_objs)
         }
     }
+}
+
+if(!global.currentlyUploadingOrUpdatingALevel){
+    if(global.was_uploading_last_frame){
+        if(global.setting_custom_thumbnails){
+            if(global.has_set_thumbnail){
+                global.has_set_thumbnail = false
+            }
+        }
+        global.was_uploading_last_frame = false
+    }
+} else {
+    global.was_uploading_last_frame = true
 }

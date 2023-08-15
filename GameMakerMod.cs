@@ -62,15 +62,16 @@ public partial class GameMakerMod
 
     public void AddCode()
     {
+        CreateFunctionFromFile("scr_choose_thumbnail.gml", "scr_choose_thumbnail");
         CreateFunctionFromFile("scr_load_savestate.gml", "scr_load_savestate", 1);
         CreateFunctionFromFile("scr_save_savestate.gml", "scr_save_savestate", 1);
         CreateFunctionFromFile("scr_initialize_BSE_settings.gml", "scr_initialize_BSE_settings");
         CreateFunctionFromFile("scr_draw_global_inspector_UI.gml", "scr_draw_global_inspector_UI", 5);
         CreateFunctionFromFile("scr_draw_wires_copy_preview.gml", "scr_draw_wires_copy_preview", 5);
         CreateFunctionFromFile("scr_write_text.gml", "scr_write_text", 2);
-        CreateFunctionFromFile("scr_reset_BSE_settings.gml", "scr_reset_BSE_settings", 2);
-        CreateFunctionFromFile("scr_reset_keybindings.gml", "scr_reset_keybindings", 2);
-        CreateFunctionFromFile("scr_reset_vanilla_settings.gml", "scr_reset_vanilla_settings", 2);
+        CreateFunctionFromFile("scr_reset_BSE_settings.gml", "scr_reset_BSE_settings");
+        CreateFunctionFromFile("scr_reset_keybindings.gml", "scr_reset_keybindings");
+        CreateFunctionFromFile("scr_reset_vanilla_settings.gml", "scr_reset_vanilla_settings");
         CreateFunctionFromFile("scr_show_hitboxes.gml", "scr_show_hitboxes", 2);
         CreateFunctionFromFile("scr_show_hitboxes_ini.gml", "scr_show_hitboxes_ini", 2);
         CreateFunctionFromFile("scr_set_savestates.gml", "scr_set_savestates", 1);
@@ -84,7 +85,8 @@ public partial class GameMakerMod
         CreateFunctionFromFile("scr_save_character.gml", "scr_save_character", 1);
         CreateFunctionFromFile("scr_load_character.gml", "scr_load_character", 1);
         CreateFunctionFromFile("scr_lvled_powertrigg_activate_helper_NOTINLINE.gml", "scr_lvled_powertrigg_activate_helper_NOTINLINE", 1);
-        HookFunctionFromFile("workshop_save_level_screenshot.gml", "workshop_save_level_screenshot");
+        HookFunctionFromFile("workshop_item_update.gml", "workshop_item_update");
+        HookFunctionFromFile("workshop_item_upload.gml", "workshop_item_upload");
         HookFunctionFromFile("scr_update_power_grid.gml", "scr_update_power_grid");
         HookFunctionFromFile("scr_reset_all_settings.gml", "scr_reset_all_settings");
         HookFunctionFromFile("scr_save_game.gml", "scr_save_game");
@@ -125,6 +127,9 @@ public partial class GameMakerMod
         //HookFunctionFromFile("hlp_collision_point_search.gml", "hlp_collision_point_search");
         //HookFunctionFromFile("scr_load_empty_game.gml", "scr_load_empty_game");
         //HookCodeFromFile("gml_Object_obj_player_Alarm_1.gml", "gml_Object_obj_player_Alarm_1");
+        //HookCodeFromFile("gml_Object_obj_steamworks_Other_69.gml", "gml_Object_obj_steamworks_Other_69");
+        HookCodeFromFile("gml_Object_obj_player_Collision_obj_fuse_aftersecret.gml", "gml_Object_obj_player_Collision_obj_fuse_aftersecret");
+        HookCodeFromFile("gml_Object_obj_player_Collision_obj_fuse_editor.gml", "gml_Object_obj_player_Collision_obj_fuse_editor");
         HookCodeFromFile("gml_Object_obj_level_select_blockage_Create_0.gml", "gml_Object_obj_level_select_blockage_Create_0");
         HookCodeFromFile("gml_Object_obj_level_editor_Step_0.gml", "gml_Object_obj_level_editor_Step_0");
         HookCodeFromFile("gml_Object_obj_music_parent_Step_0.gml", "gml_Object_obj_music_parent_Step_0");
@@ -135,6 +140,9 @@ public partial class GameMakerMod
         HookCodeFromFile("gml_Object_obj_td_core_Collision_obj_td_enemy.gml", "gml_Object_obj_td_core_Collision_obj_td_enemy");
         HookCodeFromFile("gml_Object_obj_ai_eye_Draw_0.gml", "gml_Object_obj_ai_eye_Draw_0");
         HookCodeFromFile("gml_Object_obj_lvledtior_trigger_powerable_Step_0.gml", "gml_Object_obj_lvledtior_trigger_powerable_Step_0");
+        //HookCodeFromFile("gml_Object_obj_level_edit_transition_Create_0.gml", "gml_Object_obj_level_edit_transition_Create_0");
+        //HookCodeFromFile("gml_Object_obj_level_transition_Step_0.gml", "gml_Object_obj_level_transition_Step_0");
+        //HookCodeFromFile("gml_Object_obj_player_Step_0.gml", "gml_Object_obj_player_Step_0");
         //HookCodeFromFile("gml_Object_obj_fx_constant_Create_0.gml", "gml_Object_obj_fx_constant_Create_0");
         //HookCodeFromFile("gml_Object_obj_fx_jump_air_Create_0.gml", "gml_Object_obj_fx_jump_air_Create_0");
         //HookCodeFromFile("gml_Object_obj_fx_jump_Create_0.gml", "gml_Object_obj_fx_jump_Create_0");
@@ -191,6 +199,7 @@ public partial class GameMakerMod
         HookCodeFromFile("gml_Object_obj_spotlight_drawer_Draw_0.gml", "gml_Object_obj_spotlight_drawer_Draw_0");
         HookCodeFromFile("gml_Object_obj_levelstyler_Create_0.gml", "gml_Object_obj_levelstyler_Create_0");
         HookCodeFromFile("gml_Object_obj_level_editor_Draw_0.gml", "gml_Object_obj_level_editor_Draw_0");
+        HookCodeFromFile("gml_Object_obj_performance_optimizer_Step_0.gml", "gml_Object_obj_performance_optimizer_Step_0");
         //HookCodeFromFile("gml_Object_obj_human_kill_drone_Create_0.gml", "gml_Object_obj_human_kill_drone_Create_0");
         HookCodeFromFile("gml_Object_obj_ball_Step_1.gml", "gml_Object_obj_ball_Step_1");
         SetObjectCodeFromFile("gml_Object_obj_level_editor_GameEnd_0.gml", "obj_level_editor", EventType.Other, EventSubtypeOther.GameEnd);
@@ -297,8 +306,9 @@ public partial class GameMakerMod
         });
 
         UndertaleGameObject invincibilityMenu = data.CreateMenu("menu_invincibility_hacks",
-            data.CreateToggleOption("\"Player Invincibility\"", "invincibility", "global.invincible_mode = argument0", "selectedItem = global.invincible_mode", "global.invincible_mode", "gml_Script_scr_return_input", "\"Makes it so shelly can't die.\n\nNOTE: Even with the setting on, the player will still die when the self destruct button is pressed unless SELF DESTRUCT INVINCIBILITY is turned on.\""),
+            data.CreateToggleOption("\"Player Invincibility\"", "invincibility", "global.invincible_mode = argument0", "selectedItem = global.invincible_mode", "global.invincible_mode", "gml_Script_scr_return_input", "\"Makes it so shelly can't die.\n\nNOTE: Even with the setting on, the player will still die when the self destruct button is pressed unless SELF DESTRUCT INVINCIBILITY is turned on, and the same is with FUSES for FUSE INVINCIBILITY..\""),
             data.CreateToggleOption("\"Self Destruct Invincibility\"", "restart_invincibility", "global.restart_invincible_mode = argument0", "selectedItem = global.restart_invincible_mode", "global.restart_invincible_mode", "gml_Script_scr_return_input", "\"Controls whether or not the self destruct button works.\n\nNOTE: Even with normal invincibility on, the player will still die to a restart if this setting is off.\""),
+            data.CreateToggleOption("\"Fuse Invincibility\"", "fuse_invincibility", "global.fuse_invincible_mode = argument0", "selectedItem = global.fuse_invincible_mode", "global.fuse_invincible_mode", "gml_Script_scr_return_input", "\"Makes it so you don't die when you hit a fuse.\n\nNOTE: Even with normal invincibility on, the player will still die to a fuse if this setting is off.\""),
             data.CreateToggleOption("\"Ball Invincibility\"", "ball_invincibility", "global.ball_invincible_mode = argument0", "selectedItem = global.ball_invincible_mode", "global.ball_invincible_mode", "gml_Script_scr_return_input", "\"Makes it so the basketball cannot pop.\""),
             data.CreateToggleOption("\"Tower Defense Invincibility\"", "td_invincibility", "global.td_invincible_mode = argument0", "selectedItem = global.td_invincible_mode", "global.td_invincible_mode", "gml_Script_scr_return_input", "\"Makes it so you don't die when TD cores break.\"")
         );
@@ -325,21 +335,17 @@ public partial class GameMakerMod
         data.AddMenuOption("obj_menu_wysapi_level_editor", data.CreateToggleOption("\"Custom Thumbnails\"", "custom_thumbnails", "global.setting_custom_thumbnails = argument0", "selectedItem = global.setting_custom_thumbnails", "global.setting_custom_thumbnails", "gml_Script_scr_return_input", "\"With this on, you will be asked if you want to pick a custom thumbnail every time you press the \\\"upload to steamworks\\\" button.\""));
         data.AddMenuOption("obj_menu_wysapi_level_editor", data.CreateToggleOption("\"Campaign-Only Exploration Mode\"", "campaign_exploration_mode", "global.setting_campaign_exploration_mode = argument0", "selectedItem = global.setting_campaign_exploration_mode", "global.setting_campaign_exploration_mode", "gml_Script_scr_return_input", "\"Unlocks ALL levels in custom campaigns so you don't have to unlock them, but, unlock normal exploration mode, DOES NOT ruin validity of main save file.\""));
 
-        /*
         UndertaleGameObject ResetVanillaSettings = data.CreateMenu("Reset_Vanilla_Settings", new WysMenuOption("\"Reset Vanilla Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_vanilla_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that are included in the original game (not added with mods).\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.More, 5, new Menus.WysMenuOption("\"Reset Vanilla Settings\"")
         {
             instance = ResetVanillaSettings.Name.Content
         });
-        */
 
-        /*
         UndertaleGameObject ResetBSESettings = data.CreateMenu("Reset_BSE_Settings", new WysMenuOption("\"Reset Better Snail Editor Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_BSE_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that were added with Better Snail Editor.\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.More, 5, new Menus.WysMenuOption("\"Reset Better Snail Editor Settings\"")
         {
-            instance = ResetVanillaSettings.Name.Content
+            instance = ResetBSESettings.Name.Content
         });
-        */
 
         UndertaleGameObject ResetKeybindings = data.CreateMenu("Reset_Keybindings", new WysMenuOption("\"Reset Keybindings\"", Menus.Vanilla.More, "gml_Script_scr_reset_keybindings()", null, "gml_Script_scr_return_input", "\"Restore the controls of the game to their defaults.\""));
         data.InsertMenuOptionFromEnd("obj_menu_Controls", 0, new Menus.WysMenuOption("\"Reset Keybindings\"")
@@ -521,6 +527,7 @@ bExecuteScriptsOnExit = 1");
             new WysMenuOption("\"Single Slot (Just F6+F7)\"", null, "gml_Script_scr_set_savestates", "2")
         );
         data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (EXPERIMENTAL)\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can save and load the state of your game.\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\""));
+
     }
 
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0){

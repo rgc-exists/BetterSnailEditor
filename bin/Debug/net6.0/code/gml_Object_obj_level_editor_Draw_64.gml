@@ -125,3 +125,35 @@ if tools_widnow_open
     }
 }
 
+if(global.setting_custom_thumbnails){
+
+    if (menu_mode == 1)
+    {
+        if(just_pressed_upload_icon){
+            just_pressed_upload_icon = false
+            workshop_save_level_screenshot()
+            global.current_thumbnail = sprite_add("Community Levels/" + global.currentCampaign + "/Thumbnail.png", 0, false, false, 0, 0)
+        }
+        var start_x = (display_get_gui_width() * 0.17) + (190 * 5)
+        var start_y = (display_get_gui_height() * 0.17)
+        var draw_color = c_white
+        if(scr_ui_detectvmouse_square_centered(start_x + 90, start_y + 180 + 50, 180, 101)){
+            draw_color = c_gray
+        }
+        if(scr_ui_detectvmouse_square_lpress(start_x, start_y + 180, 180, 101)){
+            draw_color = c_dkgray
+            gml_Script_scr_choose_thumbnail()
+        }
+        draw_sprite_ext(global.current_thumbnail, 0, start_x, start_y + 180, 180 / sprite_get_width(global.current_thumbnail), 101 / sprite_get_height(global.current_thumbnail), 0, draw_color, 1)
+        if(scr_ui_detectvmouse_square_centered(start_x + 90, start_y + 180 + 50, 180, 101)){
+            draw_set_color(c_white)
+            draw_set_halign(fa_middle)
+            draw_set_valign(fa_center)
+            scr_draw_text_in_box("Choose Thumbnail", 180, 101, 1, -1, (start_x + 90), (start_y + 180 + 50), 0)
+        }
+    } else {
+        if(!just_pressed_upload_icon){
+            just_pressed_upload_icon = true
+        }
+    }
+}

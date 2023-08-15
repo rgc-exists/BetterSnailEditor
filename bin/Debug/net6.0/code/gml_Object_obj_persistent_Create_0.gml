@@ -28,7 +28,10 @@ if(global.is_gmml_version){
 global.invincible_mode = false
 global.ball_invincible_mode = false
 global.td_invincible_mode = false
+global.fuse_invincible_mode = false
 global.infinite_jumps = false
+
+
 obj_persistent.show_hotkeys_tip = 0
 global.hotkeys_shown = false
 global.rendering_enabled = true
@@ -157,5 +160,10 @@ prevMouseInInspector = false
 
 global.just_loaded_savestate = false
 
+global.has_set_thumbnail = false
+
+gml_Script_scr_initialize_BSE_settings()
+
+global.was_uploading_last_frame = false
 
 #orig#()

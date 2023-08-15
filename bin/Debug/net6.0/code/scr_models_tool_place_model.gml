@@ -98,6 +98,13 @@ switch argument1
                     created_inst.image_angle = rot_data.image_angle
                     created_inst.image_xscale = rot_data.image_xscale
                     created_inst.image_yscale = rot_data.image_yscale
+                    if(global.cur_model_is_text){
+                        if(_Ts.custom_tool_or_object_id == "anchor"){
+                            created_inst.image_xscale = 0.1
+                            created_inst.image_yscale = 0.1
+                            ds_map_replace(clip_entry.properties, "visible", true)
+                        }
+                    }
                     ds_list_add(_Ts.li_placed_instances, created_inst)
                     created_inst.map_properties = clip_entry.properties
                     created_inst.toolStruct = _Ts
@@ -129,7 +136,19 @@ switch argument1
                 lvlwire_create(ds_list_find_value(created_instances, ww[0]), ds_list_find_value(created_instances, ww[1]))
             }
         }
-        ds_list_destroy(created_instances)
+        ds_list_destroy(created_instances)    for(var m = 0; m < array_length(global.current_model); m++)
+        for(var m = 0; m < array_length(global.current_model); m++){
+            var current_model_obj = global.current_model[m]
+            variable_struct_set(current_model_obj, "toolStruct", get_leveleditor_database_element(variable_struct_get(current_model_obj, "custom_tool_or_object_id")))
+            var li_properties = ds_map_create()
+            var properties_struct = variable_struct_get(current_model_obj, "properties")
+            names = variable_struct_get_names(properties_struct)
+            for(var i = 0; i < variable_struct_names_count(properties_struct); i += 1){
+                ds_map_add(li_properties, names[i], variable_struct_get(properties_struct, names[i]))
+            }
+            variable_struct_get(current_model_obj, "properties", li_properties)
+            global.cur_model_is_text = true
+        }
         break
 }
 

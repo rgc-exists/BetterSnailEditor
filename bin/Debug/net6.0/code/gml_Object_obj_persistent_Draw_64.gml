@@ -1,4 +1,5 @@
 #orig#()
+
 if(room == disco_copy_me){
     gml_Script_scr_manage_music_player()
 } else {
