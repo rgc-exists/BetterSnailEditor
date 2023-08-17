@@ -1,9 +1,3 @@
-if(directory_exists(working_directory + "BetterSnailEditor_Assets/")){
-    global.betterSE_assets = working_directory + "BetterSnailEditor_Assets/"
-    global.is_gmml_version = false
-} else {
-    show_error("ERROR:\nThe assets folder for the mod was not found.\nPlease add the folder called 'BetterSnailEditor_Assets' to the same folder as the Will You Snail executable (your WYS steam install location.)\nThe folder can be found in the zip file you downloaded the mod with.\n\n\nFor GMML users, IDK how you messed this up because its literally checking if the GMML folder for the mod exists. XD", true)
-}
 if(!global.just_loaded_savestate){
     #orig#()
 }

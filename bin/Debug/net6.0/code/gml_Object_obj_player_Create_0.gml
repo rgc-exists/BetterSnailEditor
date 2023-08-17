@@ -46,7 +46,6 @@ if(room == disco_copy_me){
     wind_sound_slither = audio_play_sound(sou_slither_no_paper, 1, true)
     audio_sound_gain_fx(wind_sound_slither, 0, 0)
     winter = 0
-    alarm = 1
     col_snail_outline = 0
     col_snail_body = 0
     col_snail_shell = 0
@@ -82,8 +81,6 @@ if(room == disco_copy_me){
     max_smilies = 0
     collected_smilies = 0
     smilie_counters_played = 0
-    alarm[2] = 1
-    alarm[1] = 300
     infinijumptime = 0
     handled_custom_exit = 0
 
