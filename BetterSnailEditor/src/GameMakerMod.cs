@@ -12,7 +12,6 @@ public partial class GameMakerMod
 
     public Dictionary<string, string> files = new Dictionary<string, string>();
 
-
     public UndertaleData? data;
 
     public void Load(int audioGroup, UndertaleData data_source)
