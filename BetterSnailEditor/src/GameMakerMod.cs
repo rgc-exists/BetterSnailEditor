@@ -1,14 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using GmmlHooker;
+﻿using GmmlHooker;
 using GmmlPatcher;
 using WysApi.Api;
-using WysModMenu;
 using UndertaleModLib;
 using UndertaleModLib.Models;
-using static WysApi.Api.Menus;
-using System.Globalization;
-using System;
 using System.Reflection;
 
 namespace BetterSnailEditor;
@@ -252,8 +246,8 @@ public partial class GameMakerMod
         });
 
 
-        data.AddMenuOption("obj_menu_ExplorationMode", new WysMenuOption("\"Extra\"", script: "gml_Script_scr_set_explore_mode", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Unlocks ALL levels and dialog springs, INCLUDING secrets.\""));
-        data.AddMenuOption("obj_menu_StayInBack", new WysMenuOption("\"Stay In FOREGROUND\"", script: "gml_Script_scr_set_stay_in_back_gml_Object_obj_menu_StayInBack_Other_10", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Makes it so squid ALWAYS stays in the foreground, and never goes into the background.\""));
+        data.AddMenuOption("obj_menu_ExplorationMode", new Menus.WysMenuOption("\"Extra\"", script: "gml_Script_scr_set_explore_mode", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Unlocks ALL levels and dialog springs, INCLUDING secrets.\""));
+        data.AddMenuOption("obj_menu_StayInBack", new Menus.WysMenuOption("\"Stay In FOREGROUND\"", script: "gml_Script_scr_set_stay_in_back_gml_Object_obj_menu_StayInBack_Other_10", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Makes it so squid ALWAYS stays in the foreground, and never goes into the background.\""));
         //UndertaleGameObject squidInEditorMenu =
         UndertaleGameObject levelEditorMenu = data.CreateMenu("level_editor", data.CreateToggleOption("\"Squid In Editor\"", "squidInEditorMenu", "global.setting_squid_in_editor = argument0", "selectedItem = global.setting_squid_in_editor", "global.setting_squid_in_editor", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Have squid present in your editor. He will not talk, but he will keep you company while you build.\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Settings, 2, new Menus.WysMenuOption("\"Level Editor\"")
@@ -323,7 +317,7 @@ public partial class GameMakerMod
         data.AddMenuOption(Menus.Vanilla.AdvancedGraphics, data.CreateToggleOption("\"Unlimited FPS (IDK if this does anything)\"", "unlimited_fps", "scr_set_unlimited_fps(argument0)", "scr_preselect_unlimited_fps()", "obj_persistent.unlimited_frame_rate", "gml_Script_scr_return_input", "\"Makes it so your framerate can go as high as you want. (I ACTUALLY HAVE NO CLUE IF THIS DOES ANYTHING BUT IT WAS IN THE CODE OF THE GAME SO WHY NOT.)\""));
 
         data.AddMenuOption("obj_menu_wysapi_level_editor", data.CreateToggleOption("\"\\\"Press O for hotkeys\\\" message\"", "press_for_hotkeys", "global.setting_show_hotkeys_overlay = argument0", "selectedItem = global.setting_show_hotkeys_overlay", "global.setting_show_hotkeys_overlay", "gml_Script_scr_return_input", "\"Turn on/off the \\\"Press O to show list of BSE-Exclusive Hotkeys\\\" overlay that shows when you enter the editor.\""));
-        UndertaleGameObject bseCredits = data.CreateMenu("BSE_credits", new WysMenuOption("\"Better Snail Editor Credits\"", Menus.Vanilla.More, "gml_Script_scr_menu_play_BSE_credits()", null, "gml_Script_scr_return_input", "\"Play the credits for Better Snail Editor\""));
+        UndertaleGameObject bseCredits = data.CreateMenu("BSE_credits", new Menus.WysMenuOption("\"Better Snail Editor Credits\"", Menus.Vanilla.More, "gml_Script_scr_menu_play_BSE_credits()", null, "gml_Script_scr_return_input", "\"Play the credits for Better Snail Editor\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.More, 1, new Menus.WysMenuOption("\"Better Snail Editor Credits\"")
         {
             instance = bseCredits.Name.Content
@@ -335,19 +329,19 @@ public partial class GameMakerMod
         data.AddMenuOption("obj_menu_wysapi_level_editor", data.CreateToggleOption("\"Custom Thumbnails\"", "custom_thumbnails", "global.setting_custom_thumbnails = argument0", "selectedItem = global.setting_custom_thumbnails", "global.setting_custom_thumbnails", "gml_Script_scr_return_input", "\"With this on, you will be asked if you want to pick a custom thumbnail every time you press the \\\"upload to steamworks\\\" button.\""));
         data.AddMenuOption("obj_menu_wysapi_level_editor", data.CreateToggleOption("\"Campaign-Only Exploration Mode\"", "campaign_exploration_mode", "global.setting_campaign_exploration_mode = argument0", "selectedItem = global.setting_campaign_exploration_mode", "global.setting_campaign_exploration_mode", "gml_Script_scr_return_input", "\"Unlocks ALL levels in custom campaigns so you don't have to unlock them, but, unlock normal exploration mode, DOES NOT ruin validity of main save file.\""));
 
-        UndertaleGameObject ResetVanillaSettings = data.CreateMenu("Reset_Vanilla_Settings", new WysMenuOption("\"Reset Vanilla Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_vanilla_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that are included in the original game (not added with mods).\""));
+        UndertaleGameObject ResetVanillaSettings = data.CreateMenu("Reset_Vanilla_Settings", new Menus.WysMenuOption("\"Reset Vanilla Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_vanilla_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that are included in the original game (not added with mods).\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.More, 5, new Menus.WysMenuOption("\"Reset Vanilla Settings\"")
         {
             instance = ResetVanillaSettings.Name.Content
         });
 
-        UndertaleGameObject ResetBSESettings = data.CreateMenu("Reset_BSE_Settings", new WysMenuOption("\"Reset Better Snail Editor Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_BSE_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that were added with Better Snail Editor.\""));
+        UndertaleGameObject ResetBSESettings = data.CreateMenu("Reset_BSE_Settings", new Menus.WysMenuOption("\"Reset Better Snail Editor Settings\"", Menus.Vanilla.More, "gml_Script_scr_reset_BSE_settings()", null, "gml_Script_scr_return_input", "\"Reset all settings that were added with Better Snail Editor.\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.More, 5, new Menus.WysMenuOption("\"Reset Better Snail Editor Settings\"")
         {
             instance = ResetBSESettings.Name.Content
         });
 
-        UndertaleGameObject ResetKeybindings = data.CreateMenu("Reset_Keybindings", new WysMenuOption("\"Reset Keybindings\"", Menus.Vanilla.More, "gml_Script_scr_reset_keybindings()", null, "gml_Script_scr_return_input", "\"Restore the controls of the game to their defaults.\""));
+        UndertaleGameObject ResetKeybindings = data.CreateMenu("Reset_Keybindings", new Menus.WysMenuOption("\"Reset Keybindings\"", Menus.Vanilla.More, "gml_Script_scr_reset_keybindings()", null, "gml_Script_scr_return_input", "\"Restore the controls of the game to their defaults.\""));
         data.InsertMenuOptionFromEnd("obj_menu_Controls", 0, new Menus.WysMenuOption("\"Reset Keybindings\"")
         {
             instance = ResetKeybindings.Name.Content
@@ -362,7 +356,7 @@ public partial class GameMakerMod
             instance = editorEasterEggs.Name.Content
         });
 
-        UndertaleGameObject MusicPlayer = data.CreateMenu("Music_Player", new WysMenuOption("\"Soundtrack Player\"", Menus.Vanilla.More, "gml_Script_scr_go_to_music_player()", null, "gml_Script_scr_return_input", "\"Go to the OST music player room\""));
+        UndertaleGameObject MusicPlayer = data.CreateMenu("Music_Player", new Menus.WysMenuOption("\"Soundtrack Player\"", Menus.Vanilla.More, "gml_Script_scr_go_to_music_player()", null, "gml_Script_scr_return_input", "\"Go to the OST music player room\""));
         data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Soundtrack Player\"")
         {
             instance = MusicPlayer.Name.Content
@@ -372,10 +366,10 @@ public partial class GameMakerMod
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Jump Height\"", "player_jump_height", "global.cheat_jump_height = clamp(global.cheat_jump_height + argument0 / 100, 0, 10)", "return string(global.cheat_jump_height * 100) + \"%\"", 10));
 
         UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode",
-        new WysMenuOption("\"Default\"", null, "gml_Script_scr_set_voiceline_mode", "0"),
-        new WysMenuOption("\"Yo\"", null, "gml_Script_scr_set_voiceline_mode", "1"),
-        new WysMenuOption("\"KYS Please\"", null, "gml_Script_scr_set_voiceline_mode", "2"),
-        new WysMenuOption("\"HAHAHAHAHAHA!!!!\"", null, "gml_Script_scr_set_voiceline_mode", "3")
+        new Menus.WysMenuOption("\"Default\"", null, "gml_Script_scr_set_voiceline_mode", "0"),
+        new Menus.WysMenuOption("\"Yo\"", null, "gml_Script_scr_set_voiceline_mode", "1"),
+        new Menus.WysMenuOption("\"KYS Please\"", null, "gml_Script_scr_set_voiceline_mode", "2"),
+        new Menus.WysMenuOption("\"HAHAHAHAHAHA!!!!\"", null, "gml_Script_scr_set_voiceline_mode", "3")
         );
         data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Voiceline Mode\"")
         {
@@ -502,8 +496,8 @@ bExecuteScriptsOnExit = 0");
 
         data.InsertMenuOption(funMenu.Name.Content, 0, data.CreateToggleOption("\"F U N N Y   S Q U I D\"", "funny_squid", "global.setting_funny_squid = argument0", "selectedItem = global.setting_funny_squid", "global.setting_funny_squid", "gml_Script_scr_return_input", "\"WEEEEEEEEEEEEEEEE!\""));
 
-        UndertaleGameObject goreMenu = data.CreateMenu("gore_menu", new WysMenuOption("\"None\"", null, "gml_Script_scr_set_blood", "0"), new WysMenuOption("\"Blood\"", null, "gml_Script_scr_set_blood", "1"), new WysMenuOption("\"Slime\"", null, "gml_Script_scr_set_blood", "2"));
-        data.InsertMenuOption(funMenu.Name.Content, 0, new WysMenuOption("\"Gore\"", goreMenu.Name.Content));
+        UndertaleGameObject goreMenu = data.CreateMenu("gore_menu", new Menus.WysMenuOption("\"None\"", null, "gml_Script_scr_set_blood", "0"), new Menus.WysMenuOption("\"Blood\"", null, "gml_Script_scr_set_blood", "1"), new Menus.WysMenuOption("\"Slime\"", null, "gml_Script_scr_set_blood", "2"));
+        data.InsertMenuOption(funMenu.Name.Content, 0, new Menus.WysMenuOption("\"Gore\"", goreMenu.Name.Content));
 
         data.HookCode("gml_Object_" + goreMenu.Name.Content + "_Other_10", @"#orig#()
 bExecuteScriptsOnSwitch = 0
@@ -521,10 +515,10 @@ bExecuteScriptsOnExit = 1");
         });
 
         UndertaleGameObject savestatesMenu = data.CreateMenu("savestates_menu",
-            new WysMenuSettings(executeScriptsOnSwitch:true, executeScriptsOnExit:true),
-            new WysMenuOption("\"Off\"", null, "gml_Script_scr_set_savestates", "0"), 
-            new WysMenuOption("\"Multiple Slots (F6/F7+number keys 1-9)\"", null, "gml_Script_scr_set_savestates", "1"),
-            new WysMenuOption("\"Single Slot (Just F6+F7)\"", null, "gml_Script_scr_set_savestates", "2")
+            new Menus.WysMenuSettings(executeScriptsOnSwitch:true, executeScriptsOnExit:true),
+            new Menus.WysMenuOption("\"Off\"", null, "gml_Script_scr_set_savestates", "0"), 
+            new Menus.WysMenuOption("\"Multiple Slots (F6/F7+number keys 1-9)\"", null, "gml_Script_scr_set_savestates", "1"),
+            new Menus.WysMenuOption("\"Single Slot (Just F6+F7)\"", null, "gml_Script_scr_set_savestates", "2")
         );
         data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (EXPERIMENTAL)\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can save and load the state of your game.\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\""));
 
