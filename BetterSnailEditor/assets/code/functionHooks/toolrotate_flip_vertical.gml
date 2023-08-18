@@ -1,0 +1,1 @@
+toolrotate_impossible.gml

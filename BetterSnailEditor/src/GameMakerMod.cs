@@ -4,6 +4,8 @@ using WysApi.Api;
 using UndertaleModLib;
 using UndertaleModLib.Models;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Text.Json;
 
 namespace BetterSnailEditor;
 
@@ -18,29 +20,14 @@ public partial class GameMakerMod
     {
         data = data_source;
 
-        Console.WriteLine("Loading code from files...");
-
-        string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)  ?? "Error";
-
-        if (assemblyFolder == "Error")
-        {
-            Console.WriteLine("Error finding assembly folder!");
-            Console.WriteLine("Assembly.GetExecutingAssembly().Location is null!");
-            Console.WriteLine("Please report this in the bse discord.");
-
-            return;
-        }
-
-        LoadFromFiles(assemblyFolder);
-
         Console.WriteLine("Adding Objects...");
         AddObjects();
 
-        Console.WriteLine("Adding Code...");
-        AddCode();
-
         Console.WriteLine("Adding Menu Items... (Thanks to Config for the very useful WYS menu API! :D)");
         AddMenuItems();
+
+        Console.WriteLine("Adding Code...");
+        AddCode();
 
         Console.WriteLine("Building Rooms...");
         BuildRooms();
@@ -55,177 +42,63 @@ public partial class GameMakerMod
 
     public void AddCode()
     {
-        CreateFunctionFromFile("scr_choose_thumbnail.gml", "scr_choose_thumbnail");
-        CreateFunctionFromFile("scr_load_savestate.gml", "scr_load_savestate", 1);
-        CreateFunctionFromFile("scr_save_savestate.gml", "scr_save_savestate", 1);
-        CreateFunctionFromFile("scr_initialize_BSE_settings.gml", "scr_initialize_BSE_settings");
-        CreateFunctionFromFile("scr_draw_global_inspector_UI.gml", "scr_draw_global_inspector_UI", 5);
-        CreateFunctionFromFile("scr_draw_wires_copy_preview.gml", "scr_draw_wires_copy_preview", 5);
-        CreateFunctionFromFile("scr_write_text.gml", "scr_write_text", 2);
-        CreateFunctionFromFile("scr_reset_BSE_settings.gml", "scr_reset_BSE_settings");
-        CreateFunctionFromFile("scr_reset_keybindings.gml", "scr_reset_keybindings");
-        CreateFunctionFromFile("scr_reset_vanilla_settings.gml", "scr_reset_vanilla_settings");
-        CreateFunctionFromFile("scr_show_hitboxes.gml", "scr_show_hitboxes", 2);
-        CreateFunctionFromFile("scr_show_hitboxes_ini.gml", "scr_show_hitboxes_ini", 2);
-        CreateFunctionFromFile("scr_set_savestates.gml", "scr_set_savestates", 1);
-        CreateFunctionFromFile("scr_preselect_savestates.gml", "scr_preselect_savestates");
-        CreateFunctionFromFile("scr_set_autosave.gml", "scr_set_autosave", 1);
-        CreateFunctionFromFile("scr_preselect_autosave.gml", "scr_preselect_autosave");
-        CreateFunctionFromFile("scr_go_to_music_player.gml", "scr_go_to_music_player");
-        CreateFunctionFromFile("scr_manage_music_player.gml", "scr_manage_music_player");
-        CreateFunctionFromFile("scr_set_global_var_to_color.gml", "scr_set_global_var_to_color", 3);
-        CreateFunctionFromFile("scr_set_global_var_to_color_raw.gml", "scr_set_global_var_to_color_raw", 1);
-        CreateFunctionFromFile("scr_save_character.gml", "scr_save_character", 1);
-        CreateFunctionFromFile("scr_load_character.gml", "scr_load_character", 1);
-        CreateFunctionFromFile("scr_lvled_powertrigg_activate_helper_NOTINLINE.gml", "scr_lvled_powertrigg_activate_helper_NOTINLINE", 1);
-        HookFunctionFromFile("workshop_item_update.gml", "workshop_item_update");
-        HookFunctionFromFile("workshop_item_upload.gml", "workshop_item_upload");
-        HookFunctionFromFile("scr_update_power_grid.gml", "scr_update_power_grid");
-        HookFunctionFromFile("scr_reset_all_settings.gml", "scr_reset_all_settings");
-        HookFunctionFromFile("scr_save_game.gml", "scr_save_game");
-        HookFunctionFromFile("scr_change_gamespeed.gml", "scr_change_gamespeed");
-        HookFunctionFromFile("toolrotate_replacement.gml", "toolrotate_90degrees");
-        HookFunctionFromFile("toolrotate_replacement.gml", "toolrotate_30degrees");
-        HookFunctionFromFile("toolrotate_replacement.gml", "toolrotate_flip_horizontal");
-        HookFunctionFromFile("toolrotate_replacement.gml", "toolrotate_flip_vertical");
-        HookFunctionFromFile("toolrotate_replacement.gml", "toolrotate_impossible");
-        HookFunctionFromFile("toolplace_fill_with_blocks.gml", "toolplace_fill_with_blocks");
-        HookFunctionFromFile("toolplace_one_at_a_time_placement.gml", "toolplace_one_at_a_time_placement");
-        HookFunctionFromFile("toolplace_fill_with_wall_blocks_noszielimit.gml", "toolplace_fill_with_wall_blocks_noszielimit");
-        HookFunctionFromFile("scr_airep_normal.gml", "scr_airep_normal");
-        HookFunctionFromFile("scr_ai_rep_to_screen_center_at_levelstart.gml", "scr_ai_rep_to_screen_center_at_levelstart");
-        HookFunctionFromFile("scr_ai_rep_to_screen_center.gml", "scr_ai_rep_to_screen_center");
-        HookFunctionFromFile("leveleditor_save.gml", "leveleditor_save");
-        HookFunctionFromFile("scr_load_settings.gml", "scr_load_settings");
-        HookFunctionFromFile("scr_save_settings.gml", "scr_save_settings");
-        HookFunctionFromFile("scr_save_settings_exists.gml", "scr_save_settings_exists");
-        HookFunctionFromFile("toolplace_copy_paste.gml", "toolplace_copy_paste");
-        HookFunctionFromFile("toolplace_copy_blocks_all_in_rect.gml", "toolplace_copy_blocks_all_in_rect");
-        HookFunctionFromFile("get_tool_sprite.gml", "get_tool_sprite");
-        HookFunctionFromFile("toolplace_delete_blocks_of_same_type.gml", "toolplace_delete_blocks_of_same_type");
-        HookFunctionFromFile("leveleditor_load.gml", "leveleditor_load");
-        HookFunctionFromFile("scr_player_death.gml", "scr_player_death");
-        HookFunctionFromFile("scr_fade_to_editor.gml", "scr_fade_to_editor");
-        HookFunctionFromFile("toolplace_singleton_placement.gml", "toolplace_singleton_placement");
-        HookFunctionFromFile("toolplace_delete_paths_of_same_path_id.gml", "toolplace_delete_paths_of_same_path_id");
-        HookFunctionFromFile("toolplace_delete_trigger_blocks_of_same_type.gml", "toolplace_delete_trigger_blocks_of_same_type");
-        HookFunctionFromFile("toolplace_delete_wall_blocks.gml", "toolplace_delete_wall_blocks");
-        HookFunctionFromFile("toolplace_fill_with_stripes.gml", "toolplace_fill_with_stripes");
-        HookFunctionFromFile("toolplace_fill_with_wall_blocks.gml", "toolplace_fill_with_wall_blocks");
-        HookFunctionFromFile("scr_move_like_a_snail.gml", "scr_move_like_a_snail");
-        HookFunctionFromFile("try_commenting_on_player_hats.gml", "try_commenting_on_player_hats");
-        HookFunctionFromFile("loca_sound.gml", "loca_sound");
-        HookFunctionFromFile("clear_existing_level.gml", "clear_existing_level");
-        HookFunctionFromFile("loca_load_all_audio_into_memory.gml", "loca_load_all_audio_into_memory");
-        //HookFunctionFromFile("hlp_collision_point_search.gml", "hlp_collision_point_search");
-        //HookFunctionFromFile("scr_load_empty_game.gml", "scr_load_empty_game");
-        //HookCodeFromFile("gml_Object_obj_player_Alarm_1.gml", "gml_Object_obj_player_Alarm_1");
-        //HookCodeFromFile("gml_Object_obj_steamworks_Other_69.gml", "gml_Object_obj_steamworks_Other_69");
-        HookCodeFromFile("gml_Object_obj_player_Collision_obj_fuse_aftersecret.gml", "gml_Object_obj_player_Collision_obj_fuse_aftersecret");
-        HookCodeFromFile("gml_Object_obj_player_Collision_obj_fuse_editor.gml", "gml_Object_obj_player_Collision_obj_fuse_editor");
-        HookCodeFromFile("gml_Object_obj_level_select_blockage_Create_0.gml", "gml_Object_obj_level_select_blockage_Create_0");
-        HookCodeFromFile("gml_Object_obj_level_editor_Step_0.gml", "gml_Object_obj_level_editor_Step_0");
-        HookCodeFromFile("gml_Object_obj_music_parent_Step_0.gml", "gml_Object_obj_music_parent_Step_0");
-        HookCodeFromFile("gml_Object_obj_performance_test_snail_Step_0.gml", "gml_Object_obj_performance_test_snail_Step_0");
-        HookCodeFromFile("gml_Object_obj_player_Create_0.gml", "gml_Object_obj_player_Create_0");
-        HookCodeFromFile("gml_Object_obj_aivl_parent_Other_10.gml", "gml_Object_obj_aivl_parent_Other_10");
-        HookCodeFromFile("gml_Object_obj_aivl_parent_Step_0.gml", "gml_Object_obj_aivl_parent_Step_0");
-        HookCodeFromFile("gml_Object_obj_td_core_Collision_obj_td_enemy.gml", "gml_Object_obj_td_core_Collision_obj_td_enemy");
-        HookCodeFromFile("gml_Object_obj_ai_eye_Draw_0.gml", "gml_Object_obj_ai_eye_Draw_0");
-        HookCodeFromFile("gml_Object_obj_lvledtior_trigger_powerable_Step_0.gml", "gml_Object_obj_lvledtior_trigger_powerable_Step_0");
-        //HookCodeFromFile("gml_Object_obj_level_edit_transition_Create_0.gml", "gml_Object_obj_level_edit_transition_Create_0");
-        //HookCodeFromFile("gml_Object_obj_level_transition_Step_0.gml", "gml_Object_obj_level_transition_Step_0");
-        //HookCodeFromFile("gml_Object_obj_player_Step_0.gml", "gml_Object_obj_player_Step_0");
-        //HookCodeFromFile("gml_Object_obj_fx_constant_Create_0.gml", "gml_Object_obj_fx_constant_Create_0");
-        //HookCodeFromFile("gml_Object_obj_fx_jump_air_Create_0.gml", "gml_Object_obj_fx_jump_air_Create_0");
-        //HookCodeFromFile("gml_Object_obj_fx_jump_Create_0.gml", "gml_Object_obj_fx_jump_Create_0");
-        CreateFunctionFromFile("scr_models_tool_load_model.gml", "scr_models_tool_load_model");
-        CreateFunctionFromFile("scr_models_tool_place_model.gml", "scr_models_tool_place_model", 2);
-        CreateFunctionFromFile("scr_models_tool_save_model.gml", "scr_models_tool_save_model", 2);
-        CreateFunctionFromFile("scr_return_exploration_mode_as_text.gml", "scr_return_exploration_mode_as_text");
-        CreateFunctionFromFile("scr_set_snailax_full.gml", "scr_set_snailax_full", 1);
-        CreateFunctionFromFile("scr_preselect_snailax_full.gml", "scr_preselect_snailax_full");
-        CreateFunctionFromFile("scr_set_voiceline_mode.gml", "scr_set_voiceline_mode", 1);
-        CreateFunctionFromFile("scr_set_snailax_forever.gml", "scr_set_snailax_forever", 1);
-        CreateFunctionFromFile("scr_preselect_snailax_forever.gml", "scr_preselect_snailax_forever");
-        CreateFunctionFromFile("scr_set_unlimited_fps.gml", "scr_set_unlimited_fps", 1);
-        CreateFunctionFromFile("scr_preselect_unlimited_fps.gml", "scr_preselect_unlimited_fps", 1);
-        CreateFunctionFromFile("scr_set_squid_in_editor.gml", "scr_set_squid_in_editor", 1);
-        CreateFunctionFromFile("scr_set_squid_constant_opacity.gml", "scr_set_squid_constant_opacity", 1);
-        CreateFunctionFromFile("scr_preselect_squid_constant_opacity.gml", "scr_preselect_squid_constant_opacity");
-        CreateFunctionFromFile("scr_preselect_squid_in_editor.gml", "scr_preselect_squid_in_editor");
-        CreateFunctionFromFile("scr_set_epilepsy_warning.gml", "scr_set_epilepsy_warning", 1);
-        CreateFunctionFromFile("scr_set_show_hitboxes.gml", "scr_set_show_hitboxes", 1);
-        CreateFunctionFromFile("scr_preselect_epilepsy_warning.gml", "scr_preselect_epilepsy_warning");
-        CreateFunctionFromFile("scr_preselect_show_hitboxes.gml", "scr_preselect_show_hitboxes");
-        CreateFunctionFromFile("scr_return_multiframe_loading.gml", "scr_return_multiframe_loading");
-        CreateFunctionFromFile("scr_menu_play_BSE_credits.gml", "scr_menu_play_BSE_credits");
-        CreateFunctionFromFile("scr_set_default_hat.gml", "scr_set_default_hat");
-        CreateFunctionFromFile("scr_set_save_hat.gml", "scr_set_save_hat");
-        CreateFunctionFromFile("scr_select_preset_character.gml", "scr_select_preset_character", 1);
-        CreateFunctionFromFile("scr_inspector_select_blocks_in_rect.gml", "scr_inspector_select_blocks_in_rect", 2);
-        CreateFunctionFromFile("scr_temp_models_tool_warning.gml", "scr_temp_models_tool_warning", 2);
-        HookFunctionFromFile("leveleditor_database_ini.gml", "leveleditor_database_ini");
-        HookCodeFromFile("gml_Object_obj_level_editor_Draw_64.gml", "gml_Object_obj_level_editor_Draw_64");
-        HookCodeFromFile("gml_Object_obj_music_GameStart_Other_10.gml", "gml_Object_obj_music_GameStart_Other_10");
-        HookCodeFromFile("gml_Object_obj_level_editor_Create_0.gml", "gml_Object_obj_level_editor_Create_0");
-        HookCodeFromFile("gml_Object_obj_ai_eye_Step_0.gml", "gml_Object_obj_ai_eye_Step_0");
-        HookCodeFromFile("gml_Object_obj_mouse_controller_Draw_64.gml", "gml_Object_obj_mouse_controller_Draw_64");
-        HookCodeFromFile("gml_Object_obj_persistent_Step_0.gml", "gml_Object_obj_persistent_Step_0");
-        HookCodeFromFile("gml_Object_obj_persistent_Step_2.gml", "gml_Object_obj_persistent_Step_2");
-        HookCodeFromFile("gml_Object_obj_persistent_Create_0.gml", "gml_Object_obj_persistent_Create_0");
-        HookCodeFromFile("gml_Object_obj_persistent_Draw_64.gml", "gml_Object_obj_persistent_Draw_64");
-        HookCodeFromFile("gml_Object_obj_camera_control_level_editor_Step_2.gml", "gml_Object_obj_camera_control_level_editor_Step_2");
-        HookCodeFromFile("gml_Object_obj_universe_Draw_0.gml", "gml_Object_obj_universe_Draw_0");
-        HookCodeFromFile("gml_Object_obj_light_stars_background_Draw_0.gml", "gml_Object_obj_light_stars_background_Draw_0");
-        HookCodeFromFile("gml_Object_obj_light_ocean_background_zoom_out_Draw_0.gml", "gml_Object_obj_light_ocean_background_zoom_out_Draw_0");
-        HookCodeFromFile("gml_Object_obj_light_Step_0.gml", "gml_Object_obj_light_Step_0");
-        HookCodeFromFile("gml_Object_obj_light_Draw_0.gml", "gml_Object_obj_light_Draw_0");
-        HookCodeFromFile("gml_Object_obj_light_ocean_background_Draw_0.gml", "gml_Object_obj_light_ocean_background_Draw_0");
-        HookCodeFromFile("gml_Object_obj_ai_representation_Step_0.gml", "gml_Object_obj_ai_representation_Step_0");
-        HookCodeFromFile("gml_Object_obj_post_processing_draw_Draw_74.gml", "gml_Object_obj_post_processing_draw_Draw_74");
-        HookCodeFromFile("gml_Object_obj_backdraw_Draw_0.gml", "gml_Object_obj_backdraw_Draw_0");
-        HookCodeFromFile("gml_Object_obj_menu_instance_Draw_0.gml", "gml_Object_obj_menu_instance_Draw_0");
-        HookCodeFromFile("gml_RoomCC_EndGameCredits_0_Create.gml", "gml_RoomCC_EndGameCredits_0_Create");
-        HookCodeFromFile("gml_Object_obj_music_level_editor_Other_10.gml", "gml_Object_obj_music_level_editor_Other_10");
-        HookCodeFromFile("gml_Object_obj_player_Other_10.gml", "gml_Object_obj_player_Other_10");
-        HookCodeFromFile("gml_Object_obj_spotlight_drawer_Draw_0.gml", "gml_Object_obj_spotlight_drawer_Draw_0");
-        HookCodeFromFile("gml_Object_obj_levelstyler_Create_0.gml", "gml_Object_obj_levelstyler_Create_0");
-        HookCodeFromFile("gml_Object_obj_level_editor_Draw_0.gml", "gml_Object_obj_level_editor_Draw_0");
-        HookCodeFromFile("gml_Object_obj_performance_optimizer_Step_0.gml", "gml_Object_obj_performance_optimizer_Step_0");
-        //HookCodeFromFile("gml_Object_obj_human_kill_drone_Create_0.gml", "gml_Object_obj_human_kill_drone_Create_0");
-        HookCodeFromFile("gml_Object_obj_ball_Step_1.gml", "gml_Object_obj_ball_Step_1");
-        SetObjectCodeFromFile("gml_Object_obj_level_editor_GameEnd_0.gml", "obj_level_editor", EventType.Other, EventSubtypeOther.GameEnd);
-        SetObjectCodeFromFile("gml_Object_obj_persistent_Other_62.gml", "obj_persistent", EventType.Other, EventSubtypeOther.AsyncHTTP);
-        SetObjectCodeFromFile("gml_Object_obj_credits_renderer_Draw_64.gml", "obj_credits_renderer", EventType.Draw, EventSubtypeDraw.DrawGUI);
-        SetObjectCodeFromFile("gml_Object_obj_lvlobj_parent_CleanUp_0.gml", "obj_lvlobj_parent", EventType.Draw, EventSubtypeDraw.DrawGUI);
-        SetObjectCodeFromFile("gml_Object_obj_persistent_Draw_73.gml", "obj_persistent", EventType.Draw, EventSubtypeDraw.DrawEnd);
-        SetObjectCodeFromFile("gml_Object_obj_td_enemy_Step_0.gml", "obj_td_enemy", EventType.Step, EventSubtypeStep.Step);
-        SetObjectCodeFromFile("gml_Object_obj_level_editor_Alarm_1.gml", "obj_level_editor", EventType.Alarm, 1);
-        SetObjectCodeFromFile("gml_Object_obj_persistent_Draw_75.gml", "obj_persistent", EventType.Draw, EventSubtypeDraw.DrawGUIEnd);
-        HookCodeFromFile("gml_Object_obj_level_select_portal_Step_0.gml", "gml_Object_obj_level_select_portal_Step_0");
-        HookCodeFromFile("gml_Object_obj_menu_Hacks_Other_10.gml", "gml_Object_obj_menu_Hacks_Other_10");
-        HookCodeFromFile("gml_Object_obj_start_screen_save_slot_Step_0.gml", "gml_Object_obj_start_screen_save_slot_Step_0");
-        HookCodeFromFile("gml_Object_obj_level_selection_Create_0.gml", "gml_Object_obj_level_selection_Create_0");
-        HookCodeFromFile("gml_Object_obj_dialog_file_Alarm_0.gml", "gml_Object_obj_dialog_file_Alarm_0");
-        HookCodeFromFile("gml_Object_obj_epilepsy_warning_Step_1.gml", "gml_Object_obj_epilepsy_warning_Step_1");
-        HookCodeFromFile("gml_Object_obj_epilepsy_warning_Draw_0.gml", "gml_Object_obj_epilepsy_warning_Draw_0");
-        HookCodeFromFile("gml_Object_obj_epilepsy_warning_Create_0.gml", "gml_Object_obj_epilepsy_warning_Create_0");
-        HookCodeFromFile("gml_Object_obj_credits_renderer_CleanUp_0.gml", "gml_Object_obj_credits_renderer_CleanUp_0");
-        HookCodeFromFile("gml_Object_obj_credits_renderer_Create_0.gml", "gml_Object_obj_credits_renderer_Create_0");
-        HookCodeFromFile("gml_Object_obj_credits_renderer_Draw_0.gml", "gml_Object_obj_credits_renderer_Draw_0");
-        HookCodeFromFile("gml_Object_obj_credits_renderer_Step_0.gml", "gml_Object_obj_credits_renderer_Step_0");
-        HookCodeFromFile("gml_Object_obj_ball_Other_10.gml", "gml_Object_obj_ball_Other_10");
-        HookCodeFromFile("gml_Object_obj_persistent_Other_10.gml", "gml_Object_obj_persistent_Other_10");
-        HookCodeFromFile("gml_Object_obj_fx_death_bounce_Step_0.gml", "gml_Object_obj_fx_death_bounce_Step_0");
-        HookCodeFromFile("gml_Object_obj_fx_death_bounce_Step_0.gml", "gml_Object_obj_fx_death_bounce_Step_0");
-        HookCodeFromFile("gml_Object_obj_fx_death_Create_0.gml", "gml_Object_obj_fx_death_Create_0");
-        HookCodeFromFile("gml_Object_obj_fx_death_Step_0.gml", "gml_Object_obj_fx_death_Step_0");
-        HookCodeFromFile("gml_Object_obj_antenna_Collision_obj_player.gml", "gml_Object_obj_antenna_Collision_obj_player");
-        HookCodeFromFile("gml_Object_obj_campaign_select_spawner_Create_0.gml", "gml_Object_obj_campaign_select_spawner_Create_0");
-        CreateFunctionFromFile("scr_set_blood.gml", "scr_set_blood", 1);
-        CreateFunctionFromFile("scr_preselect_blood.gml", "scr_preselect_blood");
+        string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "functions"), "*.gml"))
+        {
+            Console.WriteLine("Loading " + file);
+
+            string code = File.ReadAllText(file);
+
+            MatchCollection matchList = Regex.Matches(code, @"(?<=argument)(\d*)");
+            ushort argCount;
+            if (matchList.Count > 0)
+                argCount = (ushort)(matchList.Cast<Match>().Select(match => ushort.Parse(match.Value)).ToList().Max() + 1);
+            else
+                argCount = 0;
+
+            data.CreateFunction(Path.GetFileNameWithoutExtension(file), code, argCount);
+        }
+
+        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "codeHooks"), "*.gml"))
+        {
+            Console.WriteLine("Loading " + file);
+
+            string code = File.ReadAllText(file);
+
+            data.HookCode(Path.GetFileNameWithoutExtension(file), code);
+        }
+
+        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "functionHooks"), "*.gml"))
+        {
+            Console.WriteLine("Loading " + file);
+
+            string code = File.ReadAllText(file);
+
+            data.HookFunction(Path.GetFileNameWithoutExtension(file), code);
+        }
+
+        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "objectCode"), "*.json"))
+        {
+            Console.WriteLine("Loading " + file);
+
+            ObjectFile? code = JsonSerializer.Deserialize<ObjectFile>(File.ReadAllText(file));
+
+            if (code == null)
+            {
+                Console.WriteLine(file + " is null, skipping...");
+                continue;
+            }
+
+            EventType type = (EventType)Enum.Parse(typeof(EventType), code.type);
+            uint subtype;
+
+            if (code.type == "Alarm") subtype = uint.Parse(code.subtype);
+            else subtype = (uint)Enum.Parse(FindType("UndertaleModLib.Models.EventSubtype" + code.type), code.subtype);
+            
+            data.GameObjects.ByName(code.name).EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
+                .ReplaceGmlSafe(File.ReadAllText(Path.Combine(baseDir, "code", "objectCode", code.file)), data);
+        }
     }
 
     public void AddMenuItems()
@@ -374,8 +247,6 @@ public partial class GameMakerMod
         {
             instance = voicelineMode.Name.Content,
         });
-
-        HookCodeFromFile("gml_Object_obj_menu_wysapi_voiceline_mode_Other_10.gml", "gml_Object_obj_menu_wysapi_voiceline_mode_Other_10");
         
 
         UndertaleGameObject playerCharMenu = data.CreateMenu("player_character_parent",
@@ -461,19 +332,12 @@ public partial class GameMakerMod
             instance = curColor.Name.Content
         });
 
-        HookCodeFromFile("save_hat_change_menu.gml", "gml_Object_" + curColor.Name.Content + "_Other_10");
-
-
         curColor = data.CreateMenu("player_default_hat");
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
         {
             instance = curColor.Name.Content
         });
-
-        HookCodeFromFile("default_hat_change_menu.gml", "gml_Object_" + curColor.Name.Content + "_Other_10");
-
-
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Save Character\"", null, "gml_Script_scr_save_character", null, "gml_Script_scr_return_input", "\"Save a character to a .wyschar file\""));
 /*
@@ -551,7 +415,9 @@ event_inherited()
 global_variable_name = """ + global_var_name + @"""
 dark_blend = " + darkBlend.ToString() + @"
         ", data);
-        SetObjectCodeFromFile("gml_Object_obj_menu_color_Draw_0.gml", colorMenu.Name.Content, EventType.Draw, EventSubtypeDraw.Draw);
+
+        colorMenu.EventHandlerFor(EventType.Draw, EventSubtypeDraw.Draw, data.Strings, data.Code, data.CodeLocals)
+            .ReplaceGmlSafe(File.ReadAllText(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "code", "hacky", "gml_Object_obj_menu_color_Draw_0.gml")), data);
         
         data.HookCode("gml_Object_" + colorMenu.Name.Content + "_Other_10", "#orig#() \n bExecuteScriptsOnSwitch = 1 \n bExecuteScriptsOnExit = 1");
         
@@ -673,193 +539,24 @@ dark_blend = " + darkBlend.ToString() + @"
         disco_copy_me.GameObjects.Add(obj_wall_inst);
     }
 
-    public void HookFunctionFromFile(string path, string function)
+    public static Type FindType(string qualifiedTypeName)
     {
-        string value = "";
-        if (files.TryGetValue(path, out value))
-        {
-            Console.WriteLine("loading " + path);
-            data.HookFunction(function, value);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't hook function " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-    public void CreateFunctionFromFile(string path, string function, ushort argumentCount = 0)
-    {
-        string value = "";
-        if (files.TryGetValue(path, out value))
-        {
-            Console.WriteLine("loading " + path);
-            data.CreateFunction(function, value, argumentCount);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't create function " + path + ", it wasn't in the files dictionary.");
-        }
-    }
+        Type t = Type.GetType(qualifiedTypeName);
 
-    public void HookCodeFromFile(string path, string function)
-    {
-        string value = "";
-        if (files.TryGetValue(path, out value))
+        if (t != null)
         {
-            Console.WriteLine("loading " + path);
-            data.HookCode(function, value);
+            return t;
         }
         else
         {
-            Console.WriteLine("Couldn't hook object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-
-    public void LoadFromFiles(string modPath)
-    {
-        string[] codeF = Directory.GetFiles(Path.Combine(modPath, "code"), "*.gml");
-        Console.WriteLine("Loading code files from " + Path.Combine(modPath, "code"));
-        foreach (string f in codeF)
-        {
-            Patcher.AddFileToCache(0, f);
-            if (!files.ContainsKey(Path.GetFileName(f)))
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
             {
-                files.Add(Path.GetFileName(f), File.ReadAllText(f));
+                t = asm.GetType(qualifiedTypeName);
+                if (t != null)
+                    return t;
             }
+            return null;
         }
     }
-
-
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, EventSubtypeDraw EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, uint EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, EventSubtypeKey EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, EventSubtypeMouse EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-
-
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, EventSubtypeOther EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-
-    public void SetObjectCodeFromFile(string path, string objName, EventType eventType, EventSubtypeStep EventSubtype)
-    {
-        string value = "";
-        UndertaleGameObject obj = data.GameObjects.ByName(objName);
-
-        if (files.TryGetValue(path, out value))
-        {
-            obj.EventHandlerFor(eventType, EventSubtype, data.Strings, data.Code, data.CodeLocals)
-            .ReplaceGmlSafe(value, data);
-        }
-        else
-        {
-            Console.WriteLine("Couldn't change/create object script " + path + ", it wasn't in the files dictionary.");
-        }
-    }
-
-    //Unused because GMML is being shit and not functioning properly with the C# interop.
-    /*
-    [GmlInterop("gmml_return_console_command")]
-    public static string ReturnConsoleCommand(ref CInstance self, ref CInstance other)
-    {
-        string curCommand = "";
-        if(consoleCommand != "")
-        {
-            curCommand = consoleCommand;
-            consoleCommand = "";
-        }
-        return curCommand;
-    }
-    
-    [GmlInterop("gmml_console_readline")]
-    public static string ConsoleReadLine(ref CInstance self, ref CInstance other)
-    {
-        consoleCommand = Console.ReadLine();
-        return "done";
-    }
-    */
-
 
 }

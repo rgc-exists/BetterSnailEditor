@@ -46,11 +46,15 @@
     <ProjectReference Include="../lib/gmml/GmmlHooker/GmmlHooker.csproj" />
   </ItemGroup>
 
+  <Target Name="DeleteAssets" BeforeTargets="BeforeBuild">
+    <RemoveDir Directories="$(TargetDir)/code;$(TargetDir)/BetterSnailEditor_Assets" />
+  </Target>
+
   <Target Name="CopyAssets" AfterTargets="AfterBuild">
     <ItemGroup>
       <Assets Include="assets/**/*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(Assets)" DestinationFolder="$(TargetDir)/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Assets)" DestinationFolder="$(TargetDir)/%(RecursiveDir)" SkipUnchangedFiles="false" />
   </Target>
 
 </Project>
