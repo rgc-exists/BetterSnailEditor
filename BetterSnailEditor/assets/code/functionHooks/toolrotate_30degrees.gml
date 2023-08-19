@@ -1,1 +1,1 @@
-toolrotate_impossible.gml
+C:/Users/rando/source/repos/BetterSnailEditor_GS2ML/BetterSnailEditor/assets/code/functionHooks/toolrotate_impossible.gml

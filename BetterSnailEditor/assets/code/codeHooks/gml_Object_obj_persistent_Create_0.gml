@@ -166,4 +166,6 @@ gml_Script_scr_initialize_BSE_settings()
 
 global.was_uploading_last_frame = false
 
+gml_Script_scr_initialize_betterIO()
+
 #orig#()
