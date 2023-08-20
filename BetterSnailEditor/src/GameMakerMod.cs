@@ -22,11 +22,11 @@ public partial class GameMakerMod
         Console.WriteLine("Adding Objects...");
         AddObjects();
 
-        Console.WriteLine("Adding Menu Items... (Thanks to Config for the very useful WYS menu API! :D)");
-        AddMenuItems();
-
         Console.WriteLine("Adding Code...");
         AddCode();
+
+        Console.WriteLine("Adding Menu Items... (Thanks to Config for the very useful WYS menu API! :D)");
+        AddMenuItems();
 
         Console.WriteLine("Building Rooms...");
         BuildRooms();
@@ -145,14 +145,13 @@ public partial class GameMakerMod
         else
             return ""OFF (All objects load in one frame.)""
         ", 50), data.CreateChangeOption("\"Wires Per Frame (Only works with OBJECTS PER FRAME)\"", "obj_menu_multiframe_loading_wires", @"
-            global.setting_multiframe_loading_wires = clamp(global.setting_multiframe_loading_wires + argument0, 50, 10000)
-",
+            global.setting_multiframe_loading_wires = clamp(global.setting_multiframe_loading_wires + argument0, 50, 10000)",
         @"
         if(global.setting_multiframe_loading_wires > 0)
             return string(global.setting_multiframe_loading_wires)
         else
             return ""OFF (All objects load in one frame.)""
-        ", 50) /*, data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\"") */);
+        ", 50), data.CreateToggleOption("\"Optimized Saving\"", "better_saving", "global.setting_betterSaving = argument0", "selectedItem = global.setting_betterSaving", "global.setting_betterSaving", "gml_Script_scr_return_input", "\"INCREDIBLY optimized level saving using buffers. When testing, a 600k line lvl file saved in 2 seconds.\"")/*, data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\"") */);
         data.InsertMenuOptionFromEnd(levelEditorMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")
         {
             instance = advancedEditorMenu.Name.Content
@@ -244,7 +243,7 @@ public partial class GameMakerMod
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Speed\"", "player_speed", "global.cheat_player_speed = clamp(global.cheat_player_speed + argument0 / 100, 0, 10)", "return string(global.cheat_player_speed * 100) + \"%\"", 10));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Jump Height\"", "player_jump_height", "global.cheat_jump_height = clamp(global.cheat_jump_height + argument0 / 100, 0, 10)", "return string(global.cheat_jump_height * 100) + \"%\"", 10));
 
-        UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode",
+        UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true),
         new Menus.WysMenuOption("\"Default\"", null, "gml_Script_scr_set_voiceline_mode", "0"),
         new Menus.WysMenuOption("\"Yo\"", null, "gml_Script_scr_set_voiceline_mode", "1"),
         new Menus.WysMenuOption("\"KYS Please\"", null, "gml_Script_scr_set_voiceline_mode", "2"),
@@ -332,14 +331,14 @@ public partial class GameMakerMod
             instance = curColor.Name.Content
         });
 
-        curColor = data.CreateMenu("player_save_hat");
+        curColor = data.CreateMenu("player_save_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
         
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Hat\"")
         {
             instance = curColor.Name.Content
         });
 
-        curColor = data.CreateMenu("player_default_hat");
+        curColor = data.CreateMenu("player_default_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
         {

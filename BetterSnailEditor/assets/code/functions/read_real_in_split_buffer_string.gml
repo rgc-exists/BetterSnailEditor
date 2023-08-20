@@ -1,0 +1,1 @@
+return real(splitLines[curLine])

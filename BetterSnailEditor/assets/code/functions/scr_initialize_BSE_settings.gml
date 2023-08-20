@@ -35,3 +35,4 @@ global.setting_place_multiple_oneAtATime_objs = false
 global.restart_invincible_mode = false
 global.setting_global_inspector_available = false 
 global.setting_save_states = false
+global.setting_betterSaving = false
