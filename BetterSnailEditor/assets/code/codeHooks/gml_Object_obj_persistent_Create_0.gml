@@ -166,6 +166,19 @@ gml_Script_scr_initialize_BSE_settings()
 
 global.was_uploading_last_frame = false
 
+/*
+show_message("Begin")
 gml_Script_scr_initialize_betterIO()
+show_message("A")
+var f = gml_Script_OpenFileWrite(working_directory + "BetterIO_TestOutput.txt")
+show_message(string(f))
+show_message("B")
+var stringWrittenOutput = gml_Script_WriteStringFile(f, "BALLS")
+show_message("C")
+show_message(stringWrittenOutput)
+show_message("D")
+gml_Script_CloseFileWrite(f)
+show_message("E")
+*/
 
 #orig#()
