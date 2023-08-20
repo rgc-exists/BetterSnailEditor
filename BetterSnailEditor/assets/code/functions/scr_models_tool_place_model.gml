@@ -136,9 +136,9 @@ switch argument1
                 lvlwire_create(ds_list_find_value(created_instances, ww[0]), ds_list_find_value(created_instances, ww[1]))
             }
         }
-        ds_list_destroy(created_instances)    for(var m = 0; m < array_length(global.current_model); m++)
-        for(var m = 0; m < array_length(global.current_model); m++){
-            var current_model_obj = global.current_model[m]
+        ds_list_destroy(created_instances)
+        for(var m = 0; m < array_length(clipboard_model); m++){
+            var current_model_obj = clipboard_model[m]
             variable_struct_set(current_model_obj, "toolStruct", get_leveleditor_database_element(variable_struct_get(current_model_obj, "custom_tool_or_object_id")))
             var li_properties = ds_map_create()
             var properties_struct = variable_struct_get(current_model_obj, "properties")

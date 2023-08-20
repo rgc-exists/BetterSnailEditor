@@ -1,5 +1,4 @@
 ﻿using GmmlHooker;
-using GmmlPatcher;
 using WysApi.Api;
 using UndertaleModLib;
 using UndertaleModLib.Models;
@@ -395,7 +394,8 @@ bExecuteScriptsOnExit = 1");
 
     }
 
-    public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0){
+    public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0)
+    {
         UndertaleGameObject customMenu = MakeColorMenuRGB(name + "_custom", global_var_name);
 
         // data.HookCode("gml_Object_" + colorMenu.Name.Content + "_Other_10", "#orig#() \n bAllowLoopingUpDown = 0");
@@ -432,7 +432,8 @@ dark_blend = " + darkBlend.ToString() + @"
         return colorMenu;
     }
 
-    public UndertaleGameObject MakeColorMenuRGB(string name, string global_var_name){
+    public UndertaleGameObject MakeColorMenuRGB(string name, string global_var_name)
+    {
         UndertaleGameObject colorMenu = data.CreateMenu(name,
         data.CreateChangeOption("\"Red\"", name + "_r", "gml_Script_scr_set_global_var_to_color(\"" + global_var_name + "\", 0, argument0)", "return string(color_get_red(global." + global_var_name + "))", 5),
         data.CreateChangeOption("\"Green\"", name + "_g", "gml_Script_scr_set_global_var_to_color(\"" + global_var_name + "\", 1, argument0)", "return string(color_get_green(global." + global_var_name + "))", 5),
@@ -441,11 +442,9 @@ dark_blend = " + darkBlend.ToString() + @"
         return colorMenu;
     }
 
-    public void BuildRooms(){
-
+    public void BuildRooms() 
+    {
         BuildMusicRoom();
-
-
     }
 
     public void BuildMusicRoom()

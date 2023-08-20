@@ -19,8 +19,8 @@ for(var i = 0; i < variable_struct_names_count(copy_tool); i += 1){
 variable_struct_set(copy_tool_copy, "custom_tool_or_object_id", "models_tool")
 variable_struct_set(copy_tool_copy, "preview_color", "col_bubbles")
 variable_struct_set(copy_tool_copy, "preview_sprite_index", global.model_tool_sprite)
-variable_struct_set(copy_tool_copy, "placement_script", gml_Script_scr_temp_models_tool_warning)
-variable_struct_set(copy_tool_copy, "deletion_script", gml_Script_scr_temp_models_tool_warning)
+variable_struct_set(copy_tool_copy, "placement_script", gml_Script_scr_models_tool_place_model) // gml_Script_scr_temp_models_tool_warning
+variable_struct_set(copy_tool_copy, "deletion_script", gml_Script_scr_models_tool_save_model) // gml_Script_scr_temp_models_tool_warning
 var toolProps = variable_struct_get(copy_tool_copy, "tool_properties")
 var tool_properties_copy = []
 for(var tp = 0; tp < array_length(toolProps); tp++){
