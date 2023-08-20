@@ -23,11 +23,11 @@ public partial class GameMakerMod
         Console.WriteLine("Adding Objects...");
         AddObjects();
 
-        Console.WriteLine("Adding Menu Items... (Thanks to Config for the very useful WYS menu API! :D)");
-        AddMenuItems();
-
         Console.WriteLine("Adding Code...");
         AddCode();
+
+        Console.WriteLine("Adding Menu Items... (Thanks to Config for the very useful WYS menu API! :D)");
+        AddMenuItems();
 
         Console.WriteLine("Building Rooms...");
         BuildRooms();
@@ -245,7 +245,7 @@ public partial class GameMakerMod
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Speed\"", "player_speed", "global.cheat_player_speed = clamp(global.cheat_player_speed + argument0 / 100, 0, 10)", "return string(global.cheat_player_speed * 100) + \"%\"", 10));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Jump Height\"", "player_jump_height", "global.cheat_jump_height = clamp(global.cheat_jump_height + argument0 / 100, 0, 10)", "return string(global.cheat_jump_height * 100) + \"%\"", 10));
 
-        UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode",
+        UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true),
         new Menus.WysMenuOption("\"Default\"", null, "gml_Script_scr_set_voiceline_mode", "0"),
         new Menus.WysMenuOption("\"Yo\"", null, "gml_Script_scr_set_voiceline_mode", "1"),
         new Menus.WysMenuOption("\"KYS Please\"", null, "gml_Script_scr_set_voiceline_mode", "2"),
@@ -333,14 +333,14 @@ public partial class GameMakerMod
             instance = curColor.Name.Content
         });
 
-        curColor = data.CreateMenu("player_save_hat");
+        curColor = data.CreateMenu("player_save_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
         
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Hat\"")
         {
             instance = curColor.Name.Content
         });
 
-        curColor = data.CreateMenu("player_default_hat");
+        curColor = data.CreateMenu("player_default_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
         {
