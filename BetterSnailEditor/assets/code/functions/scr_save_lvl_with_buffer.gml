@@ -5,7 +5,32 @@
     }
     fileBuffer = buffer_create(1, buffer_grow, 1)
     ////show_message("A")
-    buffer_write(fileBuffer, buffer_text, "Version 1.9-BETA_16")
+    var levelData = ds_map_find_value(global.campaignMap, array_get(info, 0)).levels[info[1]]
+    if (levelData.isModded && (!global.isEditorModded))
+    {
+        show_debug_message("Can't save a modded level!")
+        return 1;
+    }
+    var has_exploration_point = 0
+    var player_tool_struct = undefined
+    var object_count_map = ds_map_create()
+    var uses_modded_elements = 0
+    li = 0
+    while (li < ds_list_size(global.li_level_editor_database))
+    {
+        dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
+        if dataBaseStruct.modded
+        {
+            uses_modded_elements = 1
+            break
+        }
+        else
+        {
+            li++
+            continue
+        }
+    }
+    buffer_write(fileBuffer, buffer_text, ("Version 1.9-BETA_24.2" + (uses_modded_elements ? "_MODDED" : "")))
     buffer_write(fileBuffer, buffer_text, "\n")
     LVLX1 = obj_level_editor.level_bound_x1
     LVLY1 = obj_level_editor.level_bound_y1
