@@ -12,9 +12,9 @@ namespace BetterSnailEditor;
 public partial class GameMakerMod
 {
 
-    public Dictionary<string, string> files = new Dictionary<string, string>();
+    public Dictionary<string, string> files = new();
 
-    public UndertaleData? data;
+    public UndertaleData data = new();
 
     public void Load(int audioGroup, UndertaleData data_source)
     {
@@ -42,7 +42,15 @@ public partial class GameMakerMod
 
     public void AddCode()
     {
-        string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "Error";
+
+        if (baseDir == "Error")
+        {
+            Console.WriteLine("Cant find mod directory!");
+            Console.WriteLine("Assembly.GetExecutingAssembly().Location is " + Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine("Please report this on the BSE discord (discord.gg/4RHXca3Dw6)");
+            return;
+        }
 
         foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "functions"), "*.gml"))
         {
@@ -390,7 +398,7 @@ bExecuteScriptsOnExit = 1");
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0){
         UndertaleGameObject customMenu = MakeColorMenuRGB(name + "_custom", global_var_name);
 
-        //data.HookCode("gml_Object_" + colorMenu.Name.Content + "_Other_10", "#orig#() \n bAllowLoopingUpDown = 0");
+        // data.HookCode("gml_Object_" + colorMenu.Name.Content + "_Other_10", "#orig#() \n bAllowLoopingUpDown = 0");
         
         UndertaleGameObject colorMenu = data.CreateMenu("colormenu_" + name,
         new Menus.WysMenuOption("\"Default\"", null, "gml_Script_scr_set_global_var_to_color_raw", "-1"),
@@ -429,9 +437,6 @@ dark_blend = " + darkBlend.ToString() + @"
         data.CreateChangeOption("\"Red\"", name + "_r", "gml_Script_scr_set_global_var_to_color(\"" + global_var_name + "\", 0, argument0)", "return string(color_get_red(global." + global_var_name + "))", 5),
         data.CreateChangeOption("\"Green\"", name + "_g", "gml_Script_scr_set_global_var_to_color(\"" + global_var_name + "\", 1, argument0)", "return string(color_get_green(global." + global_var_name + "))", 5),
         data.CreateChangeOption("\"Blue\"", name + "_b", "gml_Script_scr_set_global_var_to_color(\"" + global_var_name + "\", 2, argument0)", "return string(color_get_blue(global." + global_var_name + "))", 5));
-        
-
-
         
         return colorMenu;
     }
@@ -539,9 +544,9 @@ dark_blend = " + darkBlend.ToString() + @"
         disco_copy_me.GameObjects.Add(obj_wall_inst);
     }
 
-    public static Type FindType(string qualifiedTypeName)
+    public static Type? FindType(string qualifiedTypeName)
     {
-        Type t = Type.GetType(qualifiedTypeName);
+        Type? t = Type.GetType(qualifiedTypeName);
 
         if (t != null)
         {
