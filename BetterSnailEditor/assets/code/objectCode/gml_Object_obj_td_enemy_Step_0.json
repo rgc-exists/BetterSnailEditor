@@ -2,5 +2,6 @@
     "name": "obj_td_enemy",
     "file": "gml_Object_obj_td_enemy_Step_0.gml",
     "type": "Step",
-    "subtype": "Step"
+    "subtype": "Step",
+    "hasSubtype":true
 }

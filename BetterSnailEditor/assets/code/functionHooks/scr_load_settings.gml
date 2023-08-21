@@ -166,6 +166,10 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_betterSaving = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            case "Custom Editor Playlist":
+                global.setting_custom_editor_playlist = file_text_read_real(file)
+                file_text_readln(file)
+                break
             
         }
     }

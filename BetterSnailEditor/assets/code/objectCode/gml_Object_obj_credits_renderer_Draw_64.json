@@ -2,5 +2,6 @@
     "name": "obj_credits_renderer",
     "file": "gml_Object_obj_credits_renderer_Draw_64.gml",
     "type": "Draw",
-    "subtype": "DrawGUI"
+    "subtype": "DrawGUI",
+    "hasSubtype":true
 }

@@ -181,4 +181,13 @@ gml_Script_CloseFileWrite(f)
 show_message("E")
 */
 
+global.editor_custom_playlist = []
+var playlistPath = global.betterSE_assets + "Custom Editor Playlist/"
+var file = file_find_first(playlistPath + "/*.ogg", 0)
+while(file != ""){
+    array_push(global.editor_custom_playlist, audio_create_stream(playlistPath + file))
+    file = file_find_next()
+}
+file_find_close()
+
 #orig#()

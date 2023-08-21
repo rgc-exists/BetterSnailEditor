@@ -1,0 +1,4 @@
+To play these songs in the editor instead of the normal editor theme, turn on "custom editor playlist" in the settings.
+
+ONLY .OGG FILES WORK.
+If you want to use another file type, such as mp3 or wav, you can use a file converter like CloudConvert.

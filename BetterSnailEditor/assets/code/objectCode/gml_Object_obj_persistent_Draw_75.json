@@ -2,5 +2,6 @@
     "name": "obj_persistent",
     "file": "gml_Object_obj_persistent_Draw_75.gml",
     "type": "Draw",
-    "subtype": "DrawGUIEnd"
+    "subtype": "DrawGUIEnd",
+    "hasSubtype":true
 }

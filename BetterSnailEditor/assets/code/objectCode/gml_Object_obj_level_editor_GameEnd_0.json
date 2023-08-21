@@ -2,5 +2,6 @@
     "name": "obj_level_editor",
     "file": "gml_Object_obj_level_editor_GameEnd_0.gml",
     "type": "Other",
-    "subtype": "GameEnd"
+    "subtype": "GameEnd",
+    "hasSubtype":true
 }

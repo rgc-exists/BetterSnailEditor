@@ -128,7 +128,10 @@ public partial class GameMakerMod
         data.AddMenuOption("obj_menu_ExplorationMode", new Menus.WysMenuOption("\"Extra\"", script: "gml_Script_scr_set_explore_mode", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Unlocks ALL levels and dialog springs, INCLUDING secrets.\""));
         data.AddMenuOption("obj_menu_StayInBack", new Menus.WysMenuOption("\"Stay In FOREGROUND\"", script: "gml_Script_scr_set_stay_in_back_gml_Object_obj_menu_StayInBack_Other_10", scriptArgument: "2", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Makes it so squid ALWAYS stays in the foreground, and never goes into the background.\""));
         //UndertaleGameObject squidInEditorMenu =
-        UndertaleGameObject levelEditorMenu = data.CreateMenu("level_editor", data.CreateToggleOption("\"Squid In Editor\"", "squidInEditorMenu", "global.setting_squid_in_editor = argument0", "selectedItem = global.setting_squid_in_editor", "global.setting_squid_in_editor", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Have squid present in your editor. He will not talk, but he will keep you company while you build.\""));
+        UndertaleGameObject levelEditorMenu = data.CreateMenu("level_editor", 
+        data.CreateToggleOption("\"Squid In Editor\"", "squidInEditorMenu", "global.setting_squid_in_editor = argument0", "selectedItem = global.setting_squid_in_editor", "global.setting_squid_in_editor", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Have squid present in your editor. He will not talk, but he will keep you company while you build.\""),
+        data.CreateToggleOption("\"Custom BGM Playlist\"", "customEditorPlaylist", "global.setting_custom_editor_playlist = argument0", "selectedItem = global.setting_custom_editor_playlist", "global.setting_custom_editor_playlist", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Allows you to play music from a folder of audio files instead of the regular editor theme.\n\nYou can add custom songs to the mix in this folder:\n\" + global.betterSE_assets + \"Custom Editor Playlist/\"")
+        );
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Settings, 2, new Menus.WysMenuOption("\"Level Editor\"")
         {
             instance = levelEditorMenu.Name.Content

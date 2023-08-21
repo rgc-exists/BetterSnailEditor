@@ -2,5 +2,6 @@
     "name": "obj_persistent",
     "file": "gml_Object_obj_persistent_Draw_73.gml",
     "type": "Draw",
-    "subtype": "DrawEnd"
+    "subtype": "DrawEnd",
+    "hasSubtype":true
 }
