@@ -6,4 +6,5 @@ class ObjectFile
     public string? file { get; set; }
     public string? type { get; set; }
     public string? subtype { get; set; }
+    public bool hasSubtype { get; set; }
 }

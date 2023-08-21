@@ -100,7 +100,7 @@ public partial class GameMakerMod
             EventType type = (EventType)Enum.Parse(typeof(EventType), code.type);
             uint subtype;
 
-            if (code.type == "Alarm") subtype = uint.Parse(code.subtype);
+            if (!code.hasSubtype) subtype = uint.Parse(code.subtype);
             else subtype = (uint)Enum.Parse(FindType("UndertaleModLib.Models.EventSubtype" + code.type), code.subtype);
             
             data.GameObjects.ByName(code.name).EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
