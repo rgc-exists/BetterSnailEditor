@@ -1,5 +1,5 @@
 wall_line_instances = layer_get_all_elements("WallLines")
-
+show_message("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 if keyboard_check_pressed(vk_f8)
 {

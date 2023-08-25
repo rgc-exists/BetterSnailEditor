@@ -44,6 +44,7 @@ public partial class GameMakerMod
             Persistent = true,
             Visible = false,
             Solid = false,
+            Sprite = data.Sprites.ByName("spr_player_beta"),
             Name = name
         };
 
@@ -55,8 +56,9 @@ public partial class GameMakerMod
         UndertaleString name2 = new UndertaleString("obj_checkbox");
         UndertaleGameObject obj_checkbox = new UndertaleGameObject(){
             Persistent = false,
-            Visible = true,
+            Visible = false,
             Solid = false,
+            Sprite = data.Sprites.ByName("spr_square"),
             Name = name2
         };
 
