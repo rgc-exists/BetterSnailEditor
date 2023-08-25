@@ -42,9 +42,8 @@ public partial class GameMakerMod
         UndertaleString name = new UndertaleString("obj_BSE_manager");
         obj_BSE_manager = new UndertaleGameObject(){
             Persistent = true,
-            Visible = false,
+            Visible = true,
             Solid = false,
-            Sprite = data.Sprites.ByName("spr_player_beta"),
             Name = name
         };
 
@@ -56,9 +55,8 @@ public partial class GameMakerMod
         UndertaleString name2 = new UndertaleString("obj_checkbox");
         UndertaleGameObject obj_checkbox = new UndertaleGameObject(){
             Persistent = false,
-            Visible = false,
+            Visible = true,
             Solid = false,
-            Sprite = data.Sprites.ByName("spr_square"),
             Name = name2
         };
 
@@ -68,7 +66,6 @@ public partial class GameMakerMod
 
         UndertaleRoom empty_start_room = data.Rooms.ByName("empty_start_room");
 
-        data.GeneralInfo.LastObj++;
         UndertaleRoom.GameObject obj_BSE_manager_inst = new UndertaleRoom.GameObject()
         {
             InstanceID = data.GeneralInfo.LastObj,
@@ -76,6 +73,7 @@ public partial class GameMakerMod
             X = -120,
             Y = -120
         };
+        data.GeneralInfo.LastObj++;
 
         empty_start_room.Layers.First(layer => layer.LayerName.Content == "FadeOutIn").InstancesData.Instances.Add(obj_BSE_manager_inst);
 
