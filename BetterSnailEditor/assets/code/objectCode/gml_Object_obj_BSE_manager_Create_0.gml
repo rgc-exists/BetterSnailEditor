@@ -1,0 +1,10 @@
+global.in_snaily_pause = false
+global_fx_backup = []
+global_fx_player_backup = []
+global_fx_back_backup = []
+unpause_background_color = c_black
+scrollX = 10
+scrollY = 10
+global.checkBoxes = ds_map_create()
+global.deadlyObjs = ds_list_create()
+global.safeObjs = ds_list_create()

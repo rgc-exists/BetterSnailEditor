@@ -1,3 +1,6 @@
+if ds_list_find_index(global.safeObjs, global.last_death_by) != -1
+    return false;
+else 
 if(global.invincible_mode && !((global.last_death_by == -7) && !global.restart_invincible_mode) && !((just_hit_fuse) && !global.fuse_invincible_mode)){
     return false;
 } else if(((global.last_death_by == -7) && global.restart_invincible_mode) || ((just_hit_fuse) && global.fuse_invincible_mode)){

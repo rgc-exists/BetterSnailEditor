@@ -1,0 +1,7 @@
+{
+    "name": "obj_checkbox",
+    "file": "gml_Object_obj_checkbox_Draw_77.gml",
+    "type": "Draw",
+    "subtype": "PostDraw",
+    "hasSubtype":true
+}

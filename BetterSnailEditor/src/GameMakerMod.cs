@@ -5,6 +5,7 @@ using UndertaleModLib.Models;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Text.Json;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace BetterSnailEditor;
 
@@ -14,6 +15,8 @@ public partial class GameMakerMod
     public Dictionary<string, string> files = new();
 
     public UndertaleData data = new();
+
+    public UndertaleGameObject obj_BSE_manager;
 
     public void Load(int audioGroup, UndertaleData data_source)
     {
@@ -36,7 +39,45 @@ public partial class GameMakerMod
 
     public void AddObjects()
     {
+        UndertaleString name = new UndertaleString("obj_BSE_manager");
+        obj_BSE_manager = new UndertaleGameObject(){
+            Persistent = true,
+            Visible = false,
+            Solid = false,
+            Name = name
+        };
 
+        data.Strings.Add(name);
+        data.GameObjects.Add(obj_BSE_manager);
+        
+
+
+        UndertaleString name2 = new UndertaleString("obj_checkbox");
+        UndertaleGameObject obj_checkbox = new UndertaleGameObject(){
+            Persistent = false,
+            Visible = true,
+            Solid = false,
+            Name = name2
+        };
+
+        data.Strings.Add(name2);
+        data.GameObjects.Add(obj_checkbox);
+
+
+        UndertaleRoom empty_start_room = data.Rooms.ByName("empty_start_room");
+
+        data.GeneralInfo.LastObj++;
+        UndertaleRoom.GameObject obj_BSE_manager_inst = new UndertaleRoom.GameObject()
+        {
+            InstanceID = data.GeneralInfo.LastObj,
+            ObjectDefinition = obj_BSE_manager,
+            X = -120,
+            Y = -120
+        };
+
+        empty_start_room.Layers.First(layer => layer.LayerName.Content == "FadeOutIn").InstancesData.Instances.Add(obj_BSE_manager_inst);
+
+        empty_start_room.GameObjects.Add(obj_BSE_manager_inst);
     }
 
     public void AddCode()
