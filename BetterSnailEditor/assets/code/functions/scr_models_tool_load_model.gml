@@ -20,6 +20,7 @@ if(string_length(model_path) > 0){
     }
     for(var w = 0; w < array_length(current_model_wires_array); w++){
         ds_list_add(global.current_model_wires, current_model_wires_array[w])
+        show_message(string(current_model_wires_array[w]))
     }
     file_text_close(model_file)
     global.current_model = json_parse(model_json)
