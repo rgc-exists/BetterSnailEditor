@@ -32,7 +32,7 @@ if(global.setting_betterSaving){
             continue
         }
     }
-    file_text_write_string(file, ("Version 1.9-BETA_24.2" + (uses_modded_elements ? "_MODDED" : "")))
+    file_text_write_string(file, (global.game_build_version + (uses_modded_elements ? "_MODDED" : "")))
     file_text_writeln(file)
     LVLX1 = obj_level_editor.level_bound_x1
     LVLY1 = obj_level_editor.level_bound_y1

@@ -30,7 +30,7 @@
             continue
         }
     }
-    buffer_write(fileBuffer, buffer_text, ("Version 1.9-BETA_24.2" + (uses_modded_elements ? "_MODDED" : "")))
+    buffer_write(fileBuffer, buffer_text, (global.game_build_version + (uses_modded_elements ? "_MODDED" : "")))
     buffer_write(fileBuffer, buffer_text, "\n")
     LVLX1 = obj_level_editor.level_bound_x1
     LVLY1 = obj_level_editor.level_bound_y1

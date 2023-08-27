@@ -162,8 +162,8 @@ public partial class GameMakerMod
         UndertaleGameObject editorCameraMenu = data.CreateMenu("editor_camera", data.CreateChangeOption("\"Minimum Zoom\"", "obj_menu_camera_min_zoom",
         @"global.setting_camzoom_min = clamp(global.setting_camzoom_min + argument0, 0.05, 500)",
         @"return string(global.setting_camzoom_min * 100)", 0.5), data.CreateChangeOption("\"Maximum Zoom\"", "obj_menu_camera_max_zoom",
-        @"global.setting_camzoom_max = clamp(global.setting_camzoom_max + argument0, 0.05, 500)",
-        @"return string(global.setting_camzoom_max * 100)", 0.5));
+        @"gml_Script_scr_set_camZoomMax(argument0)",
+        @"return string(global.setting_camzoom_max * 100)", .5));
         data.InsertMenuOptionFromEnd(levelEditorMenu.Name.Content, 1, new Menus.WysMenuOption("\"Camera\"")
         {
             instance = editorCameraMenu.Name.Content

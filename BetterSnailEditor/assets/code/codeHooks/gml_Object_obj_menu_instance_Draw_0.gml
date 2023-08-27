@@ -143,6 +143,9 @@ if(string_pos("colormenu_", object_get_name(object_index)) != 0){
 if(string_pos("obj_menu_wysapi_player_character", object_get_name(object_index)) != 0){
     yspacing = 75
 }
+if(object_get_name(object_index) == "obj_menu_wysapi_level_editor"){
+    yspacing = 75
+}
 starty = ((room_height - ((menuItemCount - 1) * yspacing)) / 2)
 draw_set_font(global.font_aiTalk)
 if(global.rendering_enabled){
