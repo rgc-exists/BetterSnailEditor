@@ -5,7 +5,7 @@ global.is_BSE_client = true
 
 global.BSE_version = "v0.7.2b"
 
-global.game_build_version = "1.9-BETA_24.4"
+global.game_build_version = "1.9-BETA_25.2"
 
 
 if(directory_exists(working_directory + "gs2ml/mods/BetterSnailEditor/BetterSnailEditor_Assets/")){
@@ -193,5 +193,8 @@ while(file != ""){
     file = file_find_next()
 }
 file_find_close()
+
+global.character_randomizer_for_trailer = false
+global.character_randomizer_for_trailer_timer = 0
 
 #orig#()

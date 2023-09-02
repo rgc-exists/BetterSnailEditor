@@ -7,6 +7,8 @@ for (iw = 0; iw < ds_map_size(global.loca_map_all_audio_voice_lines); iw++)
     }
 }
 ds_map_clear(global.loca_map_all_audio_voice_lines)
+if (!(!scr_launch_param("lazyloadvl"))) //UMT is so good at decompiling WOOOOOOOOOOOW
+    return;
 kkey = ds_map_find_first(global.loca_ds_map_text_translations)
 for (iw = 0; iw < ds_map_size(global.loca_ds_map_text_translations); iw++)
 {

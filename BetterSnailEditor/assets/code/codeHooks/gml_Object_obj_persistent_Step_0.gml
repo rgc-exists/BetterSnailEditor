@@ -87,3 +87,57 @@ if(global.inspector_active){
     }
 } 
 global.new_thumnbnail_image_path = ""
+
+
+if(global.character_randomizer_for_trailer){
+    global.character_randomizer_for_trailer_timer -= 1
+    if(global.character_randomizer_for_trailer_timer < 0){
+        global.setting_player_body = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(100, 200))
+        global.setting_player_shell = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(100, 200))
+        global.setting_player_outline = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(0, 50))
+        global.setting_player_eye = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(200, 255))
+        global.setting_player_death = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(200, 255))
+        global.setting_player_spotlight = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(50, 100))
+        global.setting_player_spotlight_dark = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(5, 60))
+        global.setting_player_flare = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(50, 100))
+        global.setting_player_trail = make_color_hsv(irandom(255), irandom_range(150, 255), irandom_range(90, 150))
+
+        with(obj_fx_constant){
+            col_player_trail_idk = global.setting_player_trail
+        }
+        with(obj_fx_jump_air){
+            col_player_trail_idk = global.setting_player_trail
+        }
+        with(obj_fx_jump){
+            col_player_trail_idk = global.setting_player_trail
+        }
+        with(obj_levelstyler){
+            if(variable_global_exists("part_type_playerTrail")){
+                if (part_type_exists(global.part_type_playerTrail)){
+                    part_type_destroy(global.part_type_playerTrail)
+                }
+            }
+
+            if(global.setting_player_trail == -1){
+                col_player_trail_idk = obj_levelstyler.col_player_trail
+            } else {
+                col_player_trail_idk = global.setting_player_trail
+            }
+            part_type_color1(global.part_type_playerTrail, col_player_trail_idk)
+            part_type_life(global.part_type_playerTrail, 50, 70)
+            part_type_alpha3(global.part_type_playerTrail, 0.05, 0.03, 0)
+            part_type_sprite(global.part_type_playerTrail, 215, 0, 0, 1)
+            part_type_speed(global.part_type_playerTrail, 0.4, 0.6, 0, 0)
+            part_type_orientation(global.part_type_playerTrail, 0, 360, 0, 0, 0)
+            part_type_direction(global.part_type_playerTrail, 0, 360, 0, 0)
+            part_type_size(global.part_type_playerTrail, 1.25, 1.25, 0, 0)
+
+        }
+
+        with(obj_player){
+            event_user(0)
+        }
+        global.character_randomizer_for_trailer_timer = 20
+    }
+
+}

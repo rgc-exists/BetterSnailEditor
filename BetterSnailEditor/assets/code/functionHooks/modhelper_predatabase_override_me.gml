@@ -48,29 +48,3 @@ variable_struct_set(copy_tool_copy_2, "tool_properties", toolProps)
 ds_list_add(global.li_level_editor_database, copy_tool_copy_2)
 
 
-
-
-if variable_global_exists("map_level_editor_database")
-    ds_map_clear(global.map_level_editor_database)
-else
-    global.map_level_editor_database = ds_map_create()
-for (var iprp = 0; iprp < ds_list_size(global.li_level_editor_database); iprp++)
-{
-    //show_message(string(iprp))
-    var lvleditor_database_element = ds_list_find_value(global.li_level_editor_database, iprp)
-    variable_struct_set(lvleditor_database_element,"image_angle",0)
-    variable_struct_set(lvleditor_database_element,"image_xscale",1)
-    variable_struct_set(lvleditor_database_element,"image_yscale",1)
-    variable_struct_set(lvleditor_database_element,"li_placed_instances",ds_list_create())
-    variable_struct_set(lvleditor_database_element,"selected_property",0)
-    variable_struct_set(lvleditor_database_element,"index_of_top_property_in_wndw",0)
-    variable_struct_set(lvleditor_database_element,"ds_map_tool_properties",ds_map_create())
-    for (ili = 0; ili < array_length(lvleditor_database_element.tool_properties); ili++)
-    {
-        toolpropili = lvleditor_database_element.tool_properties[ili]
-        ds_map_add(variable_struct_get(lvleditor_database_element,"ds_map_tool_properties"), toolpropili.key, toolpropili)
-    }
-    ds_map_add(global.map_level_editor_database, variable_struct_get(lvleditor_database_element,"custom_tool_or_object_id"), lvleditor_database_element)
-    //show_message(string(lvleditor_database_element))
-}
-//clipboard_set_text(json_encode(global.map_level_editor_database))
