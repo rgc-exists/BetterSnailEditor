@@ -4,7 +4,7 @@ switch argument1
         hlp_toolplace_start_dragging_box(argument0)
         break
     case 1:
-        hlp_toolplace_drag_box_step(argument0, 4, obj_levelstyler.col_snail, 32, 0.7, 0.1)
+        hlp_toolplace_drag_box_step(argument0, 4, obj_levelstyler.col_bubbles, 32, 0.7, 0.1)
         break
     case 2:
         mouse_drag_box_xmin = (min(mouse_drag_box_start_x, mouse_drag_box_current_x) * 60)
@@ -12,7 +12,17 @@ switch argument1
         mouse_drag_box_ymin = (min(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60)
         mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
         li_objects_in_box = ds_list_create()
+
+
+
+
+        /*
+        BE SURE TO SET THE OBJECT collision_rectangle_list IS LOOKING FOR TO BE THE OBJ NAME AND NOT THE INDEX, DUMBASS!!!
+        */
         collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), obj_lvlobj_parent, 1, 1, li_objects_in_box, 0)
+        
+        
+        
         clipboard_model = []
         clipboard_model_for_json = []
         clipboard_instances = ds_list_create()
@@ -22,7 +32,7 @@ switch argument1
             inst_toolStruct = inst_check.toolStruct
             var clipStruct = scr_create_clipboard_struct_from_object((mouse_drag_box_start_x * 60), (mouse_drag_box_start_y * 60), inst_check)
             var doContinue = true
-            if (inst_toolStruct.placement_script == gml_Script_toolplace_singleton_placement)
+            if (inst_toolStruct.placement_script == gml_Script_toolplace_singleton_placement && !(global.setting_place_multiple_players && inst_toolStruct.custom_tool_or_object_id == "player") && !(global.setting_place_multiple_oneAtATime_objs))
             {
                 doContinue = false
             }

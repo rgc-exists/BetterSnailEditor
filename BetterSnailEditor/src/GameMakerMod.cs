@@ -136,7 +136,7 @@ public partial class GameMakerMod
         {
             instance = levelEditorMenu.Name.Content
         });
-        UndertaleGameObject advancedEditorMenu = data.CreateMenu("advanced_editor", data.CreateChangeOption("\"Objects Per Frame (Multi-frame Level Loading)\"", "obj_menu_multiframe_loading", @"
+        UndertaleGameObject advancedEditorMenu = data.CreateMenu("advanced_editor", /* data.CreateChangeOption("\"Objects Per Frame (Multi-frame Level Loading)\"", "obj_menu_multiframe_loading", @"
         if(global.setting_multiframe_loading == 50 && argument0 < 0){
             global.setting_multiframe_loading = 0
         } else {
@@ -154,7 +154,7 @@ public partial class GameMakerMod
             return string(global.setting_multiframe_loading_wires)
         else
             return ""OFF (All objects load in one frame.)""
-        ", 50), data.CreateToggleOption("\"Optimized Saving\"", "better_saving", "global.setting_betterSaving = argument0", "selectedItem = global.setting_betterSaving", "global.setting_betterSaving", "gml_Script_scr_return_input", "\"INCREDIBLY optimized level saving using buffers. When testing, a 600k line lvl file saved in 2 seconds.\"")/*, data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\"") */);
+        ", 50), */ data.CreateToggleOption("\"Optimized Saving\"", "better_saving", "global.setting_betterSaving = argument0", "selectedItem = global.setting_betterSaving", "global.setting_betterSaving", "gml_Script_scr_return_input", "\"INCREDIBLY optimized level saving using buffers. When testing, a 600k line lvl file saved in 2 seconds.\"")/*, data.CreateToggleOption("\"Optimized Wires (EXPERIMENTAL)\"", "optimized_wires", "global.setting_optimized_wires = argument0", "selectedItem = global.setting_optimized_wires", "global.setting_optimized_wires", "gml_Script_scr_return_input", "\"This feature is mainly designed for incredibly large and complex contraptions and probably won't affect the average wire puzzle.\n\n\nNOTE: In the vanilla game, and gates put in a chain will activate one frame at a time UNLESS you connect them in the order they were placed.\nWith the optimized wire system they ALWAYS go one frame at a time.\"") */);
         data.InsertMenuOptionFromEnd(levelEditorMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")
         {
             instance = advancedEditorMenu.Name.Content

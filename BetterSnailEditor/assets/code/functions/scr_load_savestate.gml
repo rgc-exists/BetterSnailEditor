@@ -170,7 +170,7 @@ if(variable_global_exists("li_level_editor_database")){
 }
 global.model_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "spr_models_tool_v3.png", 0, 0, 0, 0, 0)
 global.inspector_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "inspector_tool_v2.png", 0, 0, 0, 0, 0)
-
+global.king_snail_sprite = sprite_add(global.betterSE_assets + "sprites/" + "king_snail.png", 0, 0, 0, 0, 0)
 
 
 /*

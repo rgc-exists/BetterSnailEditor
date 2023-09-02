@@ -4,6 +4,11 @@
         return 0;
     }
     fileBuffer = buffer_create(1, buffer_grow, 1)
+    levelsInfo = ds_map_find_value(global.campaignMap, global.currentCampaign)
+    lvlInfo = levelsInfo.levels[global.campaignLevelIndex]
+    lvlName = lvlInfo.fileName
+    bseSettingsSaveName = (((((get_campaigns_load_path_prefix() + "Community Levels/") + global.currentCampaign) + "/") + lvlName) + ".BSEsettings")
+    bseSettingsFile = buffer_create(1, buffer_grow, 1)
     ////show_message("A")
     var levelData = ds_map_find_value(global.campaignMap, array_get(info, 0)).levels[info[1]]
     if (levelData.isModded && (!global.isEditorModded))
@@ -19,19 +24,31 @@
     while (li < ds_list_size(global.li_level_editor_database))
     {
         dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
-        if dataBaseStruct.modded
-        {
-            uses_modded_elements = 1
-            break
+        var doContinue = true
+        for(var e = 0; e < array_length(global.dont_save_these_objects); e++){
+            if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == global.dont_save_these_objects[e]){
+                doContinue = false
+            }
         }
-        else
-        {
+        if(doContinue){
+            if dataBaseStruct.modded
+            {
+                uses_modded_elements = 1
+                break
+            }
+            else
+            {
+                li++
+                continue
+            }
+        } else {
             li++
-            continue
         }
     }
     buffer_write(fileBuffer, buffer_text, (global.game_build_version + (uses_modded_elements ? "_MODDED" : "")))
     buffer_write(fileBuffer, buffer_text, "\n")
+    buffer_write(bseSettingsFile, buffer_text, global.BSE_version)
+    buffer_write(bseSettingsFile, buffer_text, "\n")
     LVLX1 = obj_level_editor.level_bound_x1
     LVLY1 = obj_level_editor.level_bound_y1
     LVLW = (obj_level_editor.level_bound_x2 - obj_level_editor.level_bound_x1)
@@ -47,13 +64,35 @@
     buffer_write(fileBuffer, buffer_text, "\n")
     buffer_write(fileBuffer, buffer_text, "TOOL DATA:")
     buffer_write(fileBuffer, buffer_text, "\n")
-    buffer_write(fileBuffer, buffer_text, string(ds_list_size(global.li_level_editor_database) - 2))
+    buffer_write(fileBuffer, buffer_text, string(ds_list_size(global.li_level_editor_database) - array_length(global.dont_save_these_objects)))
     buffer_write(fileBuffer, buffer_text, "\n")
     ////show_message("C")
+    buffer_write(bseSettingsFile, buffer_text, "LEVEL SETTINGS")
+    buffer_write(bseSettingsFile, buffer_text, "\n")
     for (li = 0; li < ds_list_size(global.li_level_editor_database); li++)
     {
         dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
-        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "models_tool" && variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "inspector_tool"){
+
+        var doContinue = true
+        for(var e = 0; e < array_length(global.dont_save_these_objects); e++){
+            if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == global.dont_save_these_objects[e]){
+                doContinue = false
+            }
+        }
+        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "BSE_settings"){
+            buffer_write(bseSettingsFile, buffer_text, array_length(variable_struct_get(dataBaseStruct, "tool_properties")))
+            buffer_write(bseSettingsFile, buffer_text, "\n")
+            for (ti = 0; ti < array_length(variable_struct_get(dataBaseStruct, "tool_properties")); ti++)
+            {
+                var toolPropsLol = variable_struct_get(dataBaseStruct,"tool_properties")
+                thsToolProp = toolPropsLol[ti]
+                buffer_write(bseSettingsFile, buffer_text, thsToolProp.key)
+                buffer_write(bseSettingsFile, buffer_text, "\n")
+                buffer_write(bseSettingsFile, buffer_text, thsToolProp.value)
+                buffer_write(bseSettingsFile, buffer_text, "\n")
+            }
+
+        } else if(doContinue){
             buffer_write(fileBuffer, buffer_text, variable_struct_get(dataBaseStruct, "custom_tool_or_object_id"))
             buffer_write(fileBuffer, buffer_text, "\n")
             buffer_write(fileBuffer, buffer_text, string(variable_struct_get(dataBaseStruct, "image_angle")))
@@ -82,7 +121,14 @@
     for (li = 0; li < 10; li++)
     {
         dataBaseStruct = ds_list_find_value(obj_level_editor.li_quicktool_slots, li)
-        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "models_tool" && variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "inspector_tool"){
+
+        var doContinue = true
+        for(var e = 0; e < array_length(global.dont_save_these_objects); e++){
+            if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == global.dont_save_these_objects[e]){
+                doContinue = false
+            }
+        }
+        if(doContinue){
             buffer_write(fileBuffer, buffer_text, variable_struct_get(dataBaseStruct, "custom_tool_or_object_id"))
             buffer_write(fileBuffer, buffer_text, "\n")
         } else {
@@ -94,72 +140,81 @@
     buffer_write(fileBuffer, buffer_text, "\n")
     buffer_write(fileBuffer, buffer_text, "PLACED OBJECTS:")
     buffer_write(fileBuffer, buffer_text, "\n")
-    buffer_write(fileBuffer, buffer_text, string(ds_list_size(global.li_level_editor_database) - 2))
+    buffer_write(fileBuffer, buffer_text, string(ds_list_size(global.li_level_editor_database) - array_length(global.dont_save_these_objects)))
     buffer_write(fileBuffer, buffer_text, "\n")
     for (li = 0; li < ds_list_size(global.li_level_editor_database); li++)
     {
         ////show_message("F")
         dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
-        ////show_message("G")
-        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "models_tool" && variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "inspector_tool"){
-            ////show_message("H")
-            buffer_write(fileBuffer, buffer_text, dataBaseStruct.custom_tool_or_object_id)
-            buffer_write(fileBuffer, buffer_text, "\n")
-            ////show_message("I")
-            buffer_write(fileBuffer, buffer_text, string(ds_list_size(dataBaseStruct.li_placed_instances)))
-            buffer_write(fileBuffer, buffer_text, "\n")
-            for (ti = 0; ti < ds_list_size(dataBaseStruct.li_placed_instances); ti++)
-            {
-                ////show_message("J")
-                thisInst = ds_list_find_value(dataBaseStruct.li_placed_instances, ti)
-                //show_message("thisInst.x - LVLX1")
-                buffer_write(fileBuffer, buffer_text, string((thisInst.x - LVLX1)))
+
+        var doContinue = true
+        for(var e = 0; e < array_length(global.dont_save_these_objects); e++){
+            if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == global.dont_save_these_objects[e]){
+                doContinue = false
+            }
+        }
+        if(doContinue){
+            ////show_message("G")
+            if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "models_tool" && variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") != "inspector_tool"){
+                ////show_message("H")
+                buffer_write(fileBuffer, buffer_text, variable_struct_get(dataBaseStruct, "custom_tool_or_object_id"))
                 buffer_write(fileBuffer, buffer_text, "\n")
-                ////show_message("K")
-                //show_message("thisInst.y - LVLY1")
-                buffer_write(fileBuffer, buffer_text, string((thisInst.y - LVLY1)))
+                ////show_message("I")
+                buffer_write(fileBuffer, buffer_text, string(ds_list_size(dataBaseStruct.li_placed_instances)))
                 buffer_write(fileBuffer, buffer_text, "\n")
-                //show_message("thisInst.image_angle")
-                buffer_write(fileBuffer, buffer_text, string(thisInst.image_angle))
-                buffer_write(fileBuffer, buffer_text, "\n")
-                //show_message("thisInst.image_xscale")
-                buffer_write(fileBuffer, buffer_text, string(thisInst.image_xscale))
-                buffer_write(fileBuffer, buffer_text, "\n")
-                //show_message("thisInst.image_yscale")
-                buffer_write(fileBuffer, buffer_text, string(thisInst.image_yscale))
-                buffer_write(fileBuffer, buffer_text, "\n")
-                ////show_message("L")
-                if (!(variable_instance_exists(thisInst, "map_properties")))
+                for (ti = 0; ti < ds_list_size(dataBaseStruct.li_placed_instances); ti++)
                 {
-                    ////show_message("M1")
-                    //show_message("Map properties (0) A")
-                    buffer_write(fileBuffer, buffer_text, string(0))
+                    ////show_message("J")
+                    thisInst = ds_list_find_value(dataBaseStruct.li_placed_instances, ti)
+                    //show_message("thisInst.x - LVLX1")
+                    buffer_write(fileBuffer, buffer_text, string((thisInst.x - LVLX1)))
                     buffer_write(fileBuffer, buffer_text, "\n")
-                }
-                else if (!(ds_exists(thisInst.map_properties, 1)))
-                {
-                    ////show_message("M2")
-                    //show_message("Map properties (0) B")
-                    buffer_write(fileBuffer, buffer_text, string(0))
+                    ////show_message("K")
+                    //show_message("thisInst.y - LVLY1")
+                    buffer_write(fileBuffer, buffer_text, string((thisInst.y - LVLY1)))
                     buffer_write(fileBuffer, buffer_text, "\n")
-                }
-                else
-                {
-                    ////show_message("M3")
-                    //show_message("Map properties")
-                    buffer_write(fileBuffer, buffer_text, string(ds_map_size(thisInst.map_properties)))
+                    //show_message("thisInst.image_angle")
+                    buffer_write(fileBuffer, buffer_text, string(thisInst.image_angle))
                     buffer_write(fileBuffer, buffer_text, "\n")
-                    thisKey = ds_map_find_first(thisInst.map_properties)
-                    for (pri = 0; pri < ds_map_size(thisInst.map_properties); pri++)
+                    //show_message("thisInst.image_xscale")
+                    buffer_write(fileBuffer, buffer_text, string(thisInst.image_xscale))
+                    buffer_write(fileBuffer, buffer_text, "\n")
+                    //show_message("thisInst.image_yscale")
+                    buffer_write(fileBuffer, buffer_text, string(thisInst.image_yscale))
+                    buffer_write(fileBuffer, buffer_text, "\n")
+                    ////show_message("L")
+                    if (!(variable_instance_exists(thisInst, "map_properties")))
                     {
-                        ////show_message("N")
-                        buffer_write(fileBuffer, buffer_text, thisKey)
+                        ////show_message("M1")
+                        //show_message("Map properties (0) A")
+                        buffer_write(fileBuffer, buffer_text, string(0))
                         buffer_write(fileBuffer, buffer_text, "\n")
-                        //show_message("Map properties: " + thisKey)
-                        buffer_write(fileBuffer, buffer_text, string(ds_map_find_value(thisInst.map_properties, thisKey)))
+                    }
+                    else if (!(ds_exists(thisInst.map_properties, 1)))
+                    {
+                        ////show_message("M2")
+                        //show_message("Map properties (0) B")
+                        buffer_write(fileBuffer, buffer_text, string(0))
                         buffer_write(fileBuffer, buffer_text, "\n")
-                        thisKey = ds_map_find_next(thisInst.map_properties, thisKey)
-                        ////show_message("O")
+                    }
+                    else
+                    {
+                        ////show_message("M3")
+                        //show_message("Map properties")
+                        buffer_write(fileBuffer, buffer_text, string(ds_map_size(thisInst.map_properties)))
+                        buffer_write(fileBuffer, buffer_text, "\n")
+                        thisKey = ds_map_find_first(thisInst.map_properties)
+                        for (pri = 0; pri < ds_map_size(thisInst.map_properties); pri++)
+                        {
+                            ////show_message("N")
+                            buffer_write(fileBuffer, buffer_text, thisKey)
+                            buffer_write(fileBuffer, buffer_text, "\n")
+                            //show_message("Map properties: " + thisKey)
+                            buffer_write(fileBuffer, buffer_text, string(ds_map_find_value(thisInst.map_properties, thisKey)))
+                            buffer_write(fileBuffer, buffer_text, "\n")
+                            thisKey = ds_map_find_next(thisInst.map_properties, thisKey)
+                            ////show_message("O")
+                        }
                     }
                 }
             }
@@ -208,4 +263,6 @@
     ////show_message("2")
     buffer_save(fileBuffer, saveName)
     buffer_delete(fileBuffer)
+    buffer_save(bseSettingsFile, bseSettingsSaveName)
+    buffer_delete(bseSettingsFile)
     return 1;

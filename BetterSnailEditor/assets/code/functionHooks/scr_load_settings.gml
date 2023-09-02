@@ -24,10 +24,12 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_epilepsy_warning = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            /*
             case "Multi-Frame Loading":
                 global.setting_multiframe_loading = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            */
             case "Camera Zoom Min":
                 global.setting_camzoom_min = file_text_read_real(file)
                 file_text_readln(file)
@@ -130,10 +132,12 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_blood_mode = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            /*
             case "Multiframe Loading Wires":
                 global.setting_multiframe_loading_wires = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            */
             case "Unicorn Horn Ball Override":
                 global.setting_unicorn_horn_ball_override = file_text_read_real(file)
                 file_text_readln(file)

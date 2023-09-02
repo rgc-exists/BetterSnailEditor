@@ -12,7 +12,17 @@
         mouse_drag_box_ymin = (min(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60)
         mouse_drag_box_ymax = ((max(mouse_drag_box_start_y, mouse_drag_box_current_y) * 60) + 60)
         li_objects_in_box = ds_list_create()
-        collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), 163, 1, 1, li_objects_in_box, 0)
+
+
+
+        /*
+        BE SURE TO SET THE OBJECT collision_rectangle_list IS LOOKING FOR TO BE THE OBJ NAME AND NOT THE INDEX, DUMBASS!!!
+        */
+        collision_rectangle_list((mouse_drag_box_xmin + 2), (mouse_drag_box_ymin + 2), (mouse_drag_box_xmax - 2), (mouse_drag_box_ymax - 2), obj_lvlobj_parent, 1, 1, li_objects_in_box, 0)
+        
+
+
+
         clipboard = []
         clipboard_instances = ds_list_create()
         for (indx = 0; indx < ds_list_size(li_objects_in_box); indx++)

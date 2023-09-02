@@ -90,6 +90,10 @@ switch argument1
                     created_inst.toolStruct = _Ts
                     call_after_initializing_new_level_editor_object(created_inst)
                     toolplace_delete_similar(created_inst)
+                    level_bound_x1 = min(level_bound_x1, (floor((created_inst.bbox_left / 60)) * 60))
+                    level_bound_x2 = max(level_bound_x2, (ceil((created_inst.bbox_right / 60)) * 60))
+                    level_bound_y1 = min(level_bound_y1, (floor((created_inst.bbox_top / 60)) * 60))
+                    level_bound_y2 = max(level_bound_y2, (ceil((created_inst.bbox_bottom / 60)) * 60))
                 }
             }
             else
@@ -108,6 +112,10 @@ switch argument1
                 created_inst.toolStruct = _Ts
                 call_after_initializing_new_level_editor_object(created_inst)
                 toolplace_delete_similar(created_inst)
+                level_bound_x1 = min(level_bound_x1, (floor((created_inst.bbox_left / 60)) * 60))
+                level_bound_x2 = max(level_bound_x2, (ceil((created_inst.bbox_right / 60)) * 60))
+                level_bound_y1 = min(level_bound_y1, (floor((created_inst.bbox_top / 60)) * 60))
+                level_bound_y2 = max(level_bound_y2, (ceil((created_inst.bbox_bottom / 60)) * 60))
             }
         }
         if(variable_instance_exists(id, "clipboard_model_wires")){

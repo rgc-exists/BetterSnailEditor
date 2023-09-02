@@ -20,6 +20,7 @@ if(directory_exists(working_directory + "gs2ml/mods/BetterSnailEditor/BetterSnai
 
 global.model_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "spr_models_tool_v3.png", 0, 0, 0, 0, 0)
 global.inspector_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "inspector_tool_v2.png", 0, 0, 0, 0, 0)
+global.king_snail_sprite = sprite_add(global.betterSE_assets + "sprites/" + "king_snail.png", 0, 0, 0, 36, 38)
 
 if(!directory_exists(working_directory + "BetterSnailEditor_Temp")){
     directory_create(working_directory + "BetterSnailEditor_Temp")
@@ -196,5 +197,6 @@ file_find_close()
 
 global.character_randomizer_for_trailer = false
 global.character_randomizer_for_trailer_timer = 0
+
 
 #orig#()
