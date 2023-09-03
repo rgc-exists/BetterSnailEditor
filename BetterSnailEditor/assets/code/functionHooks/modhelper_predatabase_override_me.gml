@@ -58,7 +58,7 @@ lvleditor_database_addition.placement_script = gml_Script_toolplace_nothing_happ
 lvleditor_database_addition.placement_offset_x = 0
 lvleditor_database_addition.placement_offset_y = 0
 lvleditor_database_addition.deletion_script = gml_Script_toolplace_nothing_happens
-lvleditor_database_addition.tool_properties = [modhelper_createprop_help("hlp", "editor_prop_info", spr_propico_help, "BSE_settings_help"), modhelper_createprop_int_as_string("resizable_boundaries", false, "BSE_resizeable_boundaries", global.king_snail_sprite, 1, "BSE_resizeable_boundaries_tooltip", ["editor_prop_opt_false", "editor_prop_opt_true"])]
+lvleditor_database_addition.tool_properties = [modhelper_createprop_help("hlp", "editor_prop_info", spr_propico_help, "BSE_settings_help"), modhelper_createprop_int_as_string("resizable_boundaries", false, "BSE_resizeable_boundaries", spr_propico_global, 1, "BSE_resizeable_boundaries_tooltip", ["editor_prop_opt_false", "editor_prop_opt_true"])]
 
 ds_list_add(global.li_level_editor_database, lvleditor_database_addition)
 
