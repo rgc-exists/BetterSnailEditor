@@ -31,9 +31,6 @@
     <Reference Include="System.Drawing.Common">
       <HintPath>lib/System.Drawing.Common.dll</HintPath>
     </Reference>
-    <Reference Include="UndertaleModLib">
-      <HintPath>../lib/UndertaleModLib.dll</HintPath>
-    </Reference>
     <Reference Include="WysApi">
       <HintPath>../lib/WysApi.dll</HintPath>
     </Reference>
@@ -42,8 +39,9 @@
     </Reference>
   </ItemGroup>
 
+
   <ItemGroup>
-    <ProjectReference Include="../lib/gmml/GmmlHooker/GmmlHooker.csproj" />
+    <ProjectReference Include="..\lib\gmml\GmmlHooker\GmmlHooker.csproj" />
   </ItemGroup>
 
   <Target Name="DeleteAssets" BeforeTargets="BeforeBuild">
