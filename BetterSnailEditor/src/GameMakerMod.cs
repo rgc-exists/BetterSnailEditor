@@ -340,13 +340,17 @@ public partial class GameMakerMod
         {
             instance = curColor.Name.Content
         });
-
+        string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "Error";
+        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "save_hat_change_menu.gml")));
+        
         curColor = data.CreateMenu("player_default_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
         {
             instance = curColor.Name.Content
         });
+
+        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "default_hat_change_menu.gml")));
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Save Character\"", null, "gml_Script_scr_save_character", null, "gml_Script_scr_return_input", "\"Save a character to a .wyschar file\""));
 /*
