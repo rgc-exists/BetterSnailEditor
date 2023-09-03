@@ -244,7 +244,7 @@ if(global.inspector_active){
                 }
             } else {
                 if(global.input_virtualmouse_lbutton_pressed){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         typingLineThingyTimer = 0
                         typingIn = thisKey
                         typingLineThingyTimer = 30
@@ -338,7 +338,7 @@ if(global.inspector_active){
                 }
             } else {
                 if(global.input_virtualmouse_lbutton_pressed){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         typingLineThingyTimer = 0
                         typingIn = thisKey
                         typingLineThingyTimer = 30
@@ -429,7 +429,7 @@ if(global.inspector_active){
                 }
             } else {
                 if(global.input_virtualmouse_lbutton_pressed){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         typingLineThingyTimer = 0
                         typingIn = thisKey
                         typingLineThingyTimer = 30
@@ -523,7 +523,7 @@ if(global.inspector_active){
                 }
             } else {
                 if(global.input_virtualmouse_lbutton_pressed){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         typingLineThingyTimer = 0
                         typingIn = thisKey
                         typingLineThingyTimer = 30
@@ -617,7 +617,7 @@ if(global.inspector_active){
                 }
             } else {
                 if(global.input_virtualmouse_lbutton_pressed){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         typingLineThingyTimer = 0
                         typingIn = thisKey
                         typingLineThingyTimer = 30
@@ -714,7 +714,7 @@ if(global.inspector_active){
                         }
                     } else {
                         if(global.input_virtualmouse_lbutton_pressed){
-                            if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                            if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                                 typingLineThingyTimer = 0
                                 typingIn = thisKey
                                 typingLineThingyTimer = 30

@@ -278,7 +278,7 @@ if(global.rendering_enabled || room = menu){
                 }
             } else {
                 if(mouse_check_button_pressed(mb_left)){
-                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .75), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
+                    if(point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), (1920 * .7), 80 + y_offset + global.debugger_scroll, 1900, 140 + y_offset + global.debugger_scroll)){
                         if(!is_array(variable_instance_get(thisInst, thisKey)) && !is_struct(variable_instance_get(thisInst, thisKey)) && !is_undefined(variable_instance_get(thisInst, thisKey)) && !is_readonly){
                             typingLineThingyTimer = 0
                             typingIn = thisKey
