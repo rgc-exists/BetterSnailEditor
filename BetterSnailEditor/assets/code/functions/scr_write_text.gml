@@ -43,7 +43,7 @@ if(string_length(selected_font_path) > 0 && last_slash_pos > 0){
                 for(var i = 0; i < variable_struct_names_count(properties_struct); i += 1){
                     ds_map_add(li_properties, names[i], variable_struct_get(properties_struct, names[i]))
                 }
-                variable_struct_get(current_model_obj, "properties", li_properties)
+                variable_struct_set(current_model_obj, "properties", li_properties)
                 //show_message(string(current_model_obj))
                 current_model_array[m] = current_model_obj
             }
