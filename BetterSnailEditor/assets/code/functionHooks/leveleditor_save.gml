@@ -5,6 +5,11 @@ if(global.setting_betterSaving){
     {
         display_text = "SAVING"
         file = file_text_open_write(saveName)
+        levelsInfo = ds_map_find_value(global.campaignMap, global.currentCampaign)
+        lvlInfo = levelsInfo.levels[global.campaignLevelIndex]
+        lvlName = lvlInfo.fileName
+        bseSettingsSaveName = (((((get_campaigns_load_path_prefix() + "Community Levels/") + global.currentCampaign) + "/") + lvlName) + ".BSEsettings")
+        bseSettingsFile = file_text_open_write(bseSettingsSaveName)
         return 0;
     }
     var levelData = ds_map_find_value(global.campaignMap, array_get(info, 0)).levels[info[1]]
@@ -38,10 +43,14 @@ if(global.setting_betterSaving){
                 li++
                 continue
             }
+        } else{
+            li++
         }
     }
     file_text_write_string(file, (global.game_build_version + (uses_modded_elements ? "_MODDED" : "")))
     file_text_writeln(file)
+    file_text_write_string(bseSettingsFile, global.BSE_version)
+    file_text_writeln(bseSettingsFile)
     LVLX1 = obj_level_editor.level_bound_x1
     LVLY1 = obj_level_editor.level_bound_y1
     LVLW = (obj_level_editor.level_bound_x2 - obj_level_editor.level_bound_x1)
@@ -59,6 +68,8 @@ if(global.setting_betterSaving){
     file_text_writeln(file)
     file_text_write_real(file, ds_list_size(global.li_level_editor_database) - array_length(global.dont_save_these_objects))
     file_text_writeln(file)
+    file_text_write_string(bseSettingsFile, "LEVEL SETTINGS")
+    file_text_write_string(bseSettingsFile, "\n")
     ////show_message("C")
     for (li = 0; li < ds_list_size(global.li_level_editor_database); li++)
     {
@@ -69,24 +80,20 @@ if(global.setting_betterSaving){
                 doContinue = false
             }
         }
+        
         if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "BSE_settings"){
-            var levelsInfo = ds_map_find_value(global.campaignMap, global.currentCampaign)
-            var lvlInfo = levelsInfo.levels[global.campaignLevelIndex]
-            var lvlName = lvlInfo.fileName
-            var bseSettingsSaveName = (((((get_campaigns_load_path_prefix() + "Community Levels/") + global.currentCampaign) + "/") + lvlName) + ".BSEsettings")
-            var bseSettingsFile = file_text_open_write(bseSettingsSaveName)
             file_text_write_real(bseSettingsFile, array_length(variable_struct_get(dataBaseStruct, "tool_properties")))
-            file_text_writeln(bseSettingsFile)
+            file_text_write_string(bseSettingsFile, "\n")
             for (ti = 0; ti < array_length(variable_struct_get(dataBaseStruct, "tool_properties")); ti++)
             {
                 var toolPropsLol = variable_struct_get(dataBaseStruct,"tool_properties")
                 thsToolProp = toolPropsLol[ti]
-                file_text_write_string(bseSettingsFile, variable_struct_get(thsToolProp, "key"))
-                file_text_writeln(bseSettingsFile)
-                file_text_write_real(bseSettingsFile, variable_struct_get(thsToolProp, "value"))
-                file_text_writeln(bseSettingsFile)
+                file_text_write_string(bseSettingsFile, thsToolProp.key)
+                file_text_write_string(bseSettingsFile, "\n")
+                file_text_write_real(bseSettingsFile, thsToolProp.value)
+                file_text_write_string(bseSettingsFile, "\n")
             }
-            file_text_close(bseSettingsFile)
+
         } else if(doContinue){
             file_text_write_string(file, variable_struct_get(dataBaseStruct, "custom_tool_or_object_id"))
             file_text_writeln(file)
@@ -257,5 +264,6 @@ if(global.setting_betterSaving){
     }
     ////show_message("2")
     file_text_close(file)
+    file_text_close(bseSettingsFile)
     return 1;
 }

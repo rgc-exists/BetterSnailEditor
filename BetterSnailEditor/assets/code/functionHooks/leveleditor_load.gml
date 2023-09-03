@@ -20,13 +20,10 @@ if(original_returned){
         for (ti = 0; ti < arraySize; ti++)
         {
             thsToolKey = file_text_read_string(bseSettingsFile)
-            show_message(thsToolKey)
             file_text_readln(bseSettingsFile)
             thsToolValue = file_text_read_real(bseSettingsFile)
             file_text_readln(bseSettingsFile)
             thsToolProp = ds_map_find_value(dataBaseStruct.ds_map_tool_properties, thsToolKey)
-            show_message(string(thsToolValue))
-            show_message(string(thsToolProp))
             if (!is_undefined(thsToolProp))
             {
                 thsToolProp.value = thsToolValue
