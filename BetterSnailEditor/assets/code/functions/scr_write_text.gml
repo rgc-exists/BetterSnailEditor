@@ -31,9 +31,32 @@ if(string_length(selected_font_path) > 0 && last_slash_pos > 0){
             file_text_readln(model_file)
             current_model_wires_str = file_text_read_string(model_file)
             ////show_message(model_wires_json)
-            current_model_wires = json_parse(current_model_wires_str)
+            current_model_wires_array = json_parse(current_model_wires_str)
             file_text_close(model_file)
             current_model_array = json_parse(model_json)
+            if(!variable_instance_exists(id, "current_model_wires")){
+                current_model_wires = ds_list_create()
+            } else {
+                ds_list_clear(current_model_wires)
+            }
+            for(var w = 0; w < array_length(current_model_wires_array); w++){
+                ds_list_add(current_model_wires, current_model_wires_array[w])
+                //show_message(string(current_model_wires_array[w]))
+            }
+            file_text_close(model_file)
+            for(var m = 0; m < array_length(current_model_array); m++){
+                var current_model_obj = current_model_array[m]
+                variable_struct_set(current_model_obj, "toolStruct", get_leveleditor_database_element(variable_struct_get(current_model_obj, "custom_tool_or_object_id")))
+                var li_properties = ds_map_create()
+                var properties_struct = variable_struct_get(current_model_obj, "properties")
+                names = variable_struct_get_names(properties_struct)
+                for(var i = 0; i < variable_struct_names_count(properties_struct); i += 1){
+                    ds_map_add(li_properties, names[i], variable_struct_get(properties_struct, names[i]))
+                }
+                variable_struct_get(current_model_obj, "properties", li_properties)
+            }
+        
+            /*
             for(var m = 0; m < array_length(current_model_array); m++){
                 var current_model_obj = current_model_array[m]
                 variable_struct_set(current_model_obj, "toolStruct", get_leveleditor_database_element(variable_struct_get(current_model_obj, "custom_tool_or_object_id")))
@@ -47,6 +70,7 @@ if(string_length(selected_font_path) > 0 && last_slash_pos > 0){
                 //show_message(string(current_model_obj))
                 current_model_array[m] = current_model_obj
             }
+            */
             global.cur_model_is_text = false
             array_push(global.loaded_font, current_model_array)
             array_push(global.loaded_font_wires, current_model_wires)
