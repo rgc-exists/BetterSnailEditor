@@ -163,6 +163,7 @@ gml_Script_keybinding_load()
 gml_Script_loca_text_load()
 gml_Script_loca_load_all_audio_into_memory()
 gml_Script_scr_show_hitboxes_ini()
+gml_Script_scr_level_dat_ini()
 if(variable_global_exists("li_level_editor_database")){
     if(ds_exists(global.li_level_editor_database, ds_type_list)){
         gml_Script_leveleditor_database_ini()
@@ -171,7 +172,7 @@ if(variable_global_exists("li_level_editor_database")){
 global.model_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "spr_models_tool_v3.png", 0, 0, 0, 0, 0)
 global.inspector_tool_sprite = sprite_add(global.betterSE_assets + "sprites/" + "inspector_tool_v2.png", 0, 0, 0, 0, 0)
 global.king_snail_sprite = sprite_add(global.betterSE_assets + "sprites/" + "king_snail.png", 0, 0, 0, 0, 0)
-
+global.just_loaded_savestate = true
 
 /*
 gml_Script_keybinding_ini_defaults()

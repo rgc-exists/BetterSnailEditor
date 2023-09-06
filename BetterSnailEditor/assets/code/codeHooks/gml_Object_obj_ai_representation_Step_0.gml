@@ -9,6 +9,9 @@ switch mode
     case 0:
         scr_airep_normal()
         break
+    case 3:
+        scr_airep_normal(global.cursor_in_level_x, global.cursor_in_level_y)
+        break
     case 1:
         scr_airep_destroyed()
         break

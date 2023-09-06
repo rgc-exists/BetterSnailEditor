@@ -9,3 +9,4 @@ global.input_virtualmouse_notgui_y = 0
 
 just_pressed_upload_icon = true
 global.currentlyUploadingOrUpdatingALevel = false
+

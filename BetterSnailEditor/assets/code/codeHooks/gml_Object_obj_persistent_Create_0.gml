@@ -3,9 +3,9 @@ global.is_BSE_client = true
 //Just use if(variable_global_exists("is_BSE_client")) to detect if it's BSE or not.
 //Sorry for anyone that needs to detect whether or not it's BSE before obj_persistent_Create_0 is run, I couldn't figure out how to get global init scripts to work with GMML.
 
-global.BSE_version = "v0.8.0b"
+global.BSE_version = "v1.0.0a"
 
-global.game_build_version = "1.9-BETA_25.2"
+global.game_build_version = "2.01"
 
 
 if(directory_exists(working_directory + "gs2ml/mods/BetterSnailEditor/BetterSnailEditor_Assets/")){

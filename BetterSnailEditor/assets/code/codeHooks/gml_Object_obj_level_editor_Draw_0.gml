@@ -29,7 +29,11 @@ for(var toolp = 0; toolp < array_length(BSEsettingsElement.tool_properties); too
 if(variable_instance_exists(id, "selectedToolStruct")){
     if(!is_undefined(selectedToolStruct)){
         if(variable_struct_get(selectedToolStruct, "custom_tool_or_object_id") == "move_tool"){
-            resize_level_enabled = true
+            if(variable_instance_exists(id, "drag_collision")){
+                if(drag_collision <= -69){
+                    resize_level_enabled = true
+                }
+            }
         }
     }
 }

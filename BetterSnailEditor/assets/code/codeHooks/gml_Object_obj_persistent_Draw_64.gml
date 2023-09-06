@@ -71,3 +71,5 @@ PRESS O TO CLOSE"
     global.hotkeys_shown = false
 }
 draw_set_alpha(1)
+
+global.just_loaded_savestate = false

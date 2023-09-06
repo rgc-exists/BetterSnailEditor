@@ -1,3 +1,7 @@
+if(global.just_loaded_savestate){
+    instance_destroy()
+    return false;
+}
 if (room == menu)
 {
     if audio_is_playing(sound_playing)
