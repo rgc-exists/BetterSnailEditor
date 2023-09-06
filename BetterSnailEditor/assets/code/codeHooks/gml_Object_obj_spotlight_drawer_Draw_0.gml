@@ -1,7 +1,7 @@
 if (global.setting_visual_details == 0)
-    return;
+    return false;
 if (global.spotlight_alpha <= 0.01)
-    return;
+    return false;
 gpu_set_blendmode(bm_add)
 with (obj_player)
 {

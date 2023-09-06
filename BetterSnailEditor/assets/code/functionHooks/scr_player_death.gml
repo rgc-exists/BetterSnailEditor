@@ -77,12 +77,12 @@ if(global.invincible_mode && !((global.last_death_by == -7) && !global.restart_i
                         audio_stop_sound(snail_voice_sound)
                     if (!global.underwater)
                     {
-                        snail_voice_sound = audio_play_sound(choose(57, 58, 59, 60, 61, 62, 63, 64), 0.91, false)
+                        snail_voice_sound = audio_play_sound(choose(sou_cuteDeath_01, sou_cuteDeath_02, sou_cuteDeath_03, sou_cuteDeath_04, sou_cuteDeath_05, sou_cuteDeath_06, sou_cuteDeath_07, sou_cuteDeath_08), 0.91, false)
                         audio_sound_gain_fx(snail_voice_sound, 0.2, 0)
                     }
                     else
                     {
-                        snail_voice_sound = audio_play_sound(choose(171, 172, 173, 174, 175, 176, 178, 179), 0.91, false)
+                        snail_voice_sound = audio_play_sound(choose(sou_UnderwCuteDeath_01, sou_UnderwCuteDeath_02, sou_UnderwCuteDeath_03, sou_UnderwCuteDeath_04, sou_UnderwCuteDeath_05, sou_UnderwCuteDeath_06, sou_UnderwCuteDeath_07, sou_UnderwCuteDeath_08), 0.91, false)
                         audio_sound_gain_fx(snail_voice_sound, 0.5, 0)
                     }
                     audio_sound_pitch(snail_voice_sound, (0.48 + random(0.2)))

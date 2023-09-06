@@ -48,7 +48,7 @@ else if (snailtype == 0)
             global.player_underwater_current_timer -= 1
     }
 }
-if (vspeed < -3.5)
+if (underwater ? vspeed < 0 : vspeed < -3.5)
 {
     if (inputjump == 0)
     {
