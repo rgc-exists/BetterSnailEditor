@@ -29,6 +29,7 @@ if(original_returned){
                 thsToolProp.value = thsToolValue
             }
         }
+        file_text_close(bseSettingsFile)
     }
     return true
 } else {
