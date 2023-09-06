@@ -39,24 +39,35 @@ public partial class GameMakerMod
 
     }
 
+    public void LoadFilesRecursively(string directoryPath, Action<string, string> fileAction)
+{
+    foreach (var file in Directory.GetFiles(directoryPath))
+    {
+        Console.WriteLine("Loading " + file);
+        string code = File.ReadAllText(file);
+        fileAction.Invoke(code, file);
+    }
+
+    foreach (var subdirectory in Directory.GetDirectories(directoryPath))
+    {
+        LoadFilesRecursively(subdirectory, fileAction);
+    }
+}
+
     public void AddCode()
     {
         string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "Error";
 
         if (baseDir == "Error")
         {
-            Console.WriteLine("Cant find mod directory!");
+            Console.WriteLine("Can't find mod directory!");
             Console.WriteLine("Assembly.GetExecutingAssembly().Location is " + Assembly.GetExecutingAssembly().Location);
             Console.WriteLine("Please report this on the BSE discord (discord.gg/4RHXca3Dw6)");
             return;
         }
 
-        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "functions"), "*.gml"))
+        Action<string, string> loadFunctionCode = (code, file) =>
         {
-            Console.WriteLine("Loading " + file);
-
-            string code = File.ReadAllText(file);
-
             MatchCollection matchList = Regex.Matches(code, @"(?<=argument)(\d*)");
             ushort argCount;
             if (matchList.Count > 0)
@@ -65,48 +76,44 @@ public partial class GameMakerMod
                 argCount = 0;
 
             data.CreateFunction(Path.GetFileNameWithoutExtension(file), code, argCount);
-        }
+        };
 
-        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "codeHooks"), "*.gml"))
+        Action<string, string> loadCodeHook = (code, file) =>
         {
-            Console.WriteLine("Loading " + file);
-
-            string code = File.ReadAllText(file);
-
             data.HookCode(Path.GetFileNameWithoutExtension(file), code);
-        }
+        };
 
-        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "functionHooks"), "*.gml"))
+        Action<string, string> loadFunctionHook = (code, file) =>
         {
-            Console.WriteLine("Loading " + file);
-
-            string code = File.ReadAllText(file);
-
             data.HookFunction(Path.GetFileNameWithoutExtension(file), code);
-        }
+        };
 
-        foreach (var file in Directory.GetFiles(Path.Combine(baseDir, "code", "objectCode"), "*.json"))
+        Action<string, string> loadObjectCode = (code, file) =>
         {
-            Console.WriteLine("Loading " + file);
+            ObjectFile? objCode = JsonSerializer.Deserialize<ObjectFile>(code);
 
-            ObjectFile? code = JsonSerializer.Deserialize<ObjectFile>(File.ReadAllText(file));
-
-            if (code == null)
+            if (objCode == null)
             {
                 Console.WriteLine(file + " is null, skipping...");
-                continue;
+                return;
             }
 
-            EventType type = (EventType)Enum.Parse(typeof(EventType), code.type);
+            EventType type = (EventType)Enum.Parse(typeof(EventType), objCode.type);
             uint subtype;
 
-            if (!code.hasSubtype) subtype = uint.Parse(code.subtype);
-            else subtype = (uint)Enum.Parse(FindType("UndertaleModLib.Models.EventSubtype" + code.type), code.subtype);
-            
-            data.GameObjects.ByName(code.name).EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
-                .ReplaceGmlSafe(File.ReadAllText(Path.Combine(baseDir, "code", "objectCode", code.file)), data);
-        }
+            if (!objCode.hasSubtype) subtype = uint.Parse(objCode.subtype);
+            else subtype = (uint)Enum.Parse(FindType("UndertaleModLib.Models.EventSubtype" + objCode.type), objCode.subtype);
+
+            data.GameObjects.ByName(objCode.name).EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
+                .ReplaceGmlSafe(File.ReadAllText(Path.Combine(baseDir, "code", "objectCode", objCode.file)), data);
+        };
+
+        LoadFilesRecursively(Path.Combine(baseDir, "code", "functions"), loadFunctionCode);
+        LoadFilesRecursively(Path.Combine(baseDir, "code", "codeHooks"), loadCodeHook);
+        LoadFilesRecursively(Path.Combine(baseDir, "code", "functionHooks"), loadFunctionHook);
+        LoadFilesRecursively(Path.Combine(baseDir, "code", "objectCode"), loadObjectCode);
     }
+
 
     public void AddMenuItems()
     {
