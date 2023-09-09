@@ -398,6 +398,23 @@ bExecuteScriptsOnExit = 1");
         );
         data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (VERY BUGGY)\nIMPORTANT INFO ------>\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"WARNING: This setting is VERY buggy and you almost definitely WILL experience crashes. So uhh... sorry.\n\nWith this on, you can save and load the state of your game.\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\""));
 
+
+
+        UndertaleGameObject linksMenu = data.CreateMenu("links_menu",
+            new Menus.WysMenuOption("\"RGC Exists Discord\"", null, "gml_Script_scr_open_link", "\"https://discord.gg/96aukFY7Rx\"", "gml_Script_scr_return_input", "\"Join the RGC Exists discord for updates on BSE and other RGC projects!\"")
+        );
+        data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Cool Links\"")
+        {
+            instance = linksMenu.Name.Content
+        });
+        UndertaleGameObject snailsEndMenu = data.CreateMenu("snails_end",
+            new Menus.WysMenuOption("\"Leaderboard\"", null, "gml_Script_scr_open_link", "\"https://sites.google.com/view/snailsend/list\"", "gml_Script_scr_return_input", "\"The unofficial list of the top ranked hardest WYS levels!\""),
+            new Menus.WysMenuOption("\"Submit level\"", null, "gml_Script_scr_open_link", "\"https://docs.google.com/forms/d/e/1FAIpQLSfbw4_JKeixMV1vKwCiXRk0JiuLMwp5vOwWNfb-3OcHdez5xA/viewform\"", "gml_Script_scr_return_input", "\"Submit to the leaderboard of the hardest WYS levels!\n\nYour level must have video proof of being legitimately completed by a real human, in one attempt.\"")
+        );
+        data.InsertMenuOptionFromEnd(linksMenu.Name.Content, 0, new Menus.WysMenuOption("\"Snail's End\"")
+        {
+            instance = snailsEndMenu.Name.Content
+        });
     }
 
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0)

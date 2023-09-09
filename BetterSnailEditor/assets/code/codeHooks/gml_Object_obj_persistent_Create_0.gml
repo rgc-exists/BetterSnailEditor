@@ -46,7 +46,6 @@ go_to_BSE_credits_next = false
 
 gml_Script_scr_show_hitboxes_ini()
 global.show_hitboxes = false
-global.really_big_circle = sprite_add(global.betterSE_assets + "sprites/" + "ReallyBigCircleToDrawBecauseFuckingUMTDoesntSupportTheDrawElipseFunction_FuckYouUMT.png", 0, false, false, 0, 0)
 
 global.snailax_just_finished = false
 global.snailax_playing = false
