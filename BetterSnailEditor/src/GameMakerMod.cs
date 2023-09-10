@@ -62,7 +62,7 @@ public partial class GameMakerMod
         {
             Console.WriteLine("Can't find mod directory!");
             Console.WriteLine("Assembly.GetExecutingAssembly().Location is " + Assembly.GetExecutingAssembly().Location);
-            Console.WriteLine("Please report this on the BSE discord (discord.gg/4RHXca3Dw6)");
+            Console.WriteLine("Please join the rgc exists discord and ping @namethempguy about this (https://discord.gg/JFs33yrY8M)");
             return;
         }
 
