@@ -90,6 +90,9 @@ public partial class GameMakerMod
 
         Action<string, string> loadObjectCode = (code, file) =>
         {
+            if(!code.EndsWith(".json")){
+                return;
+            }
             ObjectFile? objCode = JsonSerializer.Deserialize<ObjectFile>(code);
 
             if (objCode == null)
@@ -367,6 +370,7 @@ bExitSumbenuAfterConfirm = 0
 bExecuteScriptsOnConfirm = 1
 bExecuteScriptsOnExit = 0");
 */
+
 
         data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Load Character\"", null, "gml_Script_scr_load_character", null, "gml_Script_scr_return_input", "\"Load a character from a .wyschar file\""));
 /*

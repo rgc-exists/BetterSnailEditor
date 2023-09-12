@@ -42,10 +42,10 @@ if(global.setting_save_states == 1){
         }
     }
 } else if(global.setting_save_states == 2){
+    show_message("B")
     if(room != level_editor && room != menu && room != main_menu_dark && room != the_elevator){
         if(keyboard_check_pressed(vk_f6)){
             gml_Script_scr_save_savestate(1)
-            show_message("Savestate saved!")
         } else if(keyboard_check_pressed(vk_f7)){
             if(file_exists(working_directory + "BSE_SaveState_" + "1" + ".wyssavestate2") && file_exists(working_directory + "BSE_SaveState_" + "1" + ".wyssavestate1")){
                 gml_Script_scr_load_savestate(1)

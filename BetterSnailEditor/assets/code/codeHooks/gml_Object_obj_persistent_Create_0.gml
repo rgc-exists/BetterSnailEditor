@@ -199,5 +199,6 @@ global.character_randomizer_for_trailer_timer = 0
 
 global.snailax_editor_theme = audio_create_stream(global.betterSE_assets + "audio/" + "Snailax Editor Theme.ogg")
 
+global.is_legit_right_now = true
 
 #orig#()

@@ -72,4 +72,12 @@ PRESS O TO CLOSE"
 }
 draw_set_alpha(1)
 
+if(global.is_legit_right_now){
+    draw_set_color(make_color_rgb(0, 150, 0))
+} else {
+    draw_set_color(make_color_rgb(150, 0, 0))
+}
+draw_set_alpha(1)
+draw_rectangle(0, 0, 3, 3, false)
+
 global.just_loaded_savestate = false

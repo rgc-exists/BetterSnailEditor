@@ -108,3 +108,5 @@ if(!global.currentlyUploadingOrUpdatingALevel){
 } else {
     global.was_uploading_last_frame = true
 }
+
+gml_Script_scr_check_if_speedrun_legit()
