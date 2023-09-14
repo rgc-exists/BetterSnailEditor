@@ -81,16 +81,8 @@ for(var obj_in_list = 0; obj_in_list < ds_list_size(global.li_hitbox_objects); o
                             has_special_mask = true
                             draw_sprite_ext(global.mask_outlines[s], 0, x, y,  (sprite_width) / sprite_get_width(sprite_index), (sprite_height) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
                             if(draw_get_color() == c_red){
-                                var should_continue = true
-                                if(o == obj_disco_laser || o == obj_laser_other){
-                                    should_continue = enabled
-                                }
-                                //Not using a continue statement because iirc UMT compiles it weird. It technically doesn't cause problems but I don't want it looking weird when decompiled.
-                                
-                                if(should_continue){
-                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                                }
+                                draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
                             }
                             if(draw_get_color() == c_blue){
                                 draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
@@ -103,13 +95,12 @@ for(var obj_in_list = 0; obj_in_list < ds_list_size(global.li_hitbox_objects); o
                 if(!has_special_mask && obj_type >= 0){
                     draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                     if(draw_get_color() == c_red){
-                        var should_continue = true
                         if(o == obj_disco_laser || o = obj_laser_other){
-                            should_continue = enabled
-                        }
-                        //Not using a continue statement because iirc UMT decompiles it weird. It technically doesn't cause problems but I don't want it looking weird when decompiled.
-                        
-                        if(should_continue){
+                            if(self.enabled){
+                            } else {
+                                draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
+                            }
+                        } else {
                             draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
                         }
                     }
