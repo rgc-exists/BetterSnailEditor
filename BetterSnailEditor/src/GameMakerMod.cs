@@ -40,19 +40,19 @@ public partial class GameMakerMod
     }
 
     public void LoadFilesRecursively(string directoryPath, Action<string, string> fileAction)
-{
-    foreach (var file in Directory.GetFiles(directoryPath))
     {
-        Console.WriteLine("Loading " + file);
-        string code = File.ReadAllText(file);
-        fileAction.Invoke(code, file);
-    }
+        foreach (var file in Directory.GetFiles(directoryPath))
+        {
+            Console.WriteLine("Loading " + file);
+            string code = File.ReadAllText(file);
+            fileAction.Invoke(code, file);
+        }
 
-    foreach (var subdirectory in Directory.GetDirectories(directoryPath))
-    {
-        LoadFilesRecursively(subdirectory, fileAction);
+        foreach (var subdirectory in Directory.GetDirectories(directoryPath))
+        {
+            LoadFilesRecursively(subdirectory, fileAction);
+        }
     }
-}
 
     public void AddCode()
     {
@@ -90,9 +90,10 @@ public partial class GameMakerMod
 
         Action<string, string> loadObjectCode = (code, file) =>
         {
-            if(!code.EndsWith(".json")){
+            if(!file.EndsWith(".json")){
                 return;
             }
+
             ObjectFile? objCode = JsonSerializer.Deserialize<ObjectFile>(code);
 
             if (objCode == null)
@@ -106,8 +107,9 @@ public partial class GameMakerMod
 
             if (!objCode.hasSubtype) subtype = uint.Parse(objCode.subtype);
             else subtype = (uint)Enum.Parse(FindType("UndertaleModLib.Models.EventSubtype" + objCode.type), objCode.subtype);
-
-            data.GameObjects.ByName(objCode.name).EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
+            
+            data.GameObjects.ByName(objCode.name)
+                .EventHandlerFor(type, subtype, data.Strings, data.Code, data.CodeLocals)
                 .ReplaceGmlSafe(File.ReadAllText(Path.Combine(baseDir, "code", "objectCode", objCode.file)), data);
         };
 
