@@ -42,7 +42,6 @@ if(global.setting_save_states == 1){
         }
     }
 } else if(global.setting_save_states == 2){
-    show_message("B")
     if(room != level_editor && room != menu && room != main_menu_dark && room != the_elevator){
         if(keyboard_check_pressed(vk_f6)){
             gml_Script_scr_save_savestate(1)

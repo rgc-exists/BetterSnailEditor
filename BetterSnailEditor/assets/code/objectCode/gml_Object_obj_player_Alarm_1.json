@@ -2,6 +2,6 @@
     "name": "obj_player",
     "file": "gml_Object_obj_player_Alarm_1.gml",
     "type": "Alarm",
-    "subtype": 0,
-    "hasSubtype":true
+    "subtype": "0",
+    "hasSubtype":false
 }

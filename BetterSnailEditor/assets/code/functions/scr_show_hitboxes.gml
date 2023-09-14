@@ -1,4 +1,5 @@
-for(var o = 0; o < global.object_index_count; o++){
+for(var obj_in_list = 0; obj_in_list < ds_list_size(global.li_hitbox_objects); obj_in_list++){
+    var o = ds_list_find_value(global.li_hitbox_objects, obj_in_list)
     var sprite = object_get_sprite(o)
     var obj_type = -1;
     var text_to_draw = ""
@@ -14,9 +15,11 @@ for(var o = 0; o < global.object_index_count; o++){
         obj_type = 0;
         draw_set_color(c_blue)
     }
-    if(object_is_ancestor(o, obj_powerable_parent)){
-        obj_type = 4;
-        draw_set_color(c_green)
+    for(var t = 0; t < array_length(global.li_wireable_objs); t++){
+        if(global.li_wireable_objs[t] == o){
+            obj_type = 4;
+            draw_set_color(c_green)
+        }
     }
     if(object_is_ancestor(o, cam_zoom_100)){
         obj_type = 3;
@@ -25,6 +28,7 @@ for(var o = 0; o < global.object_index_count; o++){
     }
     for(var t = 0; t < array_length(global.li_deadly_objects); t++){
         if(global.li_deadly_objects[t] == o){
+            var should_continue = true
             obj_type = 1;
             draw_set_color(c_red)
             break;
@@ -77,8 +81,16 @@ for(var o = 0; o < global.object_index_count; o++){
                             has_special_mask = true
                             draw_sprite_ext(global.mask_outlines[s], 0, x, y,  (sprite_width) / sprite_get_width(sprite_index), (sprite_height) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
                             if(draw_get_color() == c_red){
-                                draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                                draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                var should_continue = true
+                                if(o == obj_disco_laser || o == obj_laser_other){
+                                    should_continue = enabled
+                                }
+                                //Not using a continue statement because iirc UMT compiles it weird. It technically doesn't cause problems but I don't want it looking weird when decompiled.
+                                
+                                if(should_continue){
+                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                }
                             }
                             if(draw_get_color() == c_blue){
                                 draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
@@ -91,7 +103,15 @@ for(var o = 0; o < global.object_index_count; o++){
                 if(!has_special_mask && obj_type >= 0){
                     draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                     if(draw_get_color() == c_red){
-                        draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
+                        var should_continue = true
+                        if(o == obj_disco_laser || o = obj_laser_other){
+                            should_continue = enabled
+                        }
+                        //Not using a continue statement because iirc UMT decompiles it weird. It technically doesn't cause problems but I don't want it looking weird when decompiled.
+                        
+                        if(should_continue){
+                            draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
+                        }
                     }
                     if(draw_get_color() == c_blue){
                         for(var thickness = 1; thickness < 4; thickness++){

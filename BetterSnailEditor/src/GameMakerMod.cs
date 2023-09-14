@@ -409,7 +409,7 @@ bExecuteScriptsOnExit = 1");
             new Menus.WysMenuOption("\"Multiple Slots (F6/F7+number keys 1-9)\"", null, "gml_Script_scr_set_savestates", "1"),
             new Menus.WysMenuOption("\"Single Slot (Just F6+F7)\"", null, "gml_Script_scr_set_savestates", "2")
         );
-        data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (VERY BUGGY)\nIMPORTANT INFO ------>\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"WARNING: This setting is VERY buggy and you almost definitely WILL experience crashes. So uhh... sorry.\n\nWith this on, you can save and load the state of your game.\nNOTE:\nThis feature is experimental and VERY unstable. Expect crashes to happen sometimes.\""));
+        data.InsertMenuOptionFromEnd(advancedSpecialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Savestates (VERY BUGGY)\nIMPORTANT INFO ------>\"", savestatesMenu.Name.Content, tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"WARNING: This setting is VERY buggy and you almost definitely WILL experience crashes. So uhh... sorry.\n\nWith this on, you can save and load the state of your game.\""));
 
 
 

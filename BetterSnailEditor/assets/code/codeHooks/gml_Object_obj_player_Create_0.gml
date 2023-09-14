@@ -87,4 +87,5 @@ if(room == disco_copy_me){
 } else {
     #orig#()
     just_hit_fuse = false
+    is_first_frame = true
 }
