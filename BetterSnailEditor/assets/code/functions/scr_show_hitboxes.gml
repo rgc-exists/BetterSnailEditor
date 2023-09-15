@@ -78,38 +78,49 @@ for(var obj_in_list = 0; obj_in_list < ds_list_size(global.li_hitbox_objects); o
                     //show_message(sprite_get_name(sprite_index) + " == " + global.mask_names[s])
                     if(sprite_get_name(sprite_index) == global.mask_names[s]){
                         if(sprite_exists(global.mask_outlines[s])){
-                            has_special_mask = true
-                            draw_sprite_ext(global.mask_outlines[s], 0, x, y,  (sprite_width) / sprite_get_width(sprite_index), (sprite_height) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                            if(draw_get_color() == c_red){
+                        has_special_mask = true
+                        if(draw_get_color() == c_red){
+                            if(o == obj_disco_laser || o = obj_laser_other){
+                                if(enabled){
+                                    draw_sprite_ext(global.mask_outlines[s], 0, x, y,  (sprite_width) / sprite_get_width(sprite_index), (sprite_height) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                    draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                }   
+                            } else {
+                                draw_sprite_ext(global.mask_outlines[s], 0, x, y,  (sprite_width) / sprite_get_width(sprite_index), (sprite_height) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
                                 draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
                                 draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                                
                             }
-                            if(draw_get_color() == c_blue){
-                                draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                                draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
-                            }
-                            break;
+                        }
+                        if(draw_get_color() == c_blue){
+                            draw_sprite_ext(global.mask_outlines[s], 0, x + 1, y + 1,  (sprite_width - 1) / sprite_get_width(sprite_index), (sprite_height - 1) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                            draw_sprite_ext(global.mask_outlines[s], 0, x + 2, y + 2, (sprite_width - 2) / sprite_get_width(sprite_index), (sprite_height - 2) / sprite_get_height(sprite_index), image_angle, draw_get_color(), 1)  
+                        }
+                        break;
                         }
                     }
                 }
                 if(!has_special_mask && obj_type >= 0){
-                    draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                     if(draw_get_color() == c_red){
                         if(o == obj_disco_laser || o = obj_laser_other){
-                            if(self.enabled){
-                            } else {
+                            if(enabled){
+                                draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                                 draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
                             }
                         } else {
+                            draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                             draw_rectangle(bbox_left + 1, bbox_top + 1, bbox_right - 1, bbox_bottom - 1, true)
                         }
                     }
                     if(draw_get_color() == c_blue){
+                        draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                         for(var thickness = 1; thickness < 4; thickness++){
                             draw_rectangle(bbox_left + thickness, bbox_top + thickness, bbox_right - thickness, bbox_bottom - thickness, true)
                         }
                     }
                     if(draw_get_color() == c_teal){
+                        draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
                         for(var thickness = 1; thickness < 10; thickness++){
                             draw_rectangle(bbox_left + thickness, bbox_top + thickness, bbox_right - thickness, bbox_bottom - thickness, true)
                         }
