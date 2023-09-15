@@ -269,120 +269,120 @@ public partial class GameMakerMod
             instance = voicelineMode.Name.Content,
         });
         
+        if(data.Code.ByName("BetterSnailEditor_DontCreateColors") == null){
+            UndertaleGameObject playerCharMenu = data.CreateMenu("player_character_parent",
+                new Menus.WysMenuOption("global.preset_character_data[0][0]", null, "gml_Script_scr_select_preset_character", "0", "gml_Script_scr_return_input", "\"The classic shelly we know and love.\""),
+                new Menus.WysMenuOption("global.preset_character_data[1][0]", null, "gml_Script_scr_select_preset_character", "1", "gml_Script_scr_return_input", "\"Squid tried simulating the current state of the US education system and ended up with this snail.\""),
+                new Menus.WysMenuOption("global.preset_character_data[2][0]", null, "gml_Script_scr_select_preset_character", "2", "gml_Script_scr_return_input", "\"Squid HATES unicorns! HATES THEM HATES THEM HATES THEM!!!\""),
+                new Menus.WysMenuOption("global.preset_character_data[3][0]", null, "gml_Script_scr_select_preset_character", "3", "gml_Script_scr_return_input", "\"Happy holidays! \\\"No! I decide when it's Christmas! Shut up!\\\"\""),
+                new Menus.WysMenuOption("global.preset_character_data[4][0]", null, "gml_Script_scr_select_preset_character", "4", "gml_Script_scr_return_input", "\"The snail from the silly little side project that the dev is thinking about calling \\\"Did You Snail\\\" or something.\"")
+            );
+            data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Player Character\"")
+            {
+                instance = playerCharMenu.Name.Content
+            });
 
-        UndertaleGameObject playerCharMenu = data.CreateMenu("player_character_parent",
-            new Menus.WysMenuOption("global.preset_character_data[0][0]", null, "gml_Script_scr_select_preset_character", "0", "gml_Script_scr_return_input", "\"The classic shelly we know and love.\""),
-            new Menus.WysMenuOption("global.preset_character_data[1][0]", null, "gml_Script_scr_select_preset_character", "1", "gml_Script_scr_return_input", "\"Squid tried simulating the current state of the US education system and ended up with this snail.\""),
-            new Menus.WysMenuOption("global.preset_character_data[2][0]", null, "gml_Script_scr_select_preset_character", "2", "gml_Script_scr_return_input", "\"Squid HATES unicorns! HATES THEM HATES THEM HATES THEM!!!\""),
-            new Menus.WysMenuOption("global.preset_character_data[3][0]", null, "gml_Script_scr_select_preset_character", "3", "gml_Script_scr_return_input", "\"Happy holidays! \\\"No! I decide when it's Christmas! Shut up!\\\"\""),
-            new Menus.WysMenuOption("global.preset_character_data[4][0]", null, "gml_Script_scr_select_preset_character", "4", "gml_Script_scr_return_input", "\"The snail from the silly little side project that the dev is thinking about calling \\\"Did You Snail\\\" or something.\"")
-        );
-        data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Player Character\"")
-        {
-            instance = playerCharMenu.Name.Content
-        });
+            data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, data.CreateToggleOption("\"Unicorn Hat Pops Ball\"", "unicorn_ball_popping", "global.setting_unicorn_horn_ball_override = argument0", "selectedItem = global.setting_unicorn_horn_ball_override", "global.setting_unicorn_horn_ball_override", "gml_Script_scr_return_input", "\"Having this OFF makes it so the unicorn hat DOESN'T pop the ball.\""));
 
-        data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, data.CreateToggleOption("\"Unicorn Hat Pops Ball\"", "unicorn_ball_popping", "global.setting_unicorn_horn_ball_override = argument0", "selectedItem = global.setting_unicorn_horn_ball_override", "global.setting_unicorn_horn_ball_override", "gml_Script_scr_return_input", "\"Having this OFF makes it so the unicorn hat DOESN'T pop the ball.\""));
+            data.HookCode("gml_Object_" + playerCharMenu.Name.Content + "_Other_10", "#orig#() \n bExecuteScriptsOnSwitch = 1 \n bExecuteScriptsOnExit = 1");
+            
 
-        data.HookCode("gml_Object_" + playerCharMenu.Name.Content + "_Other_10", "#orig#() \n bExecuteScriptsOnSwitch = 1 \n bExecuteScriptsOnExit = 1");
-        
+            UndertaleGameObject playerColorsCustomMenu = data.CreateMenu("player_character");
+            data.InsertMenuOptionFromEnd(playerCharMenu.Name.Content, 5, new Menus.WysMenuOption("\"Custom\"")
+            {
+                instance = playerColorsCustomMenu.Name.Content
+            });
+            
+
+            UndertaleGameObject curColor = MakeColorMenu("player_body", "setting_player_body", .45f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Body\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_shell", "setting_player_shell", .55f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Shell\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_outline", "setting_player_outline", .75f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Outline\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_eye", "setting_player_eye", .6f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Eye\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_death", "setting_player_death");
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Death FX\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_spotlight", "setting_player_spotlight", 0.75f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Spotlight (Bright)\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_spotlight_dark", "setting_player_spotlight_dark", 0.9f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Spotlight (Dark)\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_flare", "setting_player_flare", .8f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Flare\"")
+            {
+                instance = curColor.Name.Content
+            });
+            curColor = MakeColorMenu("player_trail", "setting_player_trail", .5f);
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Trail\"")
+            {
+                instance = curColor.Name.Content
+            });
+
+            curColor = data.CreateMenu("player_save_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
+            
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Hat\"")
+            {
+                instance = curColor.Name.Content
+            });
+            string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "Error";
+            data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "save_hat_change_menu.gml")));
+            
+            curColor = data.CreateMenu("player_default_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
+
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
+            {
+                instance = curColor.Name.Content
+            });
+
+            data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "default_hat_change_menu.gml")));
+
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Save Character\"", null, "gml_Script_scr_save_character", null, "gml_Script_scr_return_input", "\"Save a character to a .wyschar file\""));
+    /*
+            data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", @"#orig#()
+    bExecuteScriptsOnSwitch = 0
+    bExitSumbenuAfterConfirm = 0
+    bExecuteScriptsOnConfirm = 1
+    bExecuteScriptsOnExit = 0");
+    */
+
+
+            data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Load Character\"", null, "gml_Script_scr_load_character", null, "gml_Script_scr_return_input", "\"Load a character from a .wyschar file\""));
+    /*
+            data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", @"#orig#()
+    bExecuteScriptsOnSwitch = 0
+    bExitSumbenuAfterConfirm = 0
+    bExecuteScriptsOnConfirm = 1
+    bExecuteScriptsOnExit = 0");
+    */
+        }
 
         UndertaleGameObject squidColorsMenu = MakeColorMenu("squid_color", "setting_squid_color", 0.5f);
         data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 0, new Menus.WysMenuOption("\"Squid Color\"")
         {
             instance = squidColorsMenu.Name.Content
         });
-
-        UndertaleGameObject playerColorsCustomMenu = data.CreateMenu("player_character");
-        data.InsertMenuOptionFromEnd(playerCharMenu.Name.Content, 5, new Menus.WysMenuOption("\"Custom\"")
-        {
-            instance = playerColorsCustomMenu.Name.Content
-        });
-        
-
-        UndertaleGameObject curColor = MakeColorMenu("player_body", "setting_player_body", .45f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Body\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_shell", "setting_player_shell", .55f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Shell\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_outline", "setting_player_outline", .75f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Outline\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_eye", "setting_player_eye", .6f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Eye\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_death", "setting_player_death");
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Death FX\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_spotlight", "setting_player_spotlight", 0.75f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Spotlight (Bright)\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_spotlight_dark", "setting_player_spotlight_dark", 0.9f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Spotlight (Dark)\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_flare", "setting_player_flare", .8f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Flare\"")
-        {
-            instance = curColor.Name.Content
-        });
-        curColor = MakeColorMenu("player_trail", "setting_player_trail", .5f);
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Trail\"")
-        {
-            instance = curColor.Name.Content
-        });
-
-        curColor = data.CreateMenu("player_save_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
-        
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Hat\"")
-        {
-            instance = curColor.Name.Content
-        });
-        string baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "Error";
-        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "save_hat_change_menu.gml")));
-        
-        curColor = data.CreateMenu("player_default_hat", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true, enableUiSounds:true));
-
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Default Hat\"")
-        {
-            instance = curColor.Name.Content
-        });
-
-        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "default_hat_change_menu.gml")));
-
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Save Character\"", null, "gml_Script_scr_save_character", null, "gml_Script_scr_return_input", "\"Save a character to a .wyschar file\""));
-/*
-        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", @"#orig#()
-bExecuteScriptsOnSwitch = 0
-bExitSumbenuAfterConfirm = 0
-bExecuteScriptsOnConfirm = 1
-bExecuteScriptsOnExit = 0");
-*/
-
-
-        data.InsertMenuOptionFromEnd(playerColorsCustomMenu.Name.Content, 0, new Menus.WysMenuOption("\"Load Character\"", null, "gml_Script_scr_load_character", null, "gml_Script_scr_return_input", "\"Load a character from a .wyschar file\""));
-/*
-        data.HookCode("gml_Object_" + curColor.Name.Content + "_Other_10", @"#orig#()
-bExecuteScriptsOnSwitch = 0
-bExitSumbenuAfterConfirm = 0
-bExecuteScriptsOnConfirm = 1
-bExecuteScriptsOnExit = 0");
-*/
-
         data.InsertMenuOption(funMenu.Name.Content, 0, data.CreateToggleOption("\"F U N N Y   S Q U I D\"", "funny_squid", "global.setting_funny_squid = argument0", "selectedItem = global.setting_funny_squid", "global.setting_funny_squid", "gml_Script_scr_return_input", "\"WEEEEEEEEEEEEEEEE!\""));
 
         UndertaleGameObject goreMenu = data.CreateMenu("gore_menu", new Menus.WysMenuOption("\"None\"", null, "gml_Script_scr_set_blood", "0"), new Menus.WysMenuOption("\"Blood\"", null, "gml_Script_scr_set_blood", "1"), new Menus.WysMenuOption("\"Slime\"", null, "gml_Script_scr_set_blood", "2"));

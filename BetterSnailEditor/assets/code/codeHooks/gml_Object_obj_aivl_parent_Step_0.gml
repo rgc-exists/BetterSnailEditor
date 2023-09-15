@@ -74,7 +74,7 @@ if (enddelay <= 0 || global.input_skipvoice_pressed)
     }
 
     if(global.setting_funny_squid){
-        audio_sound_pitch(sound_playing, 2)
+        audio_sound_pitch(sound_playing, 1.75)
     }
     
     if (execute_script != -1)
