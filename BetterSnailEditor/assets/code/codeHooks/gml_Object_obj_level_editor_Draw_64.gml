@@ -132,7 +132,10 @@ if(global.setting_custom_thumbnails){
         if(just_pressed_upload_icon){
             just_pressed_upload_icon = false
             workshop_save_level_screenshot()
-            global.current_thumbnail = sprite_add("Community Levels/" + global.currentCampaign + "/Thumbnail.png", 0, false, false, 0, 0)
+            if(file_exists("Community Levels/" + global.currentCampaign + "/CustomThumbnail.png.png"))
+                global.current_thumbnail = sprite_add("Community Levels/" + global.currentCampaign + "/CustomThumbnail.png", 0, false, false, 0, 0)
+            else 
+                global.current_thumbnail = sprite_add("Community Levels/" + global.currentCampaign + "/Thumbnail.png", 0, false, false, 0, 0)
         }
         var start_x = (display_get_gui_width() * 0.17) + (190 * 6.25)
         var start_y = (display_get_gui_height() * 0.17) + 90
