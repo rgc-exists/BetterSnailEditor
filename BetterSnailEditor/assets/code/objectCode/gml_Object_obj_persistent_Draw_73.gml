@@ -1,4 +1,4 @@
-if(global.show_hitboxes){
+if(global.show_hitboxes || (global.setting_show_hitboxes_on_death && global.player_is_dead)){
     gml_Script_scr_show_hitboxes()
 }
 if(global.global_inspector_active){

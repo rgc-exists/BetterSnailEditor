@@ -257,6 +257,7 @@ public partial class GameMakerMod
 
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Speed\"", "player_speed", "global.cheat_player_speed = clamp(global.cheat_player_speed + argument0 / 100, 0, 10)", "return string(global.cheat_player_speed * 100) + \"%\"", 10));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, data.CreateChangeOption("\"Player Jump Height\"", "player_jump_height", "global.cheat_jump_height = clamp(global.cheat_jump_height + argument0 / 100, 0, 10)", "return string(global.cheat_jump_height * 100) + \"%\"", 10));
+        data.InsertMenuOptionFromEnd(Menus.Vanilla.Gameplay, 0, data.CreateChangeOption("\"Player Respawn Time\"", "respawn_time", "global.setting_respawn_time = clamp(global.setting_respawn_time + argument0, 0, 10)", "return gml_Script_scr_return_respawn_time()", 0.25));
 
         UndertaleGameObject voicelineMode = data.CreateMenu("voiceline_mode", new Menus.WysMenuSettings(executeScriptsOnSwitch:false, executeScriptsOnConfirm:false, executeScriptsOnExit:true, exitSubmenuAfterConfirm:false, allowLoopingUpDown:true),
         new Menus.WysMenuOption("\"Default\"", null, "gml_Script_scr_set_voiceline_mode", "0"),
@@ -396,6 +397,7 @@ bExecuteScriptsOnExit = 1");
 
         UndertaleGameObject advancedSpecialMenu = data.CreateMenu("advanced_special", 
         data.CreateToggleOption("\"Show Hitboxes\"", "show_hitboxes", "gml_Script_scr_set_show_hitboxes(argument0)", "gml_Script_scr_preselect_show_hitboxes()", "global.show_hitboxes", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Show the hitboxes of most solid objects, triggers,and interactive objects.\""),
+        data.CreateToggleOption("\"Show Hitboxes On Death\"", "show_hitboxes_on_death", "gml_Script_scr_set_show_hitboxes_on_death(argument0)", "gml_Script_scr_preselect_show_hitboxes_on_death()", "global.setting_show_hitboxes_on_death", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Show the hitboxes of most solid objects, triggers,and interactive objects when the player dies.\""),
         data.CreateToggleOption("\"Global Inspector (Press F5)\"", "global_inspector", "global.setting_global_inspector_available = argument0", "selectedItem = global.setting_global_inspector_available", "global.setting_global_inspector_available", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"With this on, you can press F5 to open the global object inspector.\"")
         );
         data.InsertMenuOptionFromEnd(specialMenu.Name.Content, 1, new Menus.WysMenuOption("\"Advanced\"")

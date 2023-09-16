@@ -174,6 +174,14 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_custom_editor_playlist = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            case "Show Hitboxes On Death":
+                global.setting_show_hitboxes_on_death = file_text_read_real(file)
+                file_text_readln(file)
+                break
+            case "Player Respawn Time":
+                global.setting_respawn_time = file_text_read_real(file)
+                file_text_readln(file)
+                break
             
         }
     }

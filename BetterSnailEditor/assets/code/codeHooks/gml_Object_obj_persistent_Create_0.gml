@@ -3,7 +3,7 @@ global.is_BSE_client = true
 //Just use if(variable_global_exists("is_BSE_client")) to detect if it's BSE or not.
 //Sorry for anyone that needs to detect whether or not it's BSE before obj_persistent_Create_0 is run, I couldn't figure out how to get global init scripts to work with GMML.
 
-global.BSE_version = "v1.0.0a"
+global.BSE_version = "v1.1.0a"
 
 global.game_build_version = "2.01"
 
@@ -121,15 +121,15 @@ global.preset_character_data = [
     ],
     [
         "Unicorn",
-        real("9.17518e+06"),
-        real("4.91528e+06"),
-        real("2.09718e+06"),
-        real("3.34239e+06"),
-        real("1.67119e+07"),
-        real("4.19437e+06"),
-        real("1.70396e+06"),
-        real("3.34239e+06"),
-        real("8.38874e+06"),
+        real("9175180"),
+        real("4915280"),
+        real("2097180"),
+        real("3342390"),
+        real("16711900"),
+        real("4194370"),
+        real("1703960"),
+        real("3342390"),
+        real("8388740"),
         2
     ],
     [
@@ -148,7 +148,7 @@ global.preset_character_data = [
     [
         "Prototype Shelly",
         35980,
-        real("1.91909e+06"),
+        real("1919090"),
         0,
         -1,
         65280,
@@ -201,5 +201,7 @@ global.snailax_editor_theme = audio_create_stream(global.betterSE_assets + "audi
 
 global.is_legit_right_now = true
 global.is_resetting_settings = false 
+global.player_is_dead = false
+
 
 #orig#()

@@ -102,6 +102,15 @@ for(var obj_in_list = 0; obj_in_list < ds_list_size(global.li_hitbox_objects); o
                     }
                 }
                 if(!has_special_mask && obj_type >= 0){
+                    if(draw_get_color() == c_fuchsia){
+                        draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
+                    }
+                    if(draw_get_color() == c_green){
+                        draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
+                    }
+                    if(draw_get_color() == c_white){
+                        draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true)
+                    }
                     if(draw_get_color() == c_red){
                         if(o == obj_disco_laser || o = obj_laser_other){
                             if(enabled){

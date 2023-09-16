@@ -141,3 +141,13 @@ if(global.character_randomizer_for_trailer){
     }
 
 }
+
+if(instance_exists(obj_player)){
+    if(obj_player.dead >= 0){
+        global.player_is_dead = true
+    } else {
+        global.player_is_dead = false
+    }
+} else {
+    global.player_is_dead = false
+}

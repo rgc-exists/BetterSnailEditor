@@ -37,3 +37,5 @@ global.setting_global_inspector_available = false
 global.setting_save_states = false
 global.setting_betterSaving = false
 global.setting_custom_editor_playlist = false
+global.setting_show_hitboxes_on_death = false
+global.setting_respawn_time = 0
