@@ -17,6 +17,10 @@ public partial class GameMakerMod
 
     public void Load(int audioGroup, UndertaleData data_source)
     {
+        if(audioGroup != 0){
+            return;
+        }
+
         data = data_source;
 
         Console.WriteLine("Adding Objects...");
