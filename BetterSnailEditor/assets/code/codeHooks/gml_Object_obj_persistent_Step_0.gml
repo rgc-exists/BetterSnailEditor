@@ -143,6 +143,8 @@ if(global.character_randomizer_for_trailer){
 }
 
 if(instance_exists(obj_player)){
+    global.player_has_existed = true
+
     if(obj_player.dead >= 0){
         global.player_is_dead = true
     } else {

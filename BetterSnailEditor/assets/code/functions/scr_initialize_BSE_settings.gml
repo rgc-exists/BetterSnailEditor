@@ -39,3 +39,4 @@ global.setting_betterSaving = false
 global.setting_custom_editor_playlist = false
 global.setting_show_hitboxes_on_death = false
 global.setting_respawn_time = 0
+global.setting_input_display = false

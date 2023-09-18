@@ -81,3 +81,104 @@ draw_set_alpha(1)
 draw_rectangle(0, 0, 3, 3, false)
 
 global.just_loaded_savestate = false
+
+
+
+
+
+if(global.setting_input_display){
+    if(room != level_editor && room != empty_start_room && room != disclaimer_photoepilepsy){
+        if(global.input_analysis_using_gamepad){
+            //Insert gamepad input display here
+        } else {
+            var leftPressed = false
+            var rightPressed = false
+            var upPressed = false
+            var downPressed = false
+            var skipVlPressed = false
+            var resetPressed = false
+            var menuPressed = false
+            if(global.input_confirm_pressed){
+                rightPressed = true
+            }
+            if(global.input_jump_pressed){
+                upPressed = true
+            }
+            if(global.input_jump){
+                upPressed = true
+            }
+            if(global.input_x > 0){
+                rightPressed = true
+            }
+            if(global.input_x < 0){
+                leftPressed = true
+            }
+            if(global.input_x_pressed > 0){
+                rightPressed = true
+            }
+            if(global.input_x_pressed < 0){
+                leftPressed = true
+            }
+            if(global.input_down){
+                downPressed = true
+            }
+            if(global.input_down_pressed){
+                downPressed = true
+            }
+            if(global.inputaction_jump){
+                upPressed = true
+            }
+            if(global.inputaction_move_right){
+                rightPressed = true
+            }
+            if(global.inputaction_pause_menu){
+                menuPressed = true
+            }
+            if(global.inputaction_move_left){
+                leftPressed = true
+            }
+            if(global.inputaction_self_destruct){
+                resetPressed = true
+            }
+            if(global.inputaction_skip_voiceline){
+                skipVlPressed = true
+            }
+            if(global.inputaction_navigate_down){
+                downPressed = true
+            }
+            if(global.inputaction_navigate_up){
+                upPressed = true
+            }
+            if(global.inputaction_navigate_confirm){
+                rightPressed = true
+            }
+            if(global.inputaction_navigate_confirm){
+                rightPressed = true
+            }
+            if(global.input_reset){
+                resetPressed = true
+            }
+
+            if(upPressed){
+                draw_sprite_ext(global.iDisplay_Up[1], 0, 1920 - 300, 120, 60 / sprite_get_width(global.iDisplay_Up[0]), 60 / sprite_get_width(global.iDisplay_Up[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_Up[0], 0, 1920 - 300, 120, 60 / sprite_get_width(global.iDisplay_Up[0]), 60 / sprite_get_width(global.iDisplay_Up[0]), 0, c_white, .75)
+            }
+            if(downPressed){
+                draw_sprite_ext(global.iDisplay_Down[1], 0, 1920 - 300, 180, 60 / sprite_get_width(global.iDisplay_Down[0]), 60 / sprite_get_width(global.iDisplay_Down[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_Down[0], 0, 1920 - 300, 180, 60 / sprite_get_width(global.iDisplay_Down[0]), 60 / sprite_get_width(global.iDisplay_Down[0]), 0, c_white, .75)
+            }
+            if(leftPressed){
+                draw_sprite_ext(global.iDisplay_Left[1], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Left[0]), 60 / sprite_get_width(global.iDisplay_Left[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_Left[0], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Left[0]), 60 / sprite_get_width(global.iDisplay_Left[0]), 0, c_white, .75)
+            }
+            if(rightPressed){
+                draw_sprite_ext(global.iDisplay_Right[1], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_Right[0], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
+            }
+        }
+    }
+}

@@ -49,6 +49,43 @@ ds_list_add(global.li_level_editor_database, copy_tool_copy_2)
 
 
 lvleditor_database_addition = modhelper_create_struct()
+lvleditor_database_addition.custom_tool_or_object_id = "Level_Icon"
+lvleditor_database_addition.preview_sprite_index = spr_lvlico_normal
+lvleditor_database_addition.preview_image_index = 0
+lvleditor_database_addition.preview_color = "col_light_ocean"
+lvleditor_database_addition.quickrotation_script = gml_Script_toolrotate_impossible
+lvleditor_database_addition.placement_script = gml_Script_toolplace_nothing_happens
+lvleditor_database_addition.placement_offset_x = 0
+lvleditor_database_addition.placement_offset_y = 0
+lvleditor_database_addition.deletion_script = gml_Script_toolplace_nothing_happens
+lvleditor_database_addition.tool_properties = [modhelper_createprop_help("hlp", "editor_prop_info", spr_propico_help, "level_icon_help"), modhelper_createprop_sprite("icon", "level_icon_title", spr_propico_global, 0, "level_icon_tooltip", gml_Script_level_icon_spr_collection())]
+
+ds_list_add(global.li_level_editor_database, lvleditor_database_addition)
+
+
+/*
+global.communityLevelIcons = ds_map_create()
+ds_map_add(global.communityLevelIcons, "normal", spr_lvlico_normal)
+ds_map_add(global.communityLevelIcons, "bubble", spr_lvlico_poisonbubbles)
+ds_map_add(global.communityLevelIcons, "spike", spr_lvlico_spike)
+ds_map_add(global.communityLevelIcons, "thin_spike", spr_lvlico_sharpspike)
+ds_map_add(global.communityLevelIcons, "bomb", spr_lvlico_bombs)
+ds_map_add(global.communityLevelIcons, "fish", spr_lvlico_fish)
+ds_map_add(global.communityLevelIcons, "winter", spr_lvlico_snow)
+ds_map_add(global.communityLevelIcons, "evil_snail", spr_lvlico_evilsnail)
+ds_map_add(global.communityLevelIcons, "shooter", spr_lvlico_shooter)
+ds_map_add(global.communityLevelIcons, "laser", spr_lvlico_lasers)
+ds_map_add(global.communityLevelIcons, "puzzle", spr_lvlico_puzzle)
+ds_map_add(global.communityLevelIcons, "baby_squid", spr_lvlico_race)
+ds_map_add(global.communityLevelIcons, "stars", spr_lvlico_space)
+ds_map_add(global.communityLevelIcons, "conveyor", spr_lvlico_conveyor)
+ds_map_add(global.communityLevelIcons, "tower_defense", spr_lvlico_defense)
+ds_map_add(global.communityLevelIcons, "ball", spr_lvlico_ball)
+ds_map_add(global.communityLevelIcons, "protector", spr_lvlico_protector)
+*/
+
+
+lvleditor_database_addition = modhelper_create_struct()
 lvleditor_database_addition.custom_tool_or_object_id = "BSE_settings"
 lvleditor_database_addition.preview_sprite_index = global.king_snail_sprite
 lvleditor_database_addition.preview_image_index = 0
@@ -62,4 +99,6 @@ lvleditor_database_addition.tool_properties = [modhelper_createprop_help("hlp", 
 
 ds_list_add(global.li_level_editor_database, lvleditor_database_addition)
 
-global.dont_save_these_objects = ["models_tool", "inspector_tool", "BSE_settings"]
+
+
+global.dont_save_these_objects = ["models_tool", "inspector_tool", "BSE_settings", "Level_Icon"]

@@ -29,3 +29,27 @@ ktrans = "Change whether or not the level resizes when you place/move/copy objec
 kmood = ""
 ds_map_add(global.loca_ds_map_text_translations, kkey, ktrans)
 ds_map_add(global.loca_ds_map_text_moods, kkey, kmood)
+
+kkey = "level_icon_help"
+ktrans = "Use this to set the icon of the level in the campaign level select.\n\nIn the next game update this will be replaced by an official feature."
+kmood = ""
+ds_map_add(global.loca_ds_map_text_translations, kkey, ktrans)
+ds_map_add(global.loca_ds_map_text_moods, kkey, kmood)
+
+kkey = "level_icon_help_tooltip"
+ktrans = "Use this to set the icon of the level in the campaign level select.\n\nIn the next game update this will be replaced by an official feature."
+kmood = ""
+ds_map_add(global.loca_ds_map_text_translations, kkey, ktrans)
+ds_map_add(global.loca_ds_map_text_moods, kkey, kmood)
+
+kkey = "level_icon_title"
+ktrans = "Level Icon"
+kmood = ""
+ds_map_add(global.loca_ds_map_text_translations, kkey, ktrans)
+ds_map_add(global.loca_ds_map_text_moods, kkey, kmood)
+
+kkey = "level_icon_tooltip"
+ktrans = "The icon of the level in the campaign level select."
+kmood = ""
+ds_map_add(global.loca_ds_map_text_translations, kkey, ktrans)
+ds_map_add(global.loca_ds_map_text_moods, kkey, kmood)

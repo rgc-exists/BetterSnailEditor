@@ -1,8 +1,19 @@
+    level_icon_property = 0
     if (time == 0)
     {
         display_text = "SAVING"
         return 0;
     }
+    var levelData = ds_map_find_value(global.campaignMap, array_get(info, 0)).levels[info[1]]
+    if (levelData.isModded && (!global.isEditorModded))
+    {
+        show_debug_message("Can't save a modded level!")
+        return 1;
+    }
+    var has_exploration_point = 0
+    var player_tool_struct = undefined
+    var object_count_map = ds_map_create()
+    var uses_modded_elements = 0
     fileBuffer = buffer_create(1, buffer_grow, 1)
     levelsInfo = ds_map_find_value(global.campaignMap, global.currentCampaign)
     lvlInfo = levelsInfo.levels[global.campaignLevelIndex]
@@ -72,6 +83,14 @@
     for (li = 0; li < ds_list_size(global.li_level_editor_database); li++)
     {
         dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
+        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "BSE_settings"){
+            buffer_write(bseSettingsFile, buffer_text, string(array_length(variable_struct_get(dataBaseStruct, "tool_properties")) + 1))
+            buffer_write(bseSettingsFile, buffer_text, "\n")
+        }
+    }
+    for (li = 0; li < ds_list_size(global.li_level_editor_database); li++)
+    {
+        dataBaseStruct = ds_list_find_value(global.li_level_editor_database, li)
 
         var doContinue = true
         for(var e = 0; e < array_length(global.dont_save_these_objects); e++){
@@ -79,7 +98,16 @@
                 doContinue = false
             }
         }
-        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "BSE_settings"){
+        if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "Level_Icon"){
+            var toolPropsLol = variable_struct_get(dataBaseStruct,"tool_properties")
+            thsToolProp = toolPropsLol[1]
+            level_icon_property = thsToolProp.value
+            buffer_write(bseSettingsFile, buffer_text, "icon")
+            buffer_write(bseSettingsFile, buffer_text, "\n")
+            buffer_write(bseSettingsFile, buffer_text, string(level_icon_property))
+            buffer_write(bseSettingsFile, buffer_text, "\n")
+
+        } else if(variable_struct_get(dataBaseStruct, "custom_tool_or_object_id") == "BSE_settings"){
             buffer_write(bseSettingsFile, buffer_text, array_length(variable_struct_get(dataBaseStruct, "tool_properties")))
             buffer_write(bseSettingsFile, buffer_text, "\n")
             for (ti = 0; ti < array_length(variable_struct_get(dataBaseStruct, "tool_properties")); ti++)
@@ -95,6 +123,11 @@
         } else if(doContinue){
             buffer_write(fileBuffer, buffer_text, variable_struct_get(dataBaseStruct, "custom_tool_or_object_id"))
             buffer_write(fileBuffer, buffer_text, "\n")
+            if (dataBaseStruct.custom_tool_or_object_id == "exploration_point")
+                has_exploration_point = ds_list_size(dataBaseStruct.li_placed_instances) > 0
+            else if (dataBaseStruct.custom_tool_or_object_id == "player")
+                player_tool_struct = dataBaseStruct
+            ds_map_set(object_count_map, dataBaseStruct.custom_tool_or_object_id, ds_list_size(dataBaseStruct.li_placed_instances))
             buffer_write(fileBuffer, buffer_text, string(variable_struct_get(dataBaseStruct, "image_angle")))
             buffer_write(fileBuffer, buffer_text, "\n")
             buffer_write(fileBuffer, buffer_text, string(variable_struct_get(dataBaseStruct, "image_xscale")))
@@ -264,5 +297,44 @@
     buffer_save(fileBuffer, saveName)
     buffer_delete(fileBuffer)
     buffer_save(bseSettingsFile, bseSettingsSaveName)
-    buffer_delete(bseSettingsFile)
+    buffer_delete(bseSettingsFile)    var hasexplo = variable_struct_get(levelData, "hasExplorationPoint")
+    var levelico = variable_struct_get(levelData, "levelIcon")
+    var ismodded = variable_struct_get(levelData, "isModded")
+    var is_different = 0
+    if is_undefined(hasexplo)
+        hasexplo = ""
+    if is_undefined(levelico)
+        levelico = ""
+    if is_undefined(ismodded)
+        ismodded = ""
+    levelData.hasExplorationPoint = has_exploration_point
+    if(level_icon_property == 0){
+        levelData.levelIcon = leveleditor_determine_level_icon(object_count_map, player_tool_struct)
+    } else {
+        var iconList = [
+            "normal",
+            "normal",
+            "puzzle", 
+            "spike", 
+            "fish", 
+            "ball", 
+            "bomb", 
+            "conveyor", 
+            "tower_defense", 
+            "evil_snail", 
+            "laser", 
+            "bubble", 
+            "protector", 
+            "baby_squid", 
+            "thin_spike", 
+            "shooter", 
+            "winter",
+            "stars"
+        ]
+        levelData.levelIcon = iconList[level_icon_property]
+    }
+    levelData.isModded = uses_modded_elements
+    is_different = (hasexplo != has_exploration_point || levelico != levelData.levelIcon || ismodded != uses_modded_elements)
+    if is_different
+        save_leveleditor_campaign(info[0])
     return 1;

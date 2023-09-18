@@ -72,14 +72,16 @@ public partial class GameMakerMod
 
         Action<string, string> loadFunctionCode = (code, file) =>
         {
-            MatchCollection matchList = Regex.Matches(code, @"(?<=argument)(\d*)");
-            ushort argCount;
-            if (matchList.Count > 0)
-                argCount = (ushort)(matchList.Cast<Match>().Select(match => ushort.Parse(match.Value)).ToList().Max() + 1);
-            else
-                argCount = 0;
+            if(Path.GetFileNameWithoutExtension(file) != "level_icon_spr_collection"){
+                MatchCollection matchList = Regex.Matches(code, @"(?<=argument)(\d*)");
+                ushort argCount;
+                if (matchList.Count > 0)
+                    argCount = (ushort)(matchList.Cast<Match>().Select(match => ushort.Parse(match.Value)).ToList().Max() + 1);
+                else
+                    argCount = 0;
 
-            data.CreateFunction(Path.GetFileNameWithoutExtension(file), code, argCount);
+                data.CreateFunction(Path.GetFileNameWithoutExtension(file), code, argCount);
+            }
         };
 
         Action<string, string> loadCodeHook = (code, file) =>
@@ -121,6 +123,8 @@ public partial class GameMakerMod
         LoadFilesRecursively(Path.Combine(baseDir, "code", "codeHooks"), loadCodeHook);
         LoadFilesRecursively(Path.Combine(baseDir, "code", "functionHooks"), loadFunctionHook);
         LoadFilesRecursively(Path.Combine(baseDir, "code", "objectCode"), loadObjectCode);
+
+        data.CreateFunction("level_icon_spr_collection", File.ReadAllText(Path.Combine(baseDir, "code", "functions", "level_icon_spr_collection.gml")), 0);
     }
 
 

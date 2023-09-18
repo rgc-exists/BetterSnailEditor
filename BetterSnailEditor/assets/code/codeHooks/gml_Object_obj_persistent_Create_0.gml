@@ -3,17 +3,20 @@ global.is_BSE_client = true
 //Just use if(variable_global_exists("is_BSE_client")) to detect if it's BSE or not.
 //Sorry for anyone that needs to detect whether or not it's BSE before obj_persistent_Create_0 is run, I couldn't figure out how to get global init scripts to work with GMML.
 
-global.BSE_version = "v1.1.0b"
+global.BSE_version_patch = "v1.1.1a"
+global.BSE_version_GS2ML = "v1.1.1a"
 
-global.game_build_version = "2.07"
+global.game_build_version = "2.08"
 
 
 if(directory_exists(working_directory + "gs2ml/mods/BetterSnailEditor/BetterSnailEditor_Assets/")){
     global.betterSE_assets = working_directory + "gs2ml/mods/BetterSnailEditor/BetterSnailEditor_Assets/"
     global.is_gmml_version = true
+    global.BSE_version = global.BSE_version_GS2ML
 } else if(directory_exists(working_directory + "BetterSnailEditor_Assets/")){
     global.betterSE_assets = working_directory + "BetterSnailEditor_Assets/"
     global.is_gmml_version = false
+    global.BSE_version = global.BSE_version_patch
 } else {
     show_error("ERROR:\nThe assets folder for the mod was not found.\nPlease add the folder called 'BetterSnailEditor_Assets' to the same folder as the Will You Snail executable\n(your WYS steam install location.)\n\nThe folder can be found in the zip file you downloaded the mod with.\n\nAs for GS2ML users, IDK how you messed this up, the required folder should already be inside the folder you put in the gs2ml/mods folder.", true)
 }
@@ -25,7 +28,11 @@ global.king_snail_sprite = sprite_add(global.betterSE_assets + "sprites/" + "kin
 if(!directory_exists(working_directory + "BetterSnailEditor_Temp")){
     directory_create(working_directory + "BetterSnailEditor_Temp")
 }
-version_file = http_get_file("https://raw.githubusercontent.com/rgc-exists/MysteriousVersionName/main/version.txt", "BetterSnailEditor_Temp\\version.txt")
+if(global.is_gmml_version){
+    version_file = http_get_file("https://raw.githubusercontent.com/rgc-exists/MysteriousVersionName/main/version.txt", "BetterSnailEditor_Temp\\version.txt")
+} else {
+    version_file = http_get_file("https://raw.githubusercontent.com/rgc-exists/MysteriousVersionName/main/patchversion.txt", "BetterSnailEditor_Temp\\version.txt")
+}
 global.cur_model_is_text = false
 if(global.is_gmml_version){
     //gmml_console_readline()
@@ -203,5 +210,16 @@ global.is_legit_right_now = true
 global.is_resetting_settings = false 
 global.player_is_dead = false
 
+global.iDisplay_Up = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "UpOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "UpOn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_Down = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "DownOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "DownOn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_Left = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "LeftOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "LeftOn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_Right = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "RightOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "RightOn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_Q = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "QOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "QOn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_R = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "ROff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "ROn.png", 0, 0, 0, 0, 0)]
+global.iDisplay_Esc = [sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "EscOff.png", 0, 0, 0, 0, 0), sprite_add(global.betterSE_assets + "sprites/" + "Input display/" + "EscOn.png", 0, 0, 0, 0, 0)]
+
+global.player_has_existed = false
+
+global.spr_lvlico_auto = sprite_add(global.betterSE_assets + "sprites/" + "spr_lvlico_auto.png", 0, 0, 0, 0, 0)
 
 #orig#()
