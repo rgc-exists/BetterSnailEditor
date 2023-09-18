@@ -90,6 +90,12 @@ if(global.setting_input_display){
     if(room != level_editor && room != empty_start_room && room != disclaimer_photoepilepsy){
         if(global.input_analysis_using_gamepad){
             //Insert gamepad input display here
+            draw_set_color(c_white)
+            draw_set_alpha(.8)
+            draw_set_font(global.font_aiTalk)
+            draw_set_halign(fa_right)
+            draw_set_valign(fa_top)
+            draw_text(1920 - 300, 300, "Input display does not currently support controllers.")
         } else {
             var leftPressed = false
             var rightPressed = false
@@ -117,7 +123,7 @@ if(global.setting_input_display){
                 rightPressed = true
             }
             if(global.input_x_pressed < 0){
-                leftPressed = true
+                //leftPressed = true
             }
             if(global.input_down){
                 downPressed = true
@@ -126,34 +132,37 @@ if(global.setting_input_display){
                 downPressed = true
             }
             if(global.inputaction_jump){
-                upPressed = true
+                //upPressed = true
             }
             if(global.inputaction_move_right){
-                rightPressed = true
+                //rightPressed = true
             }
             if(global.inputaction_pause_menu){
-                menuPressed = true
+                //menuPressed = true
             }
             if(global.inputaction_move_left){
-                leftPressed = true
+                //leftPressed = true
             }
             if(global.inputaction_self_destruct){
-                resetPressed = true
+                //resetPressed = true
             }
-            if(global.inputaction_skip_voiceline){
-                skipVlPressed = true
+            //if(script_execute(variable_struct_get(global.inputaction_skip_voiceline, "GetDown"))){
+                //skipVlPressed = true
+            //}
+            if(script_execute(variable_struct_get(global.inputaction_pause_menu, "GetDown"))){
+                menuPressed = true
             }
             if(global.inputaction_navigate_down){
-                downPressed = true
+                //downPressed = true
             }
             if(global.inputaction_navigate_up){
-                upPressed = true
+                //upPressed = true
             }
             if(global.inputaction_navigate_confirm){
-                rightPressed = true
+                //rightPressed = true
             }
-            if(global.inputaction_navigate_confirm){
-                rightPressed = true
+            if(global.input_skipvoice_pressed){
+                skipVlPressed = true
             }
             if(global.input_reset){
                 resetPressed = true
@@ -175,9 +184,19 @@ if(global.setting_input_display){
                 draw_sprite_ext(global.iDisplay_Left[0], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Left[0]), 60 / sprite_get_width(global.iDisplay_Left[0]), 0, c_white, .75)
             }
             if(rightPressed){
-                draw_sprite_ext(global.iDisplay_Right[1], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
+                draw_sprite_ext(global.iDisplay_Right[1], 0, 1920 - 240, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
             } else {
-                draw_sprite_ext(global.iDisplay_Right[0], 0, 1920 - 360, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
+                draw_sprite_ext(global.iDisplay_Right[0], 0, 1920 - 240, 180, 60 / sprite_get_width(global.iDisplay_Right[0]), 60 / sprite_get_width(global.iDisplay_Right[0]), 0, c_white, .75)
+            }
+            if(skipVlPressed){
+                draw_sprite_ext(global.iDisplay_Q[1], 0, 1920 - 140, 120, 60 / sprite_get_width(global.iDisplay_Q[0]), 60 / sprite_get_width(global.iDisplay_Q[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_Q[0], 0, 1920 - 140, 120, 60 / sprite_get_width(global.iDisplay_Q[0]), 60 / sprite_get_width(global.iDisplay_Q[0]), 0, c_white, .75)
+            }
+            if(resetPressed){
+                draw_sprite_ext(global.iDisplay_R[1], 0, 1920 - 80, 120, 60 / sprite_get_width(global.iDisplay_R[0]), 60 / sprite_get_width(global.iDisplay_R[0]), 0, c_white, .75)
+            } else {
+                draw_sprite_ext(global.iDisplay_R[0], 0, 1920 - 80, 120, 60 / sprite_get_width(global.iDisplay_R[0]), 60 / sprite_get_width(global.iDisplay_R[0]), 0, c_white, .75)
             }
         }
     }

@@ -194,6 +194,7 @@ public partial class GameMakerMod
         data.AddMenuOption(Menus.Vanilla.Graphics, data.CreateChangeOption("\"Intense Background Intensity\"", "intenseBackgrounda", "global.setting_intense_backgrounds = clamp(global.setting_intense_backgrounds + argument0, 0, 1)", "return string_replace(string(global.setting_intense_backgrounds * 100), \".00\", \"\") + \"%\" ", 0.1));
 
 
+
         UndertaleGameObject spoilersMenu = data.CreateMenu("menu_spoilers", data.CreateToggleOption("\"Inverted Pump\"", "inverted_pump", "global.save_pump_is_inverted = argument0", "selectedItem = global.save_pump_is_inverted", "global.save_pump_is_inverted", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Change the state of the pump. (If you don't know what this is, ignore it. It is a spoiler.)\""), data.CreateToggleOption("\"Fixed Heart Mode\"", "heart_fixed", "global.save_heart_fixed = argument0", "selectedItem = global.save_heart_fixed", "global.save_heart_fixed", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Change whether or not squid's heart is fixed. (If you don't know what this is, ignore it. It is a spoiler.)\""));
         data.InsertMenuOptionFromEnd(Menus.Vanilla.Hacks, 0, new Menus.WysMenuOption("\"Spoilers\"")
         {
@@ -438,6 +439,9 @@ bExecuteScriptsOnExit = 1");
         {
             instance = snailsEndMenu.Name.Content
         });
+
+
+        data.InsertMenuOptionFromEnd("obj_menu_Controls", 0, data.CreateToggleOption("\"Input Display\"", "input_display", "global.setting_input_display = argument0", "selectedItem = global.setting_input_display", "global.setting_input_display", tooltipScript: "gml_Script_scr_return_input", tooltipArgument: "\"Display the keys you are currently pressing on the screen.\n\nOnly works with keyboard for now.\""));
     }
 
     public UndertaleGameObject MakeColorMenu(string name, string global_var_name, float darkBlend = 0)

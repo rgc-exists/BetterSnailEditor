@@ -182,6 +182,10 @@ if(file_exists("BetterSE_SettoIngs23-2.set")){
                 global.setting_respawn_time = file_text_read_real(file)
                 file_text_readln(file)
                 break
+            case "Input Display":
+                global.setting_input_display = file_text_read_real(file)
+                file_text_readln(file)
+                break
             
         }
     }
