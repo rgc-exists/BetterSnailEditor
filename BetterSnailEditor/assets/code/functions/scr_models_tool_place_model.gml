@@ -209,7 +209,7 @@ if(variable_global_exists("current_model_wires")){
 }
 switch argument1
 {
-    case obj_lt_music_trigger:
+    case 0:
         hlp_toolplace_start_dragging_box(argument0)
         break
     case 1:
